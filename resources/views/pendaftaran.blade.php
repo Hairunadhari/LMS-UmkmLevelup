@@ -19,16 +19,17 @@
           background-repeat: no-repeat;
           background-size: contain;
           background-position-y: bottom;
-          height: 240vh;
+          height: 180vh;
         "
       >
+      
         <div class="container pt-5">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-end">
-              <li class="breadcrumb-item active">Home</li>
-              <li class="breadcrumb-item active" aria-current="page">
+              <li class="breadcrumb-item active">Registrasi</li>
+              {{-- <li class="breadcrumb-item active" aria-current="page">
                 Step By Step
-              </li>
+              </li> --}}
             </ol>
           </nav>
           <h1
@@ -98,212 +99,62 @@
             </div>
           </div>
 
-          <form action="">
+          <form method="POST" action="{{ route('register') }}">
+            @csrf
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-6 offset-lg-3">
                 <div class="form-floating mb-5 shadow rounded-pill">
                   <input
                     type="text"
                     class="form-control rounded-pill px-4"
+                    name="name"
                     id="floatingInput"
                     placeholder="name@example.com"
                   />
                   <label for="floatingInput" class="ms-4"
-                    ><i class="fa-solid fa-user me-3"></i> Nama Pemilik
-                    Usaha</label
+                    ><i class="fa-solid fa-user me-3"></i> Nama Pemilik</label
                   >
                 </div>
                 <div class="form-floating mb-5 shadow rounded-pill">
-                  <input
-                    type="text"
-                    class="form-control rounded-pill px-4"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa-solid fa-shop me-3"></i> Nama Toko</label
-                  >
+                    <input
+                      type="email"
+                      class="form-control rounded-pill px-4"
+                      id="floatingInput"
+                        name="email"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput" class="ms-4"
+                      ><i class="fa fa-email me-3"></i> Email</label
+                    >
                 </div>
                 <div class="form-floating mb-5 shadow rounded-pill">
-                  <input
-                    type="Text"
-                    class="form-control rounded-pill px-4"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa-solid fa-venus me-3"></i> Jenis Kelamin</label
-                  >
+                    <input
+                      type="text"
+                      class="form-control rounded-pill px-4"
+                      name="no_wa"
+                      id="floatingInput"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput" class="ms-4"
+                      ><i class="fa fa-phone me-3"></i> No Hp (Wa Aktif)</label
+                    >
                 </div>
                 <div class="form-floating mb-5 shadow rounded-pill">
-                  <input
-                    type="text"
-                    class="form-control rounded-pill px-4"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa-solid fa-credit-card me-3"></i> NIK</label
-                  >
-                </div>
-                <div class="form-floating mb-5 shadow rounded-pill">
-                  <input
-                    type="text"
-                    class="form-control rounded-pill px-4"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa-solid fa-credit-card me-3"></i> NPWP</label
-                  >
-                </div>
-                <div class="form-floating mb-5">
-                  <input
-                    type="tel"
-                    class="form-control rounded-pill shadow px-4"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa-solid fa-phone me-3"></i> Kontak</label
-                  >
-                  <div id="emailHelp" class="form-text text-danger">
-                    Noted: Kartu Harus Prabayar
-                  </div>
-                </div>
-                <div class="form-floating mb-5 shadow rounded-pill">
-                  <input
-                    type="tel"
-                    class="form-control rounded-pill px-4"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa-brands fa-whatsapp me-3"></i> No Usaha
-                    (Whatsapp Bisnis)</label
-                  >
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-floating mb-5 shadow rounded-pill">
-                  <select
-                    class="form-select rounded-pill shadow px-4"
-                    id="floatingSelect"
-                    aria-label="Floating label select example"
-                  >
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label for="floatingSelect" class="ms-4"
-                    ><i
-                      class="fa-solid fa-up-right-and-down-left-from-center me-3"
-                    ></i
-                    >Jenis Usaha</label
-                  >
-                </div>
-                <div class="form-floating mb-5 shadow rounded-pill">
-                  <select
-                    class="form-select rounded-pill shadow px-4"
-                    id="floatingSelect"
-                    aria-label="Floating label select example"
-                  >
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label for="floatingSelect" class="ms-4"
-                    ><i class="fa-solid fa-ellipsis me-3"></i>Jenis Usaha
-                    Anda</label
-                  >
-                </div>
-                <div class="form-floating mb-5 shadow rounded-pill">
-                  <select
-                    class="form-select rounded-pill shadow px-4"
-                    id="floatingSelect"
-                    aria-label="Floating label select example"
-                  >
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label for="floatingSelect" class="ms-4"
-                    ><i class="fa-solid fa-box-open me-3"></i>Works with
-                    selects</label
-                  >
-                </div>
-                <div class="form-floating mb-5 shadow rounded-pill">
-                  <input
-                    type="text"
-                    class="form-control shadow rounded-pill px-4"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa-solid fa-location-dot me-3"></i>Alamat
-                    UMKM</label
-                  >
-                </div>
-                <div class="form-floating mb-5 shadow rounded-pill">
-                  <select
-                    class="form-select rounded-pill shadow px-4"
-                    id="floatingSelect"
-                    aria-label="Floating label select example"
-                  >
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label for="floatingSelect" class="ms-4"
-                    ><i class="fa-solid fa-house me-3"></i>Provinsi</label
-                  >
-                </div>
-                <div class="form-floating mb-5">
-                  <select
-                    class="form-select rounded-pill shadow px-4"
-                    id="floatingSelect"
-                    aria-label="Floating label select example"
-                  >
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label for="floatingSelect" class="ms-4"
-                    ><i class="fa-solid fa-house me-3"></i>Kota /
-                    Kabupaten</label
-                  >
-
-                  <div id="emailHelp" class="form-text text-danger">
-                    Noted: Kartu Harus Prabayar
-                  </div>
-                </div>
-                <div class="form-floating mb-5 shadow rounded-pill">
-                  <select
-                    class="form-select rounded-pill shadow px-4"
-                    id="floatingSelect"
-                    aria-label="Floating label select example"
-                  >
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label for="floatingSelect" class="ms-4"
-                    ><i class="fa-regular fa-circle-dot me-3"></i>Wilayah Lokasi
-                    Pelatihan</label
-                  >
+                    <input
+                      type="password"
+                      class="form-control rounded-pill px-4"
+                      id="floatingInput"
+                      placeholder="name@example.com"
+                    />
+                    <label for="floatingInput" class="ms-4"
+                      ><i class="fa fa-phone me-3"></i> Password</label
+                    >
                 </div>
               </div>
             </div>
-          </form>
-
-          <div class="d-grid gap-2 mx-auto w-25">
-            <a href="/registrasi" class="btn btn-primary rounded-pill p-3"
+            
+            <div class="d-grid gap-2 mx-auto w-25">
+            <button type="submit" class="btn btn-primary rounded-pill p-3"
             style="
               background: linear-gradient(
                 93.89deg,
@@ -312,9 +163,10 @@
                 #18d1ff 100.92%
               );
             ">
-            <h5>Masuk</h5>
-          </a>
-          </div>
+            Registrasi
+            </button>
+        </div>
+    </form>
         </div>
       </div>
     </div>
