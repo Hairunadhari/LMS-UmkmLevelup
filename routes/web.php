@@ -47,5 +47,5 @@ Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'
 // Route::post('/logout', 'LoginController@logout')->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('home', [HomeController::class, 'index'])->name('index');
 });
