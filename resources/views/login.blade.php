@@ -9,11 +9,11 @@
         background-repeat-x: no-repeat;
         background-size: cover;
         background-position-y: bottom;
-        height: 82vh;
+        height: 82svh;
       "
     >
       <div
-        class="pt-4"
+        class="pt-5"
         style="
           background-image: url('./assets/background_regist_bawah.png');
           background-repeat: no-repeat;
@@ -36,7 +36,7 @@
             class="text-uppercase text-center font-bold"
             style="font-size: 3rem; font-weight: bolder"
           >
-            Pendaftaran
+            Login
           </h1>
           <h6 class="text-uppercase text-center">Umkm Go Online</h6>
 
@@ -99,22 +99,10 @@
             </div>
           </div> --}}
 
-          <form method="POST" action="{{ route('register') }}">
+          <form method="POST" action="{{ route('login') }}">
             @csrf
-            <div class="row pt-2">
+            <div class="row pt-5">
               <div class="col-lg-6 offset-lg-3">
-                <div class="form-floating mb-4 shadow rounded-pill">
-                  <input
-                    type="text"
-                    class="form-control rounded-pill px-4"
-                    name="name"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa-solid fa-user me-3"></i> Nama</label
-                  >
-                </div>
                 <div class="form-floating mb-4 shadow rounded-pill">
                     <input
                       type="email"
@@ -127,19 +115,7 @@
                       ><i class="fa fa-envelope me-3"></i> Email</label
                     >
                 </div>
-                <div class="form-floating mb-4 shadow rounded-pill">
-                    <input
-                      type="text"
-                      class="form-control rounded-pill px-4"
-                      name="no_wa"
-                      id="floatingInput"
-                      placeholder="name@example.com"
-                    />
-                    <label for="floatingInput" class="ms-4"
-                      ><i class="fa fa-phone me-3"></i> No Hp (Wa Aktif)</label
-                    >
-                </div>
-                <div class="form-floating mb-4 shadow rounded-pill">
+                <div class="form-floating mb-5 shadow rounded-pill">
                     <input
                       type="password"
                       class="form-control rounded-pill px-4"
@@ -164,7 +140,7 @@
                 #18d1ff 100.92%
               );
             ">
-            Daftar
+            Login
             </button>
         </div>
     </form>

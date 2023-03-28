@@ -22,7 +22,7 @@ class MailController extends Controller
          
         Mail::to('arifin.officialwork@gmail.com')->send(new DemoMail($mailData));
 
-        return redirect('/');
+        return redirect('verifikasiOtp');
            
         // dd("Email is sent successfully.");
     }

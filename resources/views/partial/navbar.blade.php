@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid justify-content-start container-sm">
+    <div class="container-fluid justify-content-center container-sm">
     <a class="navbar-brand" href="#">
         <img src="{{asset('assets/logo_kominfo.png')}}" alt="logo_kominfo" style="" />
     </a>

@@ -40,6 +40,7 @@ class RegisterController extends Controller
     
     return DB::table('users')->insert([
         'name' => $data['name'],
+        'no_wa' => $data['no_wa'],
         'email' => $data['email'],
         'password' => Hash::make($data['password']),
     ]);
