@@ -143,6 +143,7 @@
                     <input
                       type="password"
                       class="form-control rounded-pill px-4"
+                      name="password"
                       id="floatingInput"
                       placeholder="name@example.com"
                     />

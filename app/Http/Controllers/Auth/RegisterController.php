@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use DB;
 use App\Models\User;
 
 
@@ -35,8 +36,9 @@ class RegisterController extends Controller
     // }
 
     protected function create(array $data)
-{
-    return User::create([
+    {
+    
+    return DB::table('users')->insert([
         'name' => $data['name'],
         'email' => $data['email'],
         'password' => Hash::make($data['password']),
@@ -107,20 +109,22 @@ class RegisterController extends Controller
 
 protected function validator(array $data)
 {
-    return Validator::make($data, [
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
-    ]);
+    // return Validator::make($data, [
+    //     'name' => ['required', 'string', 'max:255'],
+    //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+    // ]);
+    return true;
 }
 
 public function register(Request $request)
 {
-    $this->validator($request->all())->validate();
+    // dd($request);
+    // $this->validator($request->all())->validate();
 
     event(new Registered($user = $this->create($request->all())));
 
-    return redirect($this->redirectPath());
+    return redirect('send-mail');
 }
 
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\MailController;
 
 
 /*
@@ -27,6 +28,7 @@ Route::get('pendaftaran', function () {
 
 // Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
 // Route::post('/register',  [RegisterController::class, 'register']);
+Route::get('send-mail', [MailController::class, 'index']);
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
