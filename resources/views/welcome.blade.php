@@ -12,7 +12,7 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top p-0">
     <div class="container">
       <a class="navbar-brand p-0" href="#">
-        <img src="{{url('/')}}/asset/logo.png" alt="Bootstrap" width="180" height="90">
+        <img src="{{url('/')}}/asset/logo.png" alt="Bootstrap" style="width: 100%; height: 100%">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,16 +20,19 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav text-uppercase">
           <li class="nav-item">
-            <a class="nav-link active" href="#">HOME</a>
+            <a class="nav-link active" href="{{url('/')}}">Beranda</a>
+          </li>
+          {{-- <li class="nav-item">
+            <a class="nav-link" href="#">News</a>
+          </li> --}}
+          <li class="nav-item">
+            <a class="nav-link" href="#">Artikel</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">UMKM</a>
+            <a class="nav-link" href="pendaftaran">Registrasi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">BERITA</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pendaftaran">PENDAFTARAN</a>
+            <a class="nav-link" href="login">Login</a>
           </li>
         </ul>
       </div>
@@ -41,20 +44,17 @@
     <div class="container mb-2">
       <div class="row align-items-center">
         <div class="col-md-6" style="position: relative;">
-          <h4 class="mb-0" style="font-size: 35px; color: #2F93DD;">GARIS <span style="color: #FFCD4F;">BESAR</span></h4>
-          <h1 class="fw-bold" style="color: #0C438D; font-size: 35px;">PROGRAM UMKM</h1>
-          <p style="font-size: 20px;">Program UMKM Go Online adalah program pemerintah untuk memfasilitasi adopsi teknologi digital dalam rangka memperluas akses pemasaran, meningkatkan efektivitas dan efisiensi proses bisnis, dan meningkatkan transaksi penjualan, serta meningkatkan daya saing UMKM.</p>
+          {{-- <h4 class="mb-0" style="font-size: 35px; color: #2F93DD;">GARIS <span style="color: #FFCD4F;">BESAR</span></h4> --}}
+          <h1 class="fw-bold" style="color: #0C438D; font-size: 35px;">UMKM <span style="color: #FFCD4F;">Level Up </span></h1>
+          <p style="font-size: 18px;">UMKM Level Up adalah sebuah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendorong para pelaku UMKM #LevelUp dari sisi adopsi teknologi digital untuk memperluas akses pemasaran, meningkatkan efektivitas dan efisiensi proses bisnis, meningkatkan daya saing dan inovasi, serta meningkatkan transaksi penjualan pelaku UMKM.</p>
           <div class="bulatan-pertama" style="width: 400px; aspect-ratio: 1; border-radius: 50%; background-color: #2F93DD; position: absolute; transform: translate(-160px, -220px); opacity: 0.15; filter: blur(100px);"></div>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
-          <img src="{{url('/')}}/asset/keranjang-landing-page.png" class="img-fluid p-2" width="400px" alt="">
+          <img src="{{url('/')}}/asset/keranjang-landing-page.png" class="img-fluid p-2" width="380px" alt="">
         </div>
       </div>
       <div class="row mt-5">
         <div class="col-md-12 text-center justify-content-center">
-          <h4 style="color: #EE6655;">MULAI</h4>
-          <img class="px-0 mb-2" src="{{url('/')}}/asset/garis.png" style="height: 60px; width: 2px;" alt="">
-          <br>
           <img class="px-0" src="{{url('/')}}/asset/button.png" style="width: 60px; height: 60px;" alt="">
         </div>
       </div>
@@ -93,7 +93,7 @@
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-md-6">
-          <h1 class="text-center fw-bold" style="font-size: 35px;">ALUR <span class="fw-normal">REGRISTASI</span></h1>
+          <h1 class="text-center fw-normal" style="font-size: 35px;">Siap untuk <span class="fw-bold">#BikinUsahamuJadiLevelUp?</span></h1>
           <P class="text-center">Lorem ipsum dolor sit amet consectetur. Mollis ipsum pretium semper leo quis aliquam volutpat volutpat. Diam magna lorem arcu leo. Quam.</P>
         </div>
       </div>
@@ -101,7 +101,7 @@
         <div class="col-md-5 my-auto d-block g-5">
           <div class="row align-items-center mt-2 justify-content-between">
             <div class="col-9 text-end">
-              <h4>Link Registration</h4>
+              <h4>Registrasi</h4>
             </div>
             <div class="col-3 text-center">
               <img src="{{url('/')}}/asset/www.png" style="border: 1px grey solid; width: 70px; border-radius: 50%; padding: 15px;" alt="">
@@ -109,18 +109,18 @@
           </div>
           <div class="row align-items-center mt-2 justify-content-between">
             <div class="col-9 text-end">
-              <h4>Registration</h4>
+              <h4>Verifikasi Kode OTP melalui e-mail</h4>
             </div>
             <div class="col-3 text-center">
-              <img src="{{url('/')}}/asset/registration.png" style="border: 1px grey solid; width: 70px; border-radius: 50%; padding: 15px;" alt="">
+              <img src="{{url('/')}}/asset/email000000.png" style="border: 1px grey solid; width: 70px; border-radius: 50%; padding: 15px;" alt="">
             </div>
           </div>
           <div class="row align-items-center mt-2 justify-content-between">
             <div class="col-9 text-end">
-              <h4>Mendapatkan Kode OTP Ke E-Mail</h4>
+              <h4>Lengkapi data diri</h4>
             </div>
             <div class="col-3 text-center">
-              <img src="{{url('/')}}/asset/email000000.png" style="border: 1px grey solid; width: 70px; border-radius: 50%; padding: 15px;" alt="">
+              <img src="{{url('/')}}/asset/registration.png" style="border: 1px grey solid; width: 70px; border-radius: 50%; padding: 15px;" alt="">
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@
               <img src="{{url('/')}}/asset/verifikasi-kode-otp.png" style="border: 1px grey solid; width: 70px; border-radius: 50%; padding: 15px;" alt="">
             </div>
             <div class="col-9 text-start">
-              <h4>Verifikasi Kode OTP</h4>
+              <h4>Mengisi kuesioner asesmen level adopsi teknologi digital</h4>
             </div>
           </div>
           <div class="row align-items-center mt-2 justify-content-between">
@@ -138,7 +138,7 @@
               <img src="{{url('/')}}/asset/mengisi-kuisioner.png" style="border: 1px grey solid; width: 70px; border-radius: 50%; padding: 15px;" alt="">
             </div>
             <div class="col-9 text-start">
-              <h4>Mengisi Kuisoner</h4>
+              <h4>Validasi data UMKM</h4>
             </div>
           </div>
           <div class="row align-items-center mt-2 justify-content-between">
@@ -146,7 +146,7 @@
               <img src="{{url('/')}}/asset/calon-peserta-program.png" style="border: 1px grey solid; width: 70px; border-radius: 50%; padding: 15px;" alt="">
             </div>
             <div class="col-9 text-start">
-              <h4>Calon Peserta Program</h4>
+              <h4>Lolos seleksi peserta <br>UMKM Level Up</h4>
             </div>
           </div>
         </div>
@@ -227,8 +227,8 @@
     <div class="container">
       <div class="row d-flex justify-content-center">
         <div class="col-md-8">
-          <h1 class="text-center fw-bold" style="font-size: 35px; color: #0C438D;">OUR <span class="fw-normal" style="color: #2F93DD;">PARTNER</span></h1>
-          <P class="text-center">Lorem ipsum dolor sit amet consectetur. Mollis ipsum pretium semper leo quis aliquam volutpat volutpat. Diam magna lorem arcu leo. Quam.</P>
+          <h1 class="text-center fw-bold" style="font-size: 35px; color: #0C438D;">Mitra <img src="{{url('/')}}/asset/logo.png" alt="Bootstrap" style=""></h1>
+          {{-- <P class="text-center">Lorem ipsum dolor sit amet consectetur. Mollis ipsum pretium semper leo quis aliquam volutpat volutpat. Diam magna lorem arcu leo. Quam.</P> --}}
         </div>
       </div>
       <div class="row d-flex mt-4 px-5 justify-content-center g-3">
@@ -515,7 +515,7 @@
       </div>
       <hr style="color: white;">
       <div class="row d-flex justify-content-center text-white text-center">
-        <p>Copyright By @ KOMINFO 2022</p>
+        <p>Copyright © 2023 UMKM Level Up | Direktorat Ekonomi Digital | Kementerian Komunikasi dan Informatika</p>
       </div>
     </div>
   </section>

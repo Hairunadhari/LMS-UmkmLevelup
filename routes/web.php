@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\IntegrasiController;
+use Illuminate\Http\Request;
 
 
 /*
@@ -22,15 +25,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('pendaftaran', function () {
+Route::get('pendaftaran', function (Request $request) {
+    $request->session()->forget('alert');
     return view('pendaftaran');
 });
 
-Route::get('verifikasiOtp', function () {
+Route::get('verifikasiOtp', function (Request $request) {
+    $request->session()->forget('alert');
     return view('verifikasiOtp');
 });
 
-Route::get('login', function () {
+Route::get('kuesioner', function () {
+    return view('kuesioner');
+});
+
+Route::get('login', function (Request $request) {
+    $request->session()->forget('alert');
     return view('login');
 })->name('login');
 
@@ -41,7 +51,15 @@ Route::get('send-mail', [MailController::class, 'index']);
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/submit-otp', [App\Http\Controllers\Auth\RegisterController::class, 'submitOtp'])->name('submit-otp');
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'index'])->name('logout');
+Route::post('/submit-profil', [App\Http\Controllers\UserController::class, 'submitProfil'])->name('submit-profil');
+
+Route::get('getKabupaten/{id}', [IntegrasiController::class, 'getKabupaten']);
+Route::get('getKecamatan/{id}', [IntegrasiController::class, 'getKecamatan']);
+Route::get('getKelurahan/{id}', [IntegrasiController::class, 'getKelurahan']);
+
 // Route::get('/login', 'LoginController@showLoginForm')->name('login');
 // Route::post('/login', 'LoginController@login');
 // Route::post('/logout', 'LoginController@logout')->name('logout');

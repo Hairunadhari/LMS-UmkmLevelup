@@ -25,22 +25,12 @@
         class="text-uppercase text-center font-bold"
         style="font-size: 3rem; font-weight: bolder"
       >
-      Welcome, {{ auth()->user()->name }}!
+      Test Kuesioner
       </h2>
     </div>
   </div>
-  <div class="container pt-5">
-    @if (auth()->user()->profil == 0)
-      @include('profil-pengisian')
-    @else
-      @foreach ($data as $item)
-        <a href="{{$item['link']}}" class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h4>{{$item['title']}}</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </a>
-      @endforeach
-    @endif
+  <div class="container pt-1">
+    <iframe style="border:none;width:100%;" height="620px" src="http://194.59.165.67:8082/forms/test-kuesioner"></iframe>
+    
   </div>
 @endsection

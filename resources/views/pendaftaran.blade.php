@@ -98,7 +98,7 @@
               </div>
             </div>
           </div> --}}
-
+        
           <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="row pt-2">
@@ -171,4 +171,8 @@
         </div>
       </div>
     </div>
+@endsection
+
+@section('js')
+    
 @endsection
