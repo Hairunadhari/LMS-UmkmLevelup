@@ -15,7 +15,6 @@ class LogoutController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-        // Session::forget('id_user');
         $request->session()->forget('id_user');
 
         return redirect('/');

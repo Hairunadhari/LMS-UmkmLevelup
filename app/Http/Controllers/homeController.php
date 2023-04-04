@@ -9,12 +9,30 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Request $request  ){
         $d = [];
+        $currenturl = url()->full();
+        if (Auth::user()) {
+            $request->session()->put('url', $currenturl);
+        }else{
+            redirect('login');
+        }
         $d['dataProv'] = DB::table('m_provinsi')->where('aktif', 1)->get();
-        $d['data'][0]['link'] = 'http://localhost:8000/kuesioner?href=http://194.59.165.67:8082/forms/test-kuesioner';
+        $forms = DB::table('forms')->orderBy('id', 'DESC')->first();
+        $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'';
+        $d['data'][0]['title'] = $forms->title;
+        $d['data'][0]['desc'] = $forms->description;
+        return view('home', $d);
+    }
+
+    public function profil(){
+        $d = [];
+        $d['user'] = DB::table('profil_user')->where('id_user', Auth::user()->id)->first();
+        $forms = DB::table('forms')->orderBy('id', 'DESC')->first();
+        $d['dataProv'] = DB::table('m_provinsi')->where('aktif', 1)->get();
+        $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'';
         $d['data'][0]['title'] = 'Test Kuesioner';
         $d['data'][0]['desc'] = 'Desc Kuesioner';
-        return view('home', $d);
+        return view('profil', $d);
     }
 }

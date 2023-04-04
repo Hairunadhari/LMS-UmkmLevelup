@@ -29,8 +29,8 @@
       </h2>
     </div>
   </div>
-  <div class="container pt-1">
-    <iframe style="border:none;width:100%;" height="620px" src="http://194.59.165.67:8082/forms/test-kuesioner"></iframe>
+  <div class="container-fluid pt-5">
+    <iframe style="border:none;width:100%;" height="620px" src="{{$_GET['href']}}"></iframe>
     
   </div>
 @endsection

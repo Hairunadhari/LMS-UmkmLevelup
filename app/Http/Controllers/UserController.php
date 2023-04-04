@@ -69,6 +69,11 @@ class UserController extends Controller
             'type' => 'info',
             'message' => 'Terimakasih anda sudah mengisi kelengkapan data.',
         ]);
-        return redirect('home');
+        if($request->session()->has('url'))
+        {
+            return redirect($request->session()->get('url'));
+        }else{
+            return redirect('home');
+        }
     }
 }

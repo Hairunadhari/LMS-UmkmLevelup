@@ -142,6 +142,19 @@
             ">
             Login
             </button>
+
+            <a type="button" class="btn btn-primary"
+            style="
+              background: linear-gradient(
+                93.89deg,
+                #cc6600 0%,
+                #fe9d01 47.54%,
+                #ffcd18 100.92%
+              );
+            "
+            href="pendaftaran">
+            Daftar
+            </a>
         </div>
     </form>
         </div>

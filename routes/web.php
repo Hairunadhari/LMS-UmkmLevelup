@@ -48,6 +48,7 @@ Route::get('login', function (Request $request) {
 // Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
 // Route::post('/register',  [RegisterController::class, 'register']);
 Route::get('send-mail', [MailController::class, 'index']);
+Route::get('profil', [HomeController::class, 'profil']);
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');

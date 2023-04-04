@@ -1,11 +1,42 @@
+
+@extends('layout.main')
+
+@section('container')
+<div
+    class="pt-5"
+    style="
+      background-image: url('./assets/background_regist_bawah.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position-y: bottom;
+      height: 30vh;
+    "
+  >
+<div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb justify-content-end">
+        {{-- <li class="breadcrumb-item active">Registrasi</li> --}}
+        {{-- <li class="breadcrumb-item active" aria-current="page">
+          Step By Step
+        </li> --}}
+      </ol>
+    </nav>
+    <h2
+      class="text-uppercase text-center font-bold"
+      style="font-size: 3rem; font-weight: bolder"
+    >
+    Profil, {{ auth()->user()->name }}!
+    </h2>
+  </div>
+</div>
+<div class="container pt-5">
+
 <style>
     .form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown), .form-floating>.form-select{
         padding-top: 1.725rem;
         padding-bottom: 0.425rem;
     }
 </style>
-<h4>Harap lengkapi profil usaha anda terlebih dahulu: </h4>
-    <br>
     <form action="{{route('submit-profil')}}" method="POST">
         @csrf
       <div class="row">
@@ -30,7 +61,7 @@
               id="namaPemilik"
               name="namaPemilik"
               required
-              value="{{auth()->user()->name}}"
+              value="{{$user->nama_pemilik}}"
             />
             <label for="namaPemilik" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Nama Lengkap Pemilik <span style="color: red; font-weight:bold">*</span></label
@@ -47,8 +78,8 @@
                   aria-label="Floating label select example"
                 >
                   <option value="">-- Pilih --</option>
-                  <option value="Pria">Pria</option>
-                  <option value="Perempuan">Perempuan</option>
+                  <option value="Pria" {{$user->jenis_kelamin == "Pria" ? "selected" : ""}}>Pria</option>
+                  <option value="Perempuan" {{$user->jenis_kelamin == "Perempuan" ? "selected" : ""}}>Perempuan</option>
                 </select>
                 <label for="jenisKelamin" class="ms-4"
                   ><i
@@ -67,6 +98,7 @@
               name="namaUsaha"
               required
               placeholder="Toko ...."
+              value="{{$user->nama_usaha}}"
             />
             <label for="namaUsaha" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Nama Usaha (Toko) <span style="color: red; font-weight:bold">*</span></label
@@ -82,7 +114,7 @@
               name="email"
               required
               placeholder="toko@***.com"
-              value="{{auth()->user()->email}}"
+              value="{{$user->email_usaha}}"
             />
             <label for="email" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Email Usaha (Toko) <span style="color: red; font-weight:bold">*</span></label
@@ -116,7 +148,7 @@
                     >
                     <option value="">-- Pilih --</option>
                     @foreach ($dataProv as $item)
-                        <option  value="{{$item->id_provinsi}}">{{$item->nama_provinsi}}</option>
+                        <option  value="{{$item->id_provinsi}}" {{$user->id_provinsi == $user->id_provinsi ? "selected" : ""}}>{{$item->nama_provinsi}}</option>
                     @endforeach
                     </select>
                     <label for="provinsi" class="ms-4"
@@ -136,7 +168,7 @@
                     required
                     aria-label="Floating label select example"
                     >
-                    <option selected value="">-- Pilih --</option>
+                    <option selected value="{{$user->id_kabupaten}}">{{$user->id_kabupaten}}</option>
                     </select>
                     <label for="kabupaten" class="ms-4"
                     ><i
@@ -156,7 +188,7 @@
                     required
                     aria-label="Floating label select example"
                     >
-                    <option selected value="">-- Pilih --</option>
+                    <option selected value="{{$user->id_kecamatan}}">{{$user->id_kecamatan}}</option>
                     </select>
                     <label for="kecamatan" class="ms-4"
                     ><i
@@ -176,7 +208,7 @@
                     required
                     aria-label="Floating label select example"
                     >
-                    <option selected value="">-- Pilih --</option>
+                    <option selected value="{{$user->id_keluarahan}}">{{$user->id_keluarahan}}</option>
                     </select>
                     <label for="kelurahan" class="ms-4"
                     ><i
@@ -191,7 +223,7 @@
             </div>
             <div class="col-lg-5">
                 <div class="form-floating mb-3 shadow ">
-                    <textarea class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px"></textarea>
+                    <textarea class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px">{{$user->alamat_lengkap}}</textarea>
                     <label for="alamat" class="ms-2"
                     ><i
                     class="fa fa-edit me-2"
@@ -222,6 +254,7 @@
               id="no_telp"
               name="no_telp"
               placeholder="+021 *****"
+              value="{{$user->no_telp}}"
             />
             <label for="no_telp" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> No Telpon Utama </label
@@ -237,6 +270,7 @@
               name="no_hp"
               required
               placeholder="+062 *****"
+              value="{{$user->no_hp}}"
             />
             <label for="no_hp" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> No Telpon Paket Data <span style="color: red; font-weight:bold">*</span></label
@@ -252,6 +286,7 @@
               name="nik"
               required
               placeholder="3175******"
+              value="{{$user->nik}}"
             />
             <label for="nik" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> NIK <span style="color: red; font-weight:bold">*</span></label
@@ -267,6 +302,7 @@
               name="nib"
               required
               placeholder="128******"
+              value="{{$user->nib}}"
             />
             <label for="nib" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> NIB <span style="color: red; font-weight:bold">*</span></label
@@ -287,11 +323,11 @@
               width:200px;
               margin: 0 auto;
             ">
-            Simpan
+            Update
         </button>
       </div>
     </form>
-
+</div>
 <script>
     $( "#provinsi" ).change(function() {
         var optionValue = $(this).val();
@@ -379,3 +415,4 @@
         }
     });
 </script>
+@endsection
