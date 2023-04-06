@@ -95,7 +95,7 @@
               <hr>
             </div>
             <div class="col text-center">
-              Alamat Usaha (Provinsi) : 
+              Alamat Usaha : 
             </div>
             <div class="col">
               <hr>
@@ -123,7 +123,7 @@
                     ><i
                         class="fa-solid fa-up-right-and-down-left-from-center me-2"
                     ></i
-                    >Alamat Usaha <span style="color: red; font-weight:bold">*</span></label
+                    >Provinsi <span style="color: red; font-weight:bold">*</span></label
                     >
                 </div>
                 </div>
@@ -142,7 +142,7 @@
                     ><i
                         class="fa-solid fa-up-right-and-down-left-from-center me-2"
                     ></i
-                    >Kabupaten <span style="color: red; font-weight:bold">*</span></label
+                    >Kabupaten / Kota <span style="color: red; font-weight:bold">*</span></label
                     >
                     {{-- <small for="floatingSelect">alamat usaha harus berada sesuai dengan target lokasi untuk pelaksanaan program pemdampingan umkm levelup</small> --}}
                 </div>

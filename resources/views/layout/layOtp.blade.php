@@ -68,7 +68,7 @@
 
       @if(session('success'))
       $.toast({
-        heading: 'Terjadi kesalahan :',
+        heading: 'Notifikasi :',
         text: "{{ session('success')['message'] }}",
         icon: "{{ session('success')['type'] }}",
         loader: true,        // Change it to false to disable loader
