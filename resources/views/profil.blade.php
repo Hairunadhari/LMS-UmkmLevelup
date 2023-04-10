@@ -37,7 +37,7 @@
         padding-bottom: 0.425rem;
     }
 </style>
-    <form action="{{route('submit-profil')}}" method="POST">
+    <form action="{{route('update-profil')}}" method="POST">
         @csrf
       <div class="row">
         <div class="col-md-12 mb-4 mt-2">
@@ -148,7 +148,7 @@
                     >
                     <option value="">-- Pilih --</option>
                     @foreach ($dataProv as $item)
-                        <option  value="{{$item->id_provinsi}}" {{$user->id_provinsi == $user->id_provinsi ? "selected" : ""}}>{{$item->nama_provinsi}}</option>
+                        <option  value="{{$item->id_provinsi}}" {{$item->id_provinsi == $user->id_provinsi ? "selected" : ""}}>{{$item->nama_provinsi}}</option>
                     @endforeach
                     </select>
                     <label for="provinsi" class="ms-4"
@@ -168,7 +168,7 @@
                     required
                     aria-label="Floating label select example"
                     >
-                    <option selected value="{{$user->id_kabupaten}}">{{$user->id_kabupaten}}</option>
+                    <option selected value="{{$user->id_kabupaten}}">{{$nama_kabupaten}}</option>
                     </select>
                     <label for="kabupaten" class="ms-4"
                     ><i
@@ -188,7 +188,7 @@
                     required
                     aria-label="Floating label select example"
                     >
-                    <option selected value="{{$user->id_kecamatan}}">{{$user->id_kecamatan}}</option>
+                    <option selected value="{{$user->id_kecamatan}}">{{$nama_kecamatan}}</option>
                     </select>
                     <label for="kecamatan" class="ms-4"
                     ><i
@@ -208,7 +208,7 @@
                     required
                     aria-label="Floating label select example"
                     >
-                    <option selected value="{{$user->id_keluarahan}}">{{$user->id_keluarahan}}</option>
+                    <option selected value="{{$user->id_keluarahan}}">{{$nama_kelurahan}}</option>
                     </select>
                     <label for="kelurahan" class="ms-4"
                     ><i

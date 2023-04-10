@@ -21,17 +21,24 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials, $request->remember)) {
-            $request->session()->regenerate();
-
-            return redirect()->intended('home');
+        try {
+            if (Auth::attempt($credentials, $request->remember)) {
+                $request->session()->regenerate();
+    
+                return redirect()->intended('home');
+            }
+            
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'Username / Password anda salah.',
+            ]);
+            $request->session()->put('id_user', Auth::user()->id);
+        } catch (\Throwable $th) {
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'Silahkan periksa kembali username password anda.',
+            ]);
         }
-        
-        $request->session()->flash('alert', [
-            'type' => 'error',
-            'message' => 'Username / Password anda salah.',
-        ]);
-        $request->session()->put('id_user', Auth::user()->id);
         
         return view('login');
 

@@ -176,7 +176,7 @@ public function register(Request $request)
 }
 
 public function submitOtp(Request $request){
-    $otp = $request->otp1.$request->otp2.$request->otp3.$request->otp4.$request->otp5.$request->otp6;
+    $otp = $request->otp;
     try {
         $checkOtp = DB::table('t_otp')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->count();
         // dd($request->id_user);
@@ -197,7 +197,7 @@ public function submitOtp(Request $request){
             'message' => 'Kode OTP salah.',
         ]);
         $d['email'] = $request->email;
-        $d['id_user'] = $request->id;
+        $d['id_user'] = $request->id_user;
         
         return view('verifikasiOtp', $d);
     }

@@ -52,6 +52,7 @@
         heading: 'Terjadi kesalahan :',
         text: "{{ session('alert')['message'] }}",
         icon: "{{ session('alert')['type'] }}",
+        hideAfter: false,
         // loader: true,        // Change it to false to disable loader
         position: 'top-right',
         loaderBg: '#9EC600'  // To change the background
@@ -64,6 +65,7 @@
         heading: 'Notifikasi :',
         text: "{{ session('success')['message'] }}",
         icon: "{{ session('success')['type'] }}",
+        hideAfter: false,
         // loader: true,        // Change it to false to disable loader
         position: 'top-right',
         loaderBg: '#9EC600'  // To change the background

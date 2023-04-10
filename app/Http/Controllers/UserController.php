@@ -76,4 +76,44 @@ class UserController extends Controller
             return redirect('home');
         }
     }
+
+    public function updateProfil(Request $request)
+    {
+       try {
+            DB::beginTransaction();
+                DB::table('profil_user')->where('id_user', Auth::user()->id)->update([
+                    'nama_pemilik' => $request->namaPemilik,
+                    'id_provinsi' => $request->provinsi,
+                    'id_kabupaten' => $request->kabupaten,
+                    // 'nama_kabupaten' => $request->namaPemilik,
+                    'id_kecamatan' => $request->kecamatan,
+                    // 'nama_kecamatan' => $request->namaPemilik,
+                    'id_keluarahan' => $request->kelurahan,
+                    // 'nama_kelurahan' => $request->namaPemilik,
+                    'alamat_lengkap' => $request->alamat,
+                    'nama_usaha' => $request->namaUsaha,
+                    'email_usaha' => $request->email,
+                    'no_telp' => $request->no_telp,
+                    'no_hp' => $request->no_hp,
+                    'jenis_kelamin' => $request->jenisKelamin,
+                    'nik' => $request->nik,
+                    'nib' => $request->nib,
+                ]);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+       }
+       $request->session()->flash('success', [
+            'type' => 'info',
+            'message' => 'Profil sudah diupdate.',
+        ]);
+        // if($request->session()->has('url'))
+        // {
+        //     return redirect($request->session()->get('url'));
+        // }else{
+            return redirect('home');
+        // }
+    }
 }

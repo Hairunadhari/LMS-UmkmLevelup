@@ -22,7 +22,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing-page');
 });
 
 Route::get('pendaftaran', function (Request $request) {
@@ -56,6 +56,7 @@ Route::post('/submit-otp', [App\Http\Controllers\Auth\RegisterController::class,
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'index'])->name('logout');
 Route::post('/submit-profil', [App\Http\Controllers\UserController::class, 'submitProfil'])->name('submit-profil');
+Route::post('/update-profil', [App\Http\Controllers\UserController::class, 'updateProfil'])->name('update-profil');
 
 Route::get('getKabupaten/{id}', [IntegrasiController::class, 'getKabupaten']);
 Route::get('getKecamatan/{id}', [IntegrasiController::class, 'getKecamatan']);
