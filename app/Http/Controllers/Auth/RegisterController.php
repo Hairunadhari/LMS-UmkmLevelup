@@ -128,26 +128,32 @@ public function register(Request $request)
         if($checkUser == 0){
             $id = $this->create($request->all());
         }else{
-            $id = DB::table('users')->where('email', $request->email)->first()->id;
-            DB::table('users')->where('id', $id)->update([
-                'name' => $request->name,
-                'no_wa' => $request->no_wa,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+            $checkUserVerif = DB::table('users')->where('email', $request->email)->whereNotNull('email_verified_at')->count();
+            if($checkUser == 0){
+                $id = DB::table('users')->where('email', $request->email)->first()->id;
+                DB::table('users')->where('id', $id)->update([
+                    'name' => $request->name,
+                    'no_wa' => $request->no_wa,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+            }else{
+                $request->session()->flash('alert', [
+                    'type' => 'error',
+                    'message' => 'Email / No Hp Sudah terpakai.',
+                ]);
+                return view('pendaftaran');
+            }
         }
         DB::commit();
     } catch (\Throwable $th) {
         DB::rollBack();
         $request->session()->flash('alert', [
             'type' => 'error',
-            'message' => 'Email Sudah Terpakai.',
+            'message' => 'Email / No Hp Sudah Terpakai.',
         ]);
         return view('pendaftaran');
     }
-    
-    // $valid = event(new Registered($user));
-
     $otp = mt_rand(100000, 999999);
 
     DB::table('t_otp')->where('id_user', $id)->where('status', 0)->update([
