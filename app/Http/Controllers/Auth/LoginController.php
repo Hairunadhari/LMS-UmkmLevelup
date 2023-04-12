@@ -30,13 +30,13 @@ class LoginController extends Controller
             
             $request->session()->flash('alert', [
                 'type' => 'error',
-                'message' => 'Username / Password anda salah.',
+                'message' => 'Email / Password anda salah.',
             ]);
             $request->session()->put('id_user', Auth::user()->id);
         } catch (\Throwable $th) {
             $request->session()->flash('alert', [
                 'type' => 'error',
-                'message' => 'Silahkan periksa kembali username password anda.',
+                'message' => 'Silahkan periksa kembali email password anda.',
             ]);
         }
         

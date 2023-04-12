@@ -210,7 +210,7 @@ public function submitOtp(Request $request){
     $request->session()->forget('alert');
     $request->session()->flash('success', [
         'type' => 'info',
-        'message' => 'Selamat anda sudah terverifikasi, silahkan login kembali menggunakan username dan password anda.',
+        'message' => 'Selamat anda sudah terverifikasi, silahkan login kembali menggunakan email dan password anda.',
     ]);
     return view('login');
 }
