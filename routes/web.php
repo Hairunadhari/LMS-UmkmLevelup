@@ -35,9 +35,12 @@ Route::get('verifikasiOtp', function (Request $request) {
     return view('verifikasiOtp');
 });
 
-Route::get('kuesioner', function () {
-    return view('kuesioner');
-});
+// Route::get('kuesioner', function () {
+    
+// });
+
+Route::get('kuesioner', [HomeController::class, 'kuesioner']);
+
 
 Route::get('login', function (Request $request) {
     $request->session()->forget('alert');
