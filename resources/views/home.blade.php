@@ -33,19 +33,29 @@
     @if (auth()->user()->profil == 0)
       @include('profil-pengisian')
     @else
-      @foreach ($data as $item)
-        <{{$done == true ? 'span' : 'a'}} href="{{$done == true ? '' : $item['link']}}" class="card" style="width: 18100%rem;">
-          <div class="card-body">
-            <h4>Banner "{{$item['title']}}"</h4>
-            @if ($done == true)
-              <span style="color: red; text-decoration:none; position: absolute; right:20px; top : 20px;">Sudah terisi</span>  
-            @else
-                
-            @endif
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </{{$done == true ? 'span' : 'a'}}>
-      @endforeach
+      @if ($done == true)
+      <span class="card" style="width: 100%rem;">
+        <div class="card-body">
+          <h4>Banner "{{$data[0]['title']}}"</h4>
+          <span style="color: red; text-decoration:none; position: absolute; right:20px; top : 20px;">Sudah terisi</span>  
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+      </span>
+      @else
+        @foreach ($data as $item)
+          <a href="{{$item['link']}}" class="card" style="width: 100%rem;">
+            <div class="card-body">
+              <h4>Banner "{{$item['title']}}"</h4>
+              {{-- @if ($done == true)
+                <span style="color: red; text-decoration:none; position: absolute; right:20px; top : 20px;">Sudah terisi</span>  
+              @else
+                  
+              @endif --}}
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          <a>
+        @endforeach
+      @endif
     @endif
   </div>
 @endsection

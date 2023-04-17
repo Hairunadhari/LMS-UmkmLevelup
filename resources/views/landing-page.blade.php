@@ -156,7 +156,7 @@
   <!-- #bikinusahamujadilevelup -->
 
   <!-- lokasilokasikawasanprioritas -->
-  <section>
+  {{-- <section>
     <div class="container-fluid py-2 py-md-5">
       <div class="d-flex justify-content-center align-items-center mb-2 mb-md-5">
         <h1 class="fw-bold" style="color: #0C438D;">15 Kawasan Prioritas</h1>
@@ -192,7 +192,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
   <!-- lokasilokasikawasanprioritas -->
 
   <!-- partner -->
