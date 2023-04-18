@@ -36,7 +36,7 @@ class HomeController extends Controller
             }else{
                 $d['done'] = false;
                 $submission = DB::table('form_submissions')->where('id_user', Auth::user()->id)->where('savedSession', 1)->first();
-                $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'?submission_id='.$hashids->encode($submission->id);
+                $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'?submission_id='.$hashids->encode($submission->id).'&id='. Auth::user()->id;
                 $d['data'][0]['title'] = $forms->title;
                 $d['data'][0]['title'] = $forms->description;
             }
