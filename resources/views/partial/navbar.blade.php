@@ -33,7 +33,7 @@
         </div>
         @auth
             <div class="">
-                Hi, {{ auth()->user()->name }} | <a href="#">Histori</a> | <a href="profil">Profil</a> | <a href="logout">Logout</a>
+                Hi, {{ auth()->user()->name }} | <a href="profil">Profil</a> | <a href="logout">Logout</a>
             </div>
         @endauth
     </div>
