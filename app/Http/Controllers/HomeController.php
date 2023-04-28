@@ -60,6 +60,11 @@ class HomeController extends Controller
 
     public function kuesioner()
     {
+        // $currenturl = url()->full();
+        if (Auth::user() == null) {
+            return redirect('login');
+        }else{
+        }
         $check = DB::table('form_submissions')->where('savedSession', 1)->where('id_user', Auth::user()->id)->count();
         if($check == 0){
             $d['done'] = false;
