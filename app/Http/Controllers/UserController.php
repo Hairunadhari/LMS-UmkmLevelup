@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\ForgotMail;
 
 class UserController extends Controller
 {
@@ -115,5 +116,26 @@ class UserController extends Controller
         // }else{
             return redirect('home');
         // }
+    }
+
+    public function forgot(){
+        return view('forgot');
+    }
+
+    public function forgotPassword(Request $request){
+        $mailData = [
+            'title' => 'Mail from umkmlevelup.id',
+            'body' => 'Berikut email lupa password anda.',
+        ];
+    
+        Mail::to($request->email)->send(new ForgotMail($mailData));
+    
+        $d['email'] = $request->email;
+
+        $request->session()->flash('success', [
+            'type' => 'info',
+            'message' => 'email "lupa password" sudah terkirim, silahkan periksa email anda.',
+        ]);
+        return view('login');
     }
 }

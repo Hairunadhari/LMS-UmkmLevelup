@@ -28,7 +28,7 @@
       <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
       <link rel="stylesheet" type="text/css" href="css/jquery.signature.css">
 
-    <title>Kuisioner 2 || UMKM GO ONLINE</title>
+    <title>Kuisioner 2 || UMKM LEVELUP</title>
 
     <style>
       .photos img {

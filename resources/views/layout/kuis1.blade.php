@@ -13,7 +13,7 @@
       crossorigin="anonymous"
     />
 
-    <title>Kuisioner 1 || UMKM GO ONLINE</title>
+    <title>Kuisioner 1 || UMKM LEVELUP</title>
 
     <style>
       .photos img {

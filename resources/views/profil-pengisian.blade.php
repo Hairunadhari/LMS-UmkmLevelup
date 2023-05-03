@@ -250,11 +250,10 @@
               class="form-control rounded-pill px-4"
               id="nik"
               name="nik"
-              required
               placeholder="3175******"
             />
             <label for="nik" class="ms-4"
-              ><i class="fa-solid fa-user me-2"></i> NIK <span style="color: red; font-weight:bold">*</span></label
+              ><i class="fa-solid fa-user me-2"></i> NIK</label
             >
           </div>
         </div>

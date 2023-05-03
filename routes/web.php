@@ -60,6 +60,8 @@ Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'
 Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'index'])->name('logout');
 Route::post('/submit-profil', [App\Http\Controllers\UserController::class, 'submitProfil'])->name('submit-profil');
 Route::post('/update-profil', [App\Http\Controllers\UserController::class, 'updateProfil'])->name('update-profil');
+Route::get('/forgot', [App\Http\Controllers\UserController::class, 'forgot'])->name('forgot');
+Route::post('/forgot-password', [App\Http\Controllers\UserController::class, 'forgotPassword'])->name('forgot-password');
 
 Route::get('getKabupaten/{id}', [IntegrasiController::class, 'getKabupaten']);
 Route::get('getKecamatan/{id}', [IntegrasiController::class, 'getKecamatan']);

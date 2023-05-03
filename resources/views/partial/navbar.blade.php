@@ -28,12 +28,12 @@
             @guest
                 <a class="navbar-brand" href="#">
             @endguest
-                <img src="{{asset('assets/logo_umkm.png')}}" alt="logo_umkm" />
+                <img src="{{asset('asset/logo.png')}}" alt="logo umkm levelup" />
             </a>
         </div>
         @auth
             <div class="">
-                Hi, {{ auth()->user()->name }} | <a href="home">Home</a> | <a href="profil">Profil</a> | <a href="logout">Logout</a>
+                Hi, {{ auth()->user()->name }} | <a href="home">Kuesioner</a> | <a href="profil">Profil</a> | <a href="logout">Logout</a>
             </div>
         @endauth
     </div>
