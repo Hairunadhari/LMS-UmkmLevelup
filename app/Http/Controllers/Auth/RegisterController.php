@@ -39,13 +39,18 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-    
-    return DB::table('users')->insertGetId([
-        'name' => $data['name'],
-        'no_wa' => $data['no_wa'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password']),
-    ]);
+        $query = DB::table('users')->where('email', $data['email']);
+        $check = $query->count();
+        if ($check == 0) {
+            return DB::table('users')->insertGetId([
+                'name' => $data['name'],
+                'no_wa' => $data['no_wa'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+        }else{
+            return $query->first()->id;
+        }
 }
 
 
@@ -124,12 +129,12 @@ public function register(Request $request)
 {
     try {
         DB::beginTransaction();
-        $checkUser = DB::table('users')->where('email', $request->email)->count();
+        $checkUser = DB::table('users')->where('email', $request->email)->whereNotNull('email_verified_at')->count();
         if($checkUser == 0){
             $id = $this->create($request->all());
         }else{
-            $checkUserVerif = DB::table('users')->where('email', $request->email)->whereNotNull('email_verified_at')->count();
-            if($checkUser == 0){
+            $checkUserVerif = DB::table('users')->where('no_wa', $request->no_wa)->count();
+            if($checkUserVerif == 0){
                 $id = DB::table('users')->where('email', $request->email)->first()->id;
                 DB::table('users')->where('id', $id)->update([
                     'name' => $request->name,
@@ -140,7 +145,7 @@ public function register(Request $request)
             }else{
                 $request->session()->flash('alert', [
                     'type' => 'error',
-                    'message' => 'Email / No Hp Sudah terpakai.',
+                    'message' => 'No Hp Sudah terpakai.',
                 ]);
                 return view('pendaftaran');
             }
@@ -150,7 +155,7 @@ public function register(Request $request)
         DB::rollBack();
         $request->session()->flash('alert', [
             'type' => 'error',
-            'message' => 'Email / No Hp Sudah Terpakai.',
+            'message' => 'Email Sudah Terpakai.',
         ]);
         return view('pendaftaran');
     }
