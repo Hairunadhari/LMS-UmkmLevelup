@@ -16,6 +16,9 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        if (Auth::check()) {
+            return redirect()->intended('home');
+        }
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],

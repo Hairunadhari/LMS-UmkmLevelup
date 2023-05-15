@@ -26,6 +26,9 @@ Route::get('/', function () {
 });
 
 Route::get('pendaftaran', function (Request $request) {
+    if (Auth::check()) {
+        return redirect()->intended('home');
+    }
     $request->session()->forget('alert');
     return view('pendaftaran');
 });
@@ -43,6 +46,9 @@ Route::get('kuesioner', [HomeController::class, 'kuesioner']);
 
 
 Route::get('login', function (Request $request) {
+    if (Auth::check()) {
+        return redirect()->intended('home');
+    }
     $request->session()->forget('alert');
     return view('login');
 })->name('login');
