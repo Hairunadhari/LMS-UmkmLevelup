@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect()->route('home'); // Replace 'home' with the desired route after login
+    }
+    
     public function showLoginForm()
     {
         return view('login');
@@ -19,6 +24,16 @@ class LoginController extends Controller
         if (Auth::check()) {
             return redirect()->intended('home');
         }
+        $request->session()->forget('alert');
+        return view('login');
+    }
+
+    public function submitLogin(Request $request)
+    {
+        // dd('test');
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -28,7 +43,7 @@ class LoginController extends Controller
             if (Auth::attempt($credentials, $request->remember)) {
                 $request->session()->regenerate();
     
-                return redirect()->intended('home');
+                return redirect()->route('home'); 
             }
             
             $request->session()->flash('alert', [

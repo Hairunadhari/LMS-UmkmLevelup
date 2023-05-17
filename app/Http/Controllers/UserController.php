@@ -70,12 +70,14 @@ class UserController extends Controller
             'type' => 'info',
             'message' => 'Terimakasih anda sudah mengisi kelengkapan data.',
         ]);
-        if($request->session()->has('url'))
-        {
-            return redirect($request->session()->get('url'));
-        }else{
-            return redirect('home');
-        }
+        // if($request->session()->has('url'))
+        // {
+        //     return redirect($request->session()->get('url'));
+        // }else{
+        //     return redirect('home');
+        // }
+
+        return redirect('https://umkmlevelup.id/home');
     }
 
     public function updateProfil(Request $request)
@@ -114,7 +116,8 @@ class UserController extends Controller
         // {
         //     return redirect($request->session()->get('url'));
         // }else{
-            return redirect('home');
+            // return redirect('home');
+            return redirect('https://umkmlevelup.id/home');
         // }
     }
 

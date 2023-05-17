@@ -44,14 +44,7 @@ Route::get('verifikasiOtp', function (Request $request) {
 
 Route::get('kuesioner', [HomeController::class, 'kuesioner']);
 
-
-Route::get('login', function (Request $request) {
-    if (Auth::check()) {
-        return redirect()->intended('home');
-    }
-    $request->session()->forget('alert');
-    return view('login');
-})->name('login');
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 
 // Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
@@ -62,7 +55,7 @@ Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, '
 
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/submit-otp', [App\Http\Controllers\Auth\RegisterController::class, 'submitOtp'])->name('submit-otp');
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::post('/submit-login', [App\Http\Controllers\Auth\LoginController::class, 'submitLogin'])->name('submit-login');
 Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'index'])->name('logout');
 Route::post('/submit-profil', [App\Http\Controllers\UserController::class, 'submitProfil'])->name('submit-profil');
 Route::post('/update-profil', [App\Http\Controllers\UserController::class, 'updateProfil'])->name('update-profil');
@@ -77,6 +70,8 @@ Route::get('getKelurahan/{id}', [IntegrasiController::class, 'getKelurahan']);
 // Route::post('/login', 'LoginController@login');
 // Route::post('/logout', 'LoginController@logout')->name('logout');
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('home', [HomeController::class, 'index'])->name('home');
-});
+// Route::group(['middleware' => 'disable-back-button'],function(){
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('home', [HomeController::class, 'index'])->name('home');
+    });
+// });
