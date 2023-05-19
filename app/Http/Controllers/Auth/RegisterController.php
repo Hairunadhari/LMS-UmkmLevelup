@@ -133,7 +133,7 @@ public function register(Request $request)
         if($checkUser == 0){
             $id = $this->create($request->all());
         }else{
-            $checkUserVerif = DB::table('users')->where('no_wa', $request->no_wa)->count();
+            $checkUserVerif = DB::table('users')->where('no_wa', $request->no_wa)->whereNotNull('email_verified_at')->count();
             if($checkUserVerif == 0){
                 $id = DB::table('users')->where('email', $request->email)->first()->id;
                 DB::table('users')->where('id', $id)->update([
@@ -152,18 +152,26 @@ public function register(Request $request)
         }
         DB::commit();
     } catch (\Throwable $th) {
-        DB::rollBack();
-        $request->session()->flash('alert', [
-            'type' => 'error',
-            'message' => 'Email Sudah Terpakai.',
-        ]);
+        // dd(str_contains($th->getMessage(), 'no_wa'));
+        if (str_contains($th->getMessage(), 'no_wa')) {
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'No Wa Sudah Terpakai.',
+            ]);
+        }else{ 
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'Email Sudah Terpakai.',
+            ]);   
+        }
         return view('pendaftaran');
+        DB::rollBack();
     }
     $otp = mt_rand(100000, 999999);
 
-    DB::table('t_otp')->where('id_user', $id)->where('status', 0)->update([
-        'status' => 2,
-    ]);
+    // DB::table('t_otp')->where('id_user', $id)->where('status', 0)->update([
+    //     'status' => 2,
+    // ]);
 
     DB::table('t_otp')->insert([
         'kode_otp' => $otp,
