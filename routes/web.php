@@ -53,7 +53,7 @@ Route::get('send-mail', [MailController::class, 'index']);
 Route::get('profil', [HomeController::class, 'profil']);
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
-Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+// Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/submit-otp', [App\Http\Controllers\Auth\RegisterController::class, 'submitOtp'])->name('submit-otp');
 Route::post('/submit-login', [App\Http\Controllers\Auth\LoginController::class, 'submitLogin'])->name('submit-login');
 Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'index'])->name('logout');
@@ -61,6 +61,8 @@ Route::post('/submit-profil', [App\Http\Controllers\UserController::class, 'subm
 Route::post('/update-profil', [App\Http\Controllers\UserController::class, 'updateProfil'])->name('update-profil');
 Route::get('/forgot', [App\Http\Controllers\UserController::class, 'forgot'])->name('forgot');
 Route::post('/forgot-password', [App\Http\Controllers\UserController::class, 'forgotPassword'])->name('forgot-password');
+Route::get('/reset-password/{url}', [App\Http\Controllers\UserController::class, 'doReset']);
+Route::post('/resetting', [App\Http\Controllers\UserController::class, 'resetting'])->name('resetting');
 
 Route::get('getKabupaten/{id}', [IntegrasiController::class, 'getKabupaten']);
 Route::get('getKecamatan/{id}', [IntegrasiController::class, 'getKecamatan']);
@@ -71,7 +73,11 @@ Route::get('getKelurahan/{id}', [IntegrasiController::class, 'getKelurahan']);
 // Route::post('/logout', 'LoginController@logout')->name('logout');
 
 // Route::group(['middleware' => 'disable-back-button'],function(){
-    Route::group(['middleware' => ['auth']], function () {
-        Route::get('home', [HomeController::class, 'index'])->name('home');
-    });
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('/page-materi/{id}', [App\Http\Controllers\MateriFrontController::class, 'viewMateri']);
+    Route::get('/dashboard', [App\Http\Controllers\MateriFrontController::class, 'index']);
+    Route::get('/lowonganHomeExam/{id}', [App\Http\Controllers\MateriFrontController::class, 'lowonganHomeExam']);
+    Route::get('/add-status/{id}', [App\Http\Controllers\MateriFrontController::class, 'addStatus']);
+});
 // });

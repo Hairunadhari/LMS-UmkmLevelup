@@ -51,7 +51,7 @@ class RegisterController extends Controller
         }else{
             return $query->first()->id;
         }
-}
+    }
 
 
     /**
@@ -110,10 +110,10 @@ class RegisterController extends Controller
         //
     }
 
-    public function showRegistrationForm()
-{
-    return view('auth.register');
-}
+    // public function showRegistrationForm()
+    // {
+    //     return view('auth.register');
+    // }
 
 protected function validator(array $data)
 {
@@ -129,26 +129,32 @@ public function register(Request $request)
 {
     try {
         DB::beginTransaction();
-        $checkUser = DB::table('users')->where('email', $request->email)->whereNotNull('email_verified_at')->count();
+        $checkUser = DB::table('users')->where('email', $request->email)->where('aktif', 1)->whereNotNull('email_verified_at')->count();
         if($checkUser == 0){
             $id = $this->create($request->all());
         }else{
-            $checkUserVerif = DB::table('users')->where('no_wa', $request->no_wa)->whereNotNull('email_verified_at')->count();
-            if($checkUserVerif == 0){
-                $id = DB::table('users')->where('email', $request->email)->first()->id;
-                DB::table('users')->where('id', $id)->update([
-                    'name' => $request->name,
-                    'no_wa' => $request->no_wa,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
-                ]);
-            }else{
-                $request->session()->flash('alert', [
-                    'type' => 'error',
-                    'message' => 'No Hp Sudah terpakai.',
-                ]);
-                return view('pendaftaran');
-            }
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'Email Sudah terpakai.',
+            ]);
+            return view('pendaftaran');
+        }
+        $checkUserVerif = DB::table('users')->where('no_wa', $request->no_wa)->where('aktif', 1)->whereNotNull('email_verified_at')->count();
+        if($checkUserVerif == 0){
+            $id = DB::table('users')->where('email', $request->email)->first()->id;
+            DB::table('users')->where('id', $id)->update([
+                'name' => $request->name,
+                'no_wa' => $request->no_wa,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'aktif' => 1,
+            ]);
+        }else{
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'No Hp Sudah terpakai.',
+            ]);
+            return view('pendaftaran');
         }
         DB::commit();
     } catch (\Throwable $th) {
@@ -167,6 +173,7 @@ public function register(Request $request)
         return view('pendaftaran');
         DB::rollBack();
     }
+    
     $otp = mt_rand(100000, 999999);
 
     // DB::table('t_otp')->where('id_user', $id)->where('status', 0)->update([
@@ -187,7 +194,7 @@ public function register(Request $request)
     ];
 
     Mail::to($request->email)->send(new DemoMail($mailData));
-
+    $request->session()->forget('alert');
     $d['email'] = $request->email;
     $d['id_user'] = $id;
 

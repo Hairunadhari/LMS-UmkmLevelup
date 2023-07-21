@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Poppins:wght@300;500;700&display=swap');
+
+.root{
+    
+}
+@font-face {
+    font-family: "seven segment";
+    src: url('../fonts/Seven-Segment.ttf');
+}
+
+*{
+    font-family: 'Montserrat', sans-serif;
+    z-index: 2;
+}
+
+nav{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 3;
+}
+.form-control{
+    border: none;
+    background-color: #d4cfcf;
+    border-radius: 5px 0 0 5px;
+    height: 36px;
+}
+.form-control:focus{
+    background-color: #d4cfcf;
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+#navbarDropdownMenuLink{
+    color: #47E1A8;
+}
+.nav-dl{
+    color: #000;
+}
+.dropdown-menu{
+    background: #F1F1F1;
+    border-radius: 10px;
+    border: none;
+}
+.btn-search{
+    border: none;
+    background-color: #d4cfcf;
+    border-radius: 0 5px 5px 0;
+}
+.btn-notif{
+    /* height: 3rem; */
+    background: #F1F1F1;
+    border-radius: 10px;
+}
+.btn-notif img{
+    width:1.5rem;
+}
+
+
+
+/* Dashboard Content */
+.top h2{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(60% + 2vmin);
+}
+.pengumuman__content{
+    background-color: #FAE3D3;
+    padding: 1.25rem 1.75rem;
+    border-radius: 10px;
+    height: 10rem;
+    overflow: auto;
+}
+.pc__content h4{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(60% + 1vmin);
+}
+.pcc__c{
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+.pcc__c .c-left{
+    width: 80%;
+}
+.pcc__c .c-right p{
+    text-align: right;
+    color: rgb(10, 75, 10);
+}
+.pcc__c .c-left P{
+    font-weight: 300;
+}
+.pcc__c p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(40% + 1vmin);
+}
+
+
+.daylist{
+    padding: 5px 15px;
+    background-color: #47E1A8;
+    color: black;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #47e1a8;
+    border-radius: 7.5px;
+    font-weight: 600;
+}
+/* .tc__mapel{
+    justify-content: center;
+} */
+.tc__mapel a{
+    text-decoration: none;
+}
+.tc__content{
+    background-color: #0169EE;
+    padding: 15px;
+    border-radius: 10px;
+}
+.tcc__right h3{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: calc(65% + .8vmin);
+    color: #000;
+}
+.tcc__right p{
+    color: #fff;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(40% + .8vmin);
+}
+.tcc__bottom{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    gap: .5rem;
+}
+.tccb__content{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #000;
+    padding:0 10px 0 0;
+}
+.tccb__content p{
+    font-size: calc(50% + 1vmin)!important;
+    margin-bottom: 0 ;
+}
+.tccbl__right {
+    margin-top: 0;
+}
+.tccbl__right p{
+    margin: auto 0;
+    font-weight: bold;
+    color: #000;
+}
+#tccb__last{
+    border: none;
+}
+
+
+
+
+/* RIGHT CONTENT DASHBOARD */
+.right__top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.rt__left h2{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+}
+.rt__right h1{
+    font-family: "seven segment";
+    color: red;
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(125% + 1vmax);
+}
+.right__bottom{
+    background-color: #F1F1F1;
+    border-radius: 10px;
+}
+.right__bottom h2{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+}
+.rbb__content{
+    display: flex;
+}
+.rb__belum h2{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+}
+.rbbc__right h1{
+    font-family: "poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+}
+.rbbcr{
+    display: flex;
+    font-size: 15px;
+}

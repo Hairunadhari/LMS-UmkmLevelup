@@ -56,6 +56,15 @@
           <a>
         @endforeach
       @endif
+      <br><br>
+      <div class="row">
+        <div class="col-md-4">
+          <a class="card" href="#">Dashboard</a>
+        </div>
+        <div class="col-md-4">
+          <a class="card" href="dashboard">LMS</a>
+        </div>
+      </div>
     @endif
   </div>
 @endsection

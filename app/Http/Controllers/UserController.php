@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\ForgotMail;
+use Mail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -126,9 +129,21 @@ class UserController extends Controller
     }
 
     public function forgotPassword(Request $request){
+        $checkUser = DB::table('users')->where('email', $request->email)->where('aktif', 1)->first();
+        if ($checkUser != null) {
+            $encryptId = urlencode(Crypt::encryptString($checkUser->id));
+        }else{
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'akun dengan email "'.$request->email.'" tidak terdaftar di akun',
+            ]);
+            return view('forgot');
+        }
+
         $mailData = [
             'title' => 'Mail from umkmlevelup.id',
             'body' => 'Berikut email lupa password anda.',
+            'link' => env('APP_URL')."/reset-password/".$encryptId
         ];
     
         Mail::to($request->email)->send(new ForgotMail($mailData));
@@ -138,6 +153,31 @@ class UserController extends Controller
         $request->session()->flash('success', [
             'type' => 'info',
             'message' => 'email "lupa password" sudah terkirim, silahkan periksa email anda.',
+        ]);
+        return view('login');
+    }
+
+    public function doReset($url) {
+        $d['id'] = Crypt::decryptString(urldecode($url));
+        $d['url'] = $url;
+        return view('reset-password', $d);
+    }
+
+    public function resetting(Request $request) {
+        if ($request->password == $request->konfirmasi_password) {
+            DB::table('users')->where('id', $request->id)->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }else{
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'password dan konfirmasi password tidak sesuai',
+            ]);
+            return redirect('reset-password/'.$request->url);
+        }
+        $request->session()->flash('success', [
+            'type' => 'info',
+            'message' => 'password anda sudah direset, silahkan login kembali',
         ]);
         return view('login');
     }
