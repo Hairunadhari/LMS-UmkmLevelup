@@ -34,7 +34,7 @@ class MateriFrontController extends Controller
 
         $subMateri = DB::table('t_sub_materi')
         ->select('t_sub_materi.*', 't_sub_materi_file.file_location')
-        ->selectRaw('(select IF(ISNULL(t_log_materi.status)=1, 0, t_log_materi.status) from t_log_materi where t_log_materi.id_user = '.Auth::user()->id.' and t_log_materi.id_sub_materi = t_sub_materi.id) as status')
+        ->selectRaw('(select IF(ISNULL(t_log_materi.status)=1, 0, t_log_materi.status) from t_log_materi where t_log_materi.id_user = '.Auth::user()->id.' and t_log_materi.id_sub_materi = t_sub_materi.id limit 1) as status')
         ->leftJoin('t_sub_materi_file', 't_sub_materi.id', '=', 't_sub_materi_file.id_sub_materi')
         ->where('t_sub_materi.aktif', 1)
         ->where('t_sub_materi.id_materi', $id)
@@ -75,6 +75,7 @@ class MateriFrontController extends Controller
         $dataSub = DB::table('t_sub_materi')->where('id', $id)->first();
         DB::table('t_log_materi')
         ->where('id_user', Auth::user()->id)
+        ->where('id_sub_materi', $id)
         ->update([
             'id_sub_materi' => $id,
             'id_materi' => $dataSub->id_materi,

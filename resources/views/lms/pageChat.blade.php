@@ -2,7 +2,7 @@
 @section('container')
 <link rel="stylesheet" href=" {{ asset('css/pageChat.css')}}">
 
-<div class="Content container px-4 px-lg-5">
+<div class="Content px-4 px-lg-5">
     <div class="row">
         {{-- <div class="col mx-auto">
             <iframe class="responsive-iframe" src="https://www.youtube.com/embed/UqA7zfsVlIg?list=RD0LxdzHBmCCM"
@@ -22,9 +22,10 @@
                             </div>
                             <div class="tpl_title">
                                 <p class="mb-0 fw-bold">{{$sub_materi->nama}}</p>
-                                <p class="mb-0 ">{{$sub_materi->deskripsi}}</p>
                             </div>
                         </div>
+
+                        <p class="mb-0 mt-4">{{$sub_materi->deskripsi}}</p>
                     </div>
                 </div>
             </div>
@@ -140,7 +141,8 @@ function renderPage(pageNumber) {
         })
 
         // Call the function to render the PDF
-        const pdfUrl = '{{$sub_materi->file_location}}';
+        // const pdfUrl = '{{$sub_materi->file_location}}';
+        const pdfUrl = 'http://localhost:8080/storage/data_upload_lms/8e6aOXYVocRerNj0llm6zvhxjg7hRGFsWwWTyhGD.pdf';
         renderPdf(pdfUrl);
         updateNavigationButtons();
     }) 
