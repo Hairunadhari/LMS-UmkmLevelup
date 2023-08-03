@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar">
     @auth
         <div class="container-fluid justify-content-between container-sm">
     @endauth
@@ -32,9 +32,14 @@
             </a>
         </div>
         @auth
-            <div class="">
-                Hi, {{ auth()->user()->name }} | <a href="home">Kuesioner</a> | <a href="profil">Profil</a> | <a href="logout">Logout</a>
-            </div>
+            <nav class="for-dropdown">
+                <ul>
+                    <li><span class="badge badge-primary bg-success"><i class="fa fa-user"></i> Hi, {{ auth()->user()->name }}</span></li>
+                    <li><a href="home"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="profil"><i class="fa fa-address-book"></i> Profil</a></li>
+                    <li><a href="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </nav>
         @endauth
     </div>
 </nav>

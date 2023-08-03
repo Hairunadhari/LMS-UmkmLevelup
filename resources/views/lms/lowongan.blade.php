@@ -60,83 +60,80 @@
     <div class="px-4 px-lg-5">
         <div class="row">
             <div class="col-md-12 top mt-5">
-                <h2 class="mb-4">Pengumuman</h2>
-                <div class="pengumuman__content mt-2">
-                    <div class="pc__content mt-2" id="place__notifikasi">
-                        @foreach ($Notifikasi as $item)
-                            <h4>{{$item->judul_notifikasi}}</h4>
-                            <div class="pcc__c">
-                                <div class="c-left">
-                                    <p>{{$item->keterangan}}</p>
-                                </div>
-                                <div class="c-right">
-                                    <p>{{$item->tanggal}}</p>
-                                </div>
-                            </div>
-                        @endforeach
-
-
-                    </div>
-                </div>
-
-                {{-- <ul class="nav nav-pills mb-3 mt-5" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link daylist active" id="pills-materiSales-tab" data-bs-toggle="pill" data-bs-target="#pills-materiSales" type="button" role="tab" aria-controls="pills-materiSales" aria-selected="true">Materi Sales</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link daylist" id="pills-materiTeamLeader-tab" data-bs-toggle="pill" data-bs-target="#pills-materiTeamLeader" type="button" role="tab" aria-controls="pills-materiTeamLeader" aria-selected="false">Materi Team Leader</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link daylist" id="pills-materiAreaKoordinator-tab" data-bs-toggle="pill" data-bs-target="#pills-materiAreaKoordinator" type="button" role="tab" aria-controls="pills-materiAreaKoordinator" aria-selected="false">Materi Area Koordinator</button>
-                        </li>
-                      </ul> --}}
-                <hr class="bg-dark border-2 border-top border-dark">
-
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-materiSales" role="tabpanel"
-                        aria-labelledby="pills-materiSales-tab">
-                        <div class="row d-flex tc__mapel">
-                            @foreach ($Materi as $item)
-                            <div class="col-lg-3 col-xl-3 col-md-4 col-sm-6 mt-3" id="mapel">
-                                <a href="{{url('/lowonganHomeExam/'.$item->id)  }}">
-                                    <div class="tc__content ">
-                                        <div class="tcc__top d-flex gap-3">
-                                            <div class="tcc__left"><img src="{{ asset('../img/matematica-icon.png')}}  "
-                                                    alt=""></div>
-                                            <div class="tcc__right">
-                                                <h3>{{$item->nama}}</h3>
-                                                <p>{{mb_strimwidth($item->keterangan, 0, 30, '...');}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="tcc__bottom">
-                                            <div class="tccb__content gap-2 ">
-                                                <div class="tccbl__left"><img src="{{ asset('../img/book-icon.png')}}  "
-                                                        alt="" style="width: 1.5rem;">
+                <div class="row">
+                    <div class="col-md-8">
+                        {{-- <hr class="bg-dark border-2 border-top border-dark"> --}}
+                        <h4>List Materi </h4>
+                        <hr />
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-materiSales" role="tabpanel"
+                                aria-labelledby="pills-materiSales-tab">
+                                <div class="row d-flex tc__mapel">
+                                    @foreach ($Materi as $item)
+                                    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3" id="mapel">
+                                        <a href="{{url('/lowonganHomeExam/'.$item->id)  }}">
+                                            <div class="tc__content ">
+                                                <div class="tcc__top d-flex gap-3">
+                                                    <div class="tcc__left"><img src="{{ asset('../img/matematica-icon.png')}}  "
+                                                            alt=""></div>
+                                                    <div class="tcc__right">
+                                                        <h3>{{$item->nama}}</h3>
+                                                        <p>{{mb_strimwidth($item->keterangan, 0, 30, '...');}}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="tccbl__right">
-                                                    <p>{{$item->jumlahData}}</p>
+                                                <div class="tcc__bottom">
+                                                    <div class="tccb__content gap-2 ">
+                                                        <div class="tccbl__left"><img src="{{ asset('../img/book-icon.png')}}  "
+                                                                alt="" style="width: 1.5rem;">
+                                                        </div>
+                                                        <div class="tccbl__right">
+                                                            <p>{{$item->jumlahData}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tccb__content gap-2" id="tccb__last">
+                                                        <div class="tccbl__left"><img
+                                                                src="{{ asset('../img/people-icon.png')}}  " alt=""
+                                                                style="width: 1.25rem;">
+                                                        </div>
+                                                        <div class="tccbl__right">
+                                                            <p>35</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="tccb__content gap-2" id="tccb__last">
-                                                <div class="tccbl__left"><img
-                                                        src="{{ asset('../img/people-icon.png')}}  " alt=""
-                                                        style="width: 1.25rem;">
-                                                </div>
-                                                <div class="tccbl__right">
-                                                    <p>35</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
-                                </a>
+                                    @endforeach
+                                </div>
                             </div>
-                            @endforeach
+                            <div class="tab-pane fade" id="pills-materiTeamLeader" role="tabpanel"
+                                aria-labelledby="pills-materiTeamLeader-tab">SELASA</div>
+                            <div class="tab-pane fade" id="pills-materiAreaKoordinator" role="tabpanel"
+                                aria-labelledby="pills-materiAreaKoordinator-tab">RABU</div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-materiTeamLeader" role="tabpanel"
-                        aria-labelledby="pills-materiTeamLeader-tab">SELASA</div>
-                    <div class="tab-pane fade" id="pills-materiAreaKoordinator" role="tabpanel"
-                        aria-labelledby="pills-materiAreaKoordinator-tab">RABU</div>
+                    <div class="col-md-4">
+                        <h4 class="">Pengumuman</h4>
+                        <hr />
+                        <div class="pengumuman__content mt-2">
+                            <div class="pc__content mt-2" id="place__notifikasi">
+                                @foreach ($Notifikasi as $item)
+                                <div style="float: right">
+                                    <span class="badge badge-sm bg-primary"><i class="fa fa-calendar-days"></i> {{$item->tanggal}}</span>
+                                </div>
+                                    <h4>{{$item->judul_notifikasi}}</h4>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-12">
+                                            {!! $item->keterangan !!}
+                                        </div>
+                                    </div>
+                                @endforeach
+        
+        
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

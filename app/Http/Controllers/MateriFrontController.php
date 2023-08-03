@@ -16,13 +16,13 @@ class MateriFrontController extends Controller
         ->get();
         $d['Notifikasi'] = DB::table('notifikasis')->get();
 
-            if ($d['Materi']) {
-                return view("lms.lowongan", $d);
-            }else {
-                return response()->json(['message'=>'Tidak Ada Data'], 200);
-            }
-            // return view("lms.exam",compact('Materi'));
-            return view("lms.lowongan",compact('Materi', 'Notifikasi'));
+        if ($d['Materi']) {
+            return view("lms.lowongan", $d);
+        }else {
+            return response()->json(['message'=>'Tidak Ada Data'], 200);
+        }
+        
+        return view("lms.lowongan", $d);
     }
 
     public function lowonganHomeExam($id){

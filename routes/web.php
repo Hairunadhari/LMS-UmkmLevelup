@@ -47,7 +47,7 @@ Route::get('kuesioner', [HomeController::class, 'kuesioner']);
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 
-Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
+Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
 // Route::post('/register',  [RegisterController::class, 'register']);
 Route::get('send-mail', [MailController::class, 'index']);
 Route::get('profil', [HomeController::class, 'profil']);

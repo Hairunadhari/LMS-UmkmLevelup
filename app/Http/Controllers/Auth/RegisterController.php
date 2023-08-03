@@ -22,9 +22,13 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // if (Auth::check()) {
+        //     return redirect()->intended('home');
+        // }
+        $request->session()->forget('alert');
+        return view('pendaftaran');
     }
 
     /**

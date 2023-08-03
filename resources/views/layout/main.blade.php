@@ -27,6 +27,23 @@
             aspect-ratio: 3/2;
             object-fit: contain;
         }
+        nav.for-dropdown li{
+            list-style: none;
+            float: left;
+            margin: 0 10px;
+            /* text-transform: none; */
+            text-decoration: none;
+        }
+        nav.for-dropdown li a {
+            color: #797979;
+            text-decoration: none;
+            padding-bottom: 5px;
+        }
+        nav.for-dropdown li a:hover{
+            color: #000;
+            /* border-bottom: 1px solid #000; */
+            /* font-weight: bold; */
+        }
     </style>
 </head>
 
@@ -35,6 +52,7 @@
 
      @yield('container')
 
+     @include('footer')
 
     <!-- Optional JavaScript; choose one of the two! -->
 

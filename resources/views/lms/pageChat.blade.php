@@ -22,6 +22,7 @@
                             </div>
                             <div class="tpl_title">
                                 <p class="mb-0 fw-bold">{{$sub_materi->nama}}</p>
+                                <br> Author : Fulan
                             </div>
                         </div>
 

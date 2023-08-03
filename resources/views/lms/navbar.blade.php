@@ -68,7 +68,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav mx-auto">
+                <ul class="navbar-nav mx-auto text-black">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/')}}/dashboard">Home</a>
                     </li>
