@@ -230,9 +230,19 @@
           document.getElementById("formDaftar").submit(); 
         }
       }else{
+        msg = '';
+        if (name == '' ) {
+          msg = "Nama"
+        }else if(email == ''){
+          msg = "Email"
+        }else if(no_wa == ''){
+          msg = "No Wa"
+        }else{
+          msg = "Password / Konfirmasi"
+        }
         $.toast({
           heading: 'Mohon Lakukan',
-          text: "Pengisian dengan benar",
+          text: "Pengisian "+ msg +" dengan benar",
           icon: "error",
           hideAfter: false,
           // loader: true,       // Change it to false to disable loader

@@ -87,7 +87,7 @@
                                                                 alt="" style="width: 1.5rem;">
                                                         </div>
                                                         <div class="tccbl__right">
-                                                            <p>{{$item->jumlahData}}</p>
+                                                            <p>{{$item->jumlahData ?? 0}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="tccb__content gap-2" id="tccb__last">

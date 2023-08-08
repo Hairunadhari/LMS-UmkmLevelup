@@ -51,7 +51,10 @@
                     <div class="left__side d-flex gap-5">
                         <div class="is__right">
                             <div class="isr__top px-auto">
-                                <h1 class="mt-md-0 mt-5 mapel">{{$Materi->nama}}</h1>
+                                <h2 class="mt-md-0 mt-5">{{$Materi->nama}}</h2>
+                                <hr>
+                                Author : <span class="badge badge-sm bg-secondary"><i class="fa fa-user"></i> {{$Materi->author}}</span>
+                                
                                 <p class="desc__mapel mt-3">{{$Materi->keterangan}}</p>
                             </div>
                         </div>

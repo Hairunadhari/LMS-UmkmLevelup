@@ -29,6 +29,7 @@ class MateriFrontController extends Controller
         $Materi = DB::table('m_materi')
         ->select('m_materi.*')
         ->selectRaw('(select count(tmat.id) from t_sub_materi tmat where tmat.id_materi=m_materi.id and tmat.aktif=1 group by tmat.id_materi ) as jumlahData')
+        ->selectRaw('(select u.name from users u where u.id=m_materi.created_by limit 1) as author')
         ->where('m_materi.aktif', 1)
         ->find($id);
 
@@ -39,21 +40,22 @@ class MateriFrontController extends Controller
         ->where('t_sub_materi.aktif', 1)
         ->where('t_sub_materi.id_materi', $id)
         ->get();
-        // dd($subMateri);
+        
         if ($Materi) {
             return view("lms.lowonganHomeExam",compact('Materi', 'subMateri'));
         }else {
             return response()->json(['message'=>'Tidak Ada Data'], 200);
         }
         // return view("lms.exam",compact('Materi'));
-        return view("lms.lowonganHomeExam",compact('Materi'));
+        // return view("lms.lowonganHomeExam",compact('Materi'));
     }
 
     public function viewMateri($id){
         $d['sub_materi'] = 
         DB::table('t_sub_materi')
-        ->select('t_sub_materi.*', 't_sub_materi_file.file_location')
+        ->select('t_sub_materi.*', 't_sub_materi_file.file_location', 'users.name')
         ->leftJoin('t_sub_materi_file', 't_sub_materi.id', '=', 't_sub_materi_file.id_sub_materi')
+        ->leftJoin('users', 'users.id', '=', 't_sub_materi.created_by')
         ->where('t_sub_materi.aktif', 1)
         ->where('t_sub_materi.id', $id)
         ->first();
