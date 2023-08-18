@@ -44,15 +44,17 @@
               <p class="card-text">{{$data[0]['desc']}}</p>
     
           </span> --}}
+          @foreach ($data as $item)
           <div  class="card" style="width: 100%; border:none; background:none; border: 1px solid #ababab">
             <div class="card-body">
               <h4>Kuesioner : <strong>{{$item['title']}}</strong></h4>
               <div class="card-text">{!! $item['desc'] !!}</div>
-              <a class="btn btn-info">Ikuti Kuesioner</a>
+              {{-- <a class="btn btn-info">Ikuti Kuesioner</a> --}}
               <hr />
               <div><small class="text-danger">Anda sudah mengikuti ini</small></div>
             </div>
           </div>
+          @endforeach
         @else
           @foreach ($data as $item)
             <div class="card" style="width: 100%; border:none; background:none; border: 1px solid #c2c2c2">
