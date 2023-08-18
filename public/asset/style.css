@@ -1,0 +1,14 @@
+@media(min-width: 1200px){
+  .container-fluid{
+    max-width: 1000px;
+  }
+}
+.button{
+  position: absolute;
+  animation: button 1s infinite;
+}
+@keyframes button{
+  0% {margin-top: 0;}
+  50% {margin-top: 10px;}
+  100% {margin-top: 0;}
+}

@@ -1,0 +1,74 @@
+
+.header{
+    background: url('bg-1.png') no-repeat;
+	background-size: contain;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	-moz-background-size: cover;
+    height: 50vh;
+    position: relative;
+    display: grid;
+    justify-content: center;
+}
+.header h1{
+    transform: translate(0%, 25%);
+}
+
+.sec_content{
+    background: url('bg-2.png') no-repeat;
+	background-size: contain;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	-ms-background-size: cover;
+	-moz-background-size: cover;
+    height: 75vh;
+    /* position: relative; */
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+/* .sec_content h1{
+    text-decoration: grey 1.5px underline;
+    text-underline-offset: 5px;
+} */
+.sec_content a{
+    background-color: #0C438D;
+    width: max-content;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.foot_top{
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.menu{
+    display: grid;
+    gap: .5rem;
+}
+.menu a{
+    text-decoration: none;
+    color: white;
+}
+.kantorpusat a{
+    text-decoration: underline  ;
+    color: white;
+}
+.contactus{
+    display: grid;
+    gap: 1rem;
+}
+
+
+@media (min-width: 992px){
+    .navbar-expand-lg .navbar-collapse 
+        {display: flex!important;
+        justify-content: end;
+        flex-basis: auto;}
+    .navbar-expand-lg .navbar-nav {
+        flex-direction: row;
+        display: flex;
+        gap: 1.5rem;
+    }
+}
