@@ -79,5 +79,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [App\Http\Controllers\MateriFrontController::class, 'index']);
     Route::get('/lowonganHomeExam/{id}', [App\Http\Controllers\MateriFrontController::class, 'lowonganHomeExam']);
     Route::get('/add-status/{id}', [App\Http\Controllers\MateriFrontController::class, 'addStatus']);
+    Route::post('/update-progres', [App\Http\Controllers\MateriFrontController::class, 'update_progres']);
 });
 // });

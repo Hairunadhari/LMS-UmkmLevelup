@@ -87,4 +87,23 @@ class MateriFrontController extends Controller
         ]);
         return redirect('lowonganHomeExam/'.$dataSub->id_materi);
     }
+
+    public function update_progres(Request $request){
+        $cek = DB::table('user_progres_materis')->where('user_id', Auth::user()->id)->where('sub_materi_id', $request->id_submateri)->first();
+        if ($cek == null) {
+            $data = DB::table('user_progres_materis')->insert([
+                'user_id' => Auth::user()->id,
+                'sub_materi_id' => $request->id_submateri,
+                'progres' => $request->progres,
+            ]);
+        } else{
+            if ($cek->progres < 100 && $request->progres > $cek->progres) {
+                $cek = DB::table('user_progres_materis')->where('user_id', Auth::user()->id)->where('sub_materi_id', $request->id_submateri)->update([
+                    'progres'=>$request->progres
+                ]);
+            }
+        }
+        return response()->json(['success' => 'true']);
+        
+    }
 }

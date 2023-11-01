@@ -39,7 +39,7 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        try {
+        // try {
             if (Auth::attempt($credentials, $request->remember)) {
                 $request->session()->regenerate();
     
@@ -51,14 +51,14 @@ class LoginController extends Controller
                 'message' => 'Email / Password anda salah.',
             ]);
             $request->session()->put('id_user', Auth::user()->id);
-        } catch (\Throwable $th) {
-            $request->session()->flash('alert', [
-                'type' => 'error',
-                'message' => 'Silahkan periksa kembali email password anda.',
-            ]);
-        }
+        // } catch (\Throwable $th) {
+        //     $request->session()->flash('alert', [
+        //         'type' => 'error',
+        //         'message' => 'Silahkan periksa kembali email password anda.',
+        //     ]);
+        // }
         
-        return view('login');
+        return redirect('/home');
 
         // return back()->withErrors([
         //     'email' => 'The provided credentials do not match our records.',
