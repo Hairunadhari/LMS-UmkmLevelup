@@ -75,7 +75,7 @@ Route::get('getKelurahan/{id}', [IntegrasiController::class, 'getKelurahan']);
 // Route::group(['middleware' => 'disable-back-button'],function(){
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::get('/page-materi/{id}', [App\Http\Controllers\MateriFrontController::class, 'viewMateri']);
+    Route::get('/page-materi/{materiid}/sub-materi/{id}', [App\Http\Controllers\MateriFrontController::class, 'viewMateri']);
     Route::get('/dashboard', [App\Http\Controllers\MateriFrontController::class, 'index']);
     Route::get('/lowonganHomeExam/{id}', [App\Http\Controllers\MateriFrontController::class, 'lowonganHomeExam']);
     Route::get('/add-status/{id}', [App\Http\Controllers\MateriFrontController::class, 'addStatus']);

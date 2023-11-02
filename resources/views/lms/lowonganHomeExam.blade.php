@@ -41,7 +41,7 @@
                                         alt="" style="width: 1.25rem;">
                                 </div>
                                 <div class="tccbl__right">
-                                    <p class="mt-1">35</p>
+                                    <p class="mt-1">{{$Materi->jumlah_user_berpartisipasi}}</p>
                                 </div>
                             </div>
                         </div>
@@ -68,15 +68,20 @@
                 <div class="col-md-5 mt-3 mt-md-0">
                   <div class="right_content text-white p-4 p-xl-5 fw-bold" style="background-color: #6b859b; border-radius: 1rem;">
                     <h1>Materi yang Tersedia</h1>
-                    @forelse ($subMateri as $key => $item)
-                        <a href="{{url('page-materi').'/'.$item->id }}" style="font-decoration:none; text-decoration:none; color:#fff">
+                    <div class="place-materi" style="height:29rem; overflow: auto">
+                        @forelse ($subMateri as $key => $item)
+                        <a href="{{url('page-materi').'/'.$Materi->id.'/sub-materi/'.$item->id }}" style="font-decoration:none; text-decoration:none; color:#fff">
                             <div class="for_content mt-3 p-3 d-flex justify-content-between align-items-center">
                                 <div class="fc_left" style="flex-basis: 20%;">
                                     <img src="{{asset ('../img/senbud-icon.png')}}" alt="">
                                 </div>
                                 <div class="fc_middle" style="flex-basis: 80%;">
                                     <h1 class="mb-0">{{$item->nama}}</h1>
+                                    @if ($item->status == 1)
+                                    <p class="fw-light mb-0">Anda Mengikutinya dengan baik</p>
+                                    @else
                                     <p class="fw-light mb-0">Anda belum mengikuti Materi Ini</p>
+                                    @endif
                                 </div>
                                 <div class="fc_right d-flex justify-content-end" style="flex-basis: 20%;">
                                     @if ($item->status == 1)
@@ -92,6 +97,7 @@
                     @empty
                         
                     @endforelse
+                    </div>
                   </div>
                 </div>
             </div>

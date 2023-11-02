@@ -12,8 +12,13 @@ class MateriFrontController extends Controller
         $d['Materi'] = DB::table('m_materi')
         ->select('m_materi.*')
         ->selectRaw('(select count(tmat.id) from t_sub_materi tmat where tmat.id_materi=m_materi.id and tmat.aktif=1 group by tmat.id_materi ) as jumlahData')
+        ->selectRaw('(select count(upm.materi_id) from user_progres_materis upm where upm.materi_id=m_materi.id and upm.progres=100) as jumlah_progres_user_selesai')
+        ->selectRaw('(select count(upm.materi_id) from user_progres_materis upm where upm.materi_id=m_materi.id and upm.progres<100) as jumlah_progres_user_belom_selesai')
         ->where('m_materi.aktif', 1)
         ->get();
+
+        // dd($d['Materi']);
+    
         $d['Notifikasi'] = DB::table('notifikasis')->get();
 
         if ($d['Materi']) {
@@ -29,10 +34,11 @@ class MateriFrontController extends Controller
         $Materi = DB::table('m_materi')
         ->select('m_materi.*')
         ->selectRaw('(select count(tmat.id) from t_sub_materi tmat where tmat.id_materi=m_materi.id and tmat.aktif=1 group by tmat.id_materi ) as jumlahData')
+        ->selectRaw('(select count(upm.materi_id) from user_progres_materis upm where upm.materi_id=m_materi.id) as jumlah_user_berpartisipasi')
         ->selectRaw('(select u.name from users u where u.id=m_materi.created_by limit 1) as author')
         ->where('m_materi.aktif', 1)
         ->find($id);
-
+        
         $subMateri = DB::table('t_sub_materi')
         ->select('t_sub_materi.*', 't_sub_materi_file.file_location')
         ->selectRaw('(select IF(ISNULL(t_log_materi.status)=1, 0, t_log_materi.status) from t_log_materi where t_log_materi.id_user = '.Auth::user()->id.' and t_log_materi.id_sub_materi = t_sub_materi.id limit 1) as status')
@@ -40,6 +46,7 @@ class MateriFrontController extends Controller
         ->where('t_sub_materi.aktif', 1)
         ->where('t_sub_materi.id_materi', $id)
         ->get();
+        // dd($subMateri);
         
         if ($Materi) {
             return view("lms.lowonganHomeExam",compact('Materi', 'subMateri'));
@@ -50,16 +57,16 @@ class MateriFrontController extends Controller
         // return view("lms.lowonganHomeExam",compact('Materi'));
     }
 
-    public function viewMateri($id){
+    public function viewMateri($materiid,$id){
+        $d['materiid'] = $materiid;
         $d['sub_materi'] = 
         DB::table('t_sub_materi')
-        ->select('t_sub_materi.*', 't_sub_materi_file.file_location', 'users.name')
+        ->select('t_sub_materi.*', 't_sub_materi_file.file_location','t_sub_materi_file.video_url', 'users.name')
         ->leftJoin('t_sub_materi_file', 't_sub_materi.id', '=', 't_sub_materi_file.id_sub_materi')
         ->leftJoin('users', 'users.id', '=', 't_sub_materi.created_by')
         ->where('t_sub_materi.aktif', 1)
         ->where('t_sub_materi.id', $id)
         ->first();
-
         DB::table('t_log_materi')
         ->insert([
             'id_user' => Auth::user()->id,
@@ -94,6 +101,7 @@ class MateriFrontController extends Controller
             $data = DB::table('user_progres_materis')->insert([
                 'user_id' => Auth::user()->id,
                 'sub_materi_id' => $request->id_submateri,
+                'materi_id' => $request->id_materi,
                 'progres' => $request->progres,
             ]);
         } else{

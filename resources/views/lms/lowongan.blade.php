@@ -70,9 +70,9 @@
                                 aria-labelledby="pills-materiSales-tab">
                                 <div class="row d-flex tc__mapel">
                                     @foreach ($Materi as $item)
-                                    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3" id="mapel">
+                                    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3"  id="mapel">
                                         <a href="{{url('/lowonganHomeExam/'.$item->id)  }}">
-                                            <div class="tc__content ">
+                                            <div class="tc__content " style="border: 1px solid gray">
                                                 <div class="tcc__top d-flex gap-3">
                                                     <div class="tcc__left"><img src="{{ asset('../img/matematica-icon.png')}}  "
                                                             alt=""></div>
@@ -91,12 +91,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="tccb__content gap-2" id="tccb__last">
-                                                        <div class="tccbl__left"><img
-                                                                src="{{ asset('../img/people-icon.png')}}  " alt=""
-                                                                style="width: 1.25rem;">
+                                                        <div class="tccbl__left " style="color: gray">
+                                                            <i class="fas fa-user-check"></i>
                                                         </div>
                                                         <div class="tccbl__right">
-                                                            <p>35</p>
+                                                            <p>{{$item->jumlah_progres_user_selesai}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tccb__content gap-2" id="tccb__last">
+                                                        <div class="tccbl__left " style="color: gray">
+                                                            <i class="fas fa-user-clock"></i>
+                                                        </div>
+                                                        <div class="tccbl__right">
+                                                            <p>{{$item->jumlah_progres_user_belom_selesai}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
