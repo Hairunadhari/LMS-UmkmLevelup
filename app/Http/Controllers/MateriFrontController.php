@@ -19,7 +19,7 @@ class MateriFrontController extends Controller
 
         // dd($d['Materi']);
     
-        $d['Notifikasi'] = DB::table('notifikasis')->get();
+        $d['Notifikasi'] = DB::table('notifikasis')->where('status_aktif',1)->get();
 
         if ($d['Materi']) {
             return view("lms.lowongan", $d);
