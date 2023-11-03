@@ -1,6 +1,14 @@
 @extends('lms.main')
 @section('title') Home @endsection
 @section('container')
+<style>
+    /* Custom CSS */
+.accordion-button:not(.collapsed) {
+    color: black;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+</style>
 <link rel="stylesheet" href=" {{ asset('css/lowongan.css')}}">
 <!-- NAV REKAYASA -->
 <nav style="z-index: 2;" class="navbar navbar-expand-lg navbar-light bg-light position-relative w-100 py-3">
@@ -121,8 +129,8 @@
                     </div>
                     <div class="col-md-4">
                         <h4 class="">Pengumuman</h4>
-                        <hr />
-                        <div class="pengumuman__content mt-2">
+                        <hr/>
+                        {{-- <div class="pengumuman__content mt-2">
                             <div class="pc__content mt-2" id="place__notifikasi">
                                 @foreach ($Notifikasi as $item)
                                 <div style="float: right">
@@ -138,6 +146,25 @@
                                 @endforeach
         
         
+                            </div>
+                        </div> --}}
+                        <div class="card" >
+                            <div class="card-body" style="background-color: #FAE3D3;">
+                                <div class="accordion accordion-flush" id="accordionFlushExample" >
+                                    @foreach ($Notifikasi as $item)
+                                    <div class="accordion-item" style="background-color: #FAE3D3;">
+                                        <h2 class="accordion-header" id="flush-heading{{$item->id}}">
+                                            <button class="accordion-button collapsed" style="background-color: #FAE3D3;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$item->id}}" aria-expanded="false" aria-controls="flush-collapse{{$item->id}}">
+                                                {{$item->judul_notifikasi}}
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$item->id}}" data-bs-parent="#accordionFlushExample">
+                                            <span class="badge badge-sm bg-primary mt-3 ms-3"><i class="fa fa-calendar-days"></i> {{$item->tanggal}}</span>
+                                            <div class="accordion-body">{!! $item->keterangan !!}</div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                  </div>
                             </div>
                         </div>
                     </div>

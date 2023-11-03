@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [App\Http\Controllers\MateriFrontController::class, 'index']);
     Route::get('/lowonganHomeExam/{id}', [App\Http\Controllers\MateriFrontController::class, 'lowonganHomeExam']);
     Route::get('/add-status/{id}', [App\Http\Controllers\MateriFrontController::class, 'addStatus']);
-    Route::post('/update-progres', [App\Http\Controllers\MateriFrontController::class, 'update_progres']);
+    Route::post('/update-progres-video', [App\Http\Controllers\MateriFrontController::class, 'update_progres_video']);
+    Route::post('/update-progres-pdf', [App\Http\Controllers\MateriFrontController::class, 'update_progres_pdf']);
 });
 // });

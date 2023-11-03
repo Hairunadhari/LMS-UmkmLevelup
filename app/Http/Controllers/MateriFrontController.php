@@ -92,25 +92,137 @@ class MateriFrontController extends Controller
             'updated_at' => date("Y-m-d H:i:s"),
             'updated_by' => Auth::user()->id,
         ]);
+
+        $data = DB::table('user_progres_materis')->insert([
+            'user_id' => Auth::user()->id,
+            'sub_materi_id' => $id,
+            'materi_id' =>  $dataSub->id_materi,
+            'progres_pdf' =>  100,
+            'progres_video' =>  100,
+            'progres' => 100,
+        ]);
         return redirect('lowonganHomeExam/'.$dataSub->id_materi);
     }
 
-    public function update_progres(Request $request){
+    public function update_progres_video(Request $request){
         $cek = DB::table('user_progres_materis')->where('user_id', Auth::user()->id)->where('sub_materi_id', $request->id_submateri)->first();
         if ($cek == null) {
-            $data = DB::table('user_progres_materis')->insert([
+            DB::table('user_progres_materis')->insert([
                 'user_id' => Auth::user()->id,
                 'sub_materi_id' => $request->id_submateri,
                 'materi_id' => $request->id_materi,
-                'progres' => $request->progres,
+                'progres_pdf' => $request->progres_pdf,
+                'progres_video' => $request->progres_video,
+                'progres'=> ($request->progres_pdf + $request->progres_video) / 2,
             ]);
         } else{
-            if ($cek->progres < 100 && $request->progres > $cek->progres) {
-                $cek = DB::table('user_progres_materis')->where('user_id', Auth::user()->id)->where('sub_materi_id', $request->id_submateri)->update([
-                    'progres'=>$request->progres
+            // cek file pdf dan video
+            $a = DB::table('t_sub_materi')
+            ->select('t_sub_materi.*','t_sub_materi_file.video_url','t_sub_materi_file.file_location')
+            ->leftJoin('t_sub_materi_file','t_sub_materi.id','=','t_sub_materi_file.id_sub_materi')
+            ->where('id', $request->id_submateri)
+            ->first();
+
+            if ($a->video_url != null && $a->file_location != null) {
+                if ($cek->progres_video < 100 && $request->progres_video > $cek->progres_video) {
+                    DB::table('user_progres_materis')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('sub_materi_id', $request->id_submateri)
+                    ->update([
+                        'progres_video' => $request->progres_video,
+                        'progres'=> ($cek->progres_pdf + $request->progres_video) / 2,
+                    ]);
+                }
+                
+            } elseif ($a->file_location == null) {
+                if ($cek->progres_video < 100 && $request->progres_video > $cek->progres_video) {
+                    DB::table('user_progres_materis')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('sub_materi_id', $request->id_submateri)
+                    ->update([
+                        'progres_video'=> $request->progres_video,
+                        'progres'=> $request->progres_video
+                    ]);
+                }
+            }
+                
+            if ($cek->progres == 100) {
+                $dataSub = DB::table('t_sub_materi')->where('id', $request->id_submateri)->first();
+                DB::table('t_log_materi')
+                ->where('id_user', Auth::user()->id)
+                ->where('id_sub_materi', $request->id_submateri)
+                ->update([
+                    'id_sub_materi' => $request->id_submateri,
+                    'id_materi' => $dataSub->id_materi,
+                    'status' => 1,
+                    'updated_at' => date("Y-m-d H:i:s"),
+                    'updated_by' => Auth::user()->id,
                 ]);
             }
         }
+        
+        return response()->json(['success' => 'true']);
+        
+    }
+
+    public function update_progres_pdf(Request $request){
+        $cek = DB::table('user_progres_materis')->where('user_id', Auth::user()->id)->where('sub_materi_id', $request->id_submateri)->first();
+     
+        if ($cek == null) {
+            DB::table('user_progres_materis')->insert([
+                'user_id' => Auth::user()->id,
+                'sub_materi_id' => $request->id_submateri,
+                'materi_id' => $request->id_materi,
+                'progres_pdf' => $request->progres_pdf,
+                'progres_video' => $request->progres_video,
+                'progres'=> ($request->progres_pdf + $request->progres_video) / 2,
+            ]);
+        } else{
+            $a = DB::table('t_sub_materi')
+            ->select('t_sub_materi.*','t_sub_materi_file.video_url','t_sub_materi_file.file_location')
+            ->leftJoin('t_sub_materi_file','t_sub_materi.id','=','t_sub_materi_file.id_sub_materi')
+            ->where('id', $request->id_submateri)
+            ->first();
+
+            if ($a->video_url != null && $a->file_location != null) {
+                if ($cek->progres_pdf < 100 && $request->progres_pdf > $cek->progres_pdf) {
+                    DB::table('user_progres_materis')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('sub_materi_id', $request->id_submateri)
+                    ->update([
+                        'progres_pdf' => $request->progres_pdf,
+                        'progres'=> ($cek->progres_video + $request->progres_pdf) / 2,
+                    ]);
+                }
+                
+            } elseif ($a->video_url == null) {
+                if ($cek->progres_pdf < 100 && $request->progres_pdf > $cek->progres_pdf) {
+                    DB::table('user_progres_materis')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('sub_materi_id', $request->id_submateri)
+                    ->update([
+                        'progres_pdf'=> $request->progres_pdf,
+                        'progres'=> $request->progres_pdf
+                    ]);
+                }
+            }
+                
+            if ($cek->progres == 100) {
+                $dataSub = DB::table('t_sub_materi')->where('id', $request->id_submateri)->first();
+                DB::table('t_log_materi')
+                ->where('id_user', Auth::user()->id)
+                ->where('id_sub_materi', $request->id_submateri)
+                ->update([
+                    'id_sub_materi' => $request->id_submateri,
+                    'id_materi' => $dataSub->id_materi,
+                    'status' => 1,
+                    'updated_at' => date("Y-m-d H:i:s"),
+                    'updated_by' => Auth::user()->id,
+                ]);
+            }
+            
+        }
+        
         return response()->json(['success' => 'true']);
         
     }

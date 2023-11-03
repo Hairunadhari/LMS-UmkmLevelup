@@ -251,11 +251,11 @@
                             </div>
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
-                        <input style="display: none" type="text"
+                        {{-- <input style="display: none" type="text"
                             value="/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf"
-                            id="file_location">
-                        {{-- <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
-                        id="file_location"> --}}
+                            id="file_location"> --}}
+                        <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
+                        id="file_location">
                         <input style="display: none" type="text" value="{{$sub_materi->video_url}}" id="video_url">
                         <input style="display: none" type="text" value="{{$materiid}}" id="id_materi">
                     </div>
@@ -336,8 +336,8 @@
         let fileUrl = $('#file_location').val();
         let videoUrl = $('#video_url').val();
         let id_materi = $('#id_materi').val();
-        console.log("tes", fileUrl)
-        console.log("tes", videoUrl)
+        console.log("file pdf", fileUrl)
+        console.log("file video", videoUrl)
 
 
         let currentPage = 1;
@@ -396,12 +396,21 @@
         };
 
         loadPdf();
+        
+        if (videoUrl === '') {
+            const h1Element = document.createElement('h1');
+            h1Element.textContent = 'Tidak ada video';
+            h1Element.style.color = 'white';
+            h1Element.style.textAlign = 'center';
+            h1Element.style.opacity = '0.7'; // Mengatur opacity menjadi 0.7 (70% transparan)
+            $('#video-container').append(h1Element);
+        } else {
+            const videoElement = document.createElement('video');
+            videoElement.controls = true;
+            videoElement.src = videoUrl;
+            $('#video-container').append(videoElement);
+        }
 
-        const videoElement = document.createElement('video');
-        videoElement.controls = true;
-        videoElement.src = videoUrl;
-
-        $('#video-container').append(videoElement);
 
         videoElement.addEventListener('loadedmetadata', function () {
             const video = this;
@@ -416,12 +425,12 @@
                 console.log('Progres:', Math.floor(progres));
                 $.ajax({
                     method: 'post',
-                    url: '/update-progres',
+                    url: '/update-progres-video',
                     data: {
                         _token: csrfToken,
                         id_submateri: id_submateri,
                         id_materi: id_materi,
-                        progres: Math.floor(progres)
+                        progres_video: Math.floor(progres)
                     },
                     success: function (res) {
                         console.log(res);
@@ -466,12 +475,12 @@
                 console.log(progres);
                 $.ajax({
                     method: 'post',
-                    url: '/update-progres',
+                    url: '/update-progres-pdf',
                     data: {
                         _token: csrfToken,
                         id_submateri: id_submateri,
                         id_materi: id_materi,
-                        progres: Math.floor(progres)
+                        progres_pdf: Math.floor(progres)
                     },
                     success: function (res) {
                         console.log(res);
