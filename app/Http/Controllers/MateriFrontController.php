@@ -40,9 +40,8 @@ class MateriFrontController extends Controller
         ->find($id);
         
         $subMateri = DB::table('t_sub_materi')
-        ->select('t_sub_materi.*', 't_sub_materi_file.file_location')
+        ->select('t_sub_materi.*')
         ->selectRaw('(select IF(ISNULL(t_log_materi.status)=1, 0, t_log_materi.status) from t_log_materi where t_log_materi.id_user = '.Auth::user()->id.' and t_log_materi.id_sub_materi = t_sub_materi.id limit 1) as status')
-        ->leftJoin('t_sub_materi_file', 't_sub_materi.id', '=', 't_sub_materi_file.id_sub_materi')
         ->where('t_sub_materi.aktif', 1)
         ->where('t_sub_materi.id_materi', $id)
         ->get();
