@@ -330,10 +330,10 @@
 
 <script>
     $(document).ready(function () {
-        // const fileUrl = '/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf';
+        const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
-        let fileUrl = $('#file_location').val();
+        // let fileUrl = $('#file_location').val();
         let videoUrl = $('#video_url').val();
         let id_materi = $('#id_materi').val();
         console.log("file pdf", fileUrl)
