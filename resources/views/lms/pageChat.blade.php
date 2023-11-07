@@ -251,11 +251,11 @@
                             </div>
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
-                        <input style="display: none" type="text"
+                        {{-- <input style="display: none" type="text"
                             value="/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf"
-                            id="file_location">
-                            {{-- <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
                             id="file_location"> --}}
+                            <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
+                            id="file_location">
                         <input style="display: none" type="text" value="{{$sub_materi->video_url}}" id="video_url">
                         <input style="display: none" type="text" value="{{$materiid}}" id="id_materi">
                     </div>
