@@ -175,6 +175,7 @@ public function register(Request $request)
             'kode_otp' => $otp,
             'id_user' => $getuser->id,
             'status' => 0,
+            'final_level' => 0,
             'created_at' => null,
         ]);
     
