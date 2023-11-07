@@ -80,7 +80,7 @@ class UserController extends Controller
         //     return redirect('home');
         // }
 
-        return redirect('https://umkmlevelup.id/home');
+        return redirect('/home');
     }
 
     public function updateProfil(Request $request)

@@ -4,8 +4,8 @@
     <div class="container-fluid">
       <form method="POST" action="{{ route('submit-otp') }}">
         @csrf
-        <input type="text" class="text" name="id_user" value="{{$id_user}}">
-        <input type="text" class="text" name="email" value="{{$email}}">
+        <input type="hidden" class="hidden" name="id_user" value="{{$id_user}}">
+        <input type="hidden" class="hidden" name="email" value="{{$email}}">
       <div class="container" style="margin-top: 10vh;">
         <div>
           <span class="step-heading">

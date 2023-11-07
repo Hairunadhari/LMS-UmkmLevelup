@@ -132,90 +132,71 @@ protected function validator(array $data)
 public function register(Request $request)
 {
     $validator = Validator::make($request->all(), [
-        'name'     => 'required',
-        'email'     => 'required|email|unique:users,email',
-        'no_wa'     => 'required|email|unique:users,email',
-        'password'     => 'required|email|unique:users,email',
-        'password_confirmation'     => 'required|same:password',
-    ]);
-    if($validator->fails()){
-        return redirect()->back()->with('alert',[
-            'type' => "error",
-            'message' => $validator,
+        'name'                  => 'required',
+        'email'                 => 'required|email|unique:users,email',
+        'no_wa'                 => 'required|unique:users,no_wa',
+        'password'              => 'required|min:8',
+        'konfirmasi_password' => 'required|same:password',
+    ],
+        [
+            'name'=>'Nama Harus Diisi',
+            'email'=>'Email Sudah Dipakai',
+            'no_wa'=>'No HP Sudah Dipakai',
+            'password'=>'Password min 8 character',
+            'konfirmasi_password'=>'Konfirmasi Password Tidak Cocok',
+        ]
+    );
+    
+    if ($validator->fails()) {
+        $messages = $validator->messages();
+    
+        $alertMessage = $messages->first();
+    
+        return redirect()->back()->with('success', [
+            'type' => 'error',
+            'message' => $alertMessage,
         ]);
     }
+    
 
     try {
         DB::beginTransaction();
-        $checkUser = DB::table('users')->where('email', $request->email)->where('aktif', 1)->whereNotNull('email_verified_at')->count();
-        if($checkUser == 0){
-            $id = $this->create($request->all());
-        }else{
-            $request->session()->flash('alert', [
-                'type' => 'error',
-                'message' => 'Email Sudah terpakai.',
-            ]);
-            return view('pendaftaran');
-        }
-        $checkUserVerif = DB::table('users')->where('no_wa', $request->no_wa)->where('aktif', 1)->whereNotNull('email_verified_at')->count();
-        if($checkUserVerif == 0){
-            $id = DB::table('users')->where('email', $request->email)->first()->id;
-            DB::table('users')->where('id', $id)->update([
-                'name' => $request->name,
-                'no_wa' => $request->no_wa,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'aktif' => 1,
-            ]);
-        }else{
-            $request->session()->flash('alert', [
-                'type' => 'error',
-                'message' => 'No Hp Sudah terpakai.',
-            ]);
-            return view('pendaftaran');
-        }
+        
+        DB::table('users')->insert([
+            'name' => $request->name,
+            'no_wa' => $request->no_wa,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'aktif' => 1,
+        ]);
+        $getuser = DB::table('users')->where('email',$request->email)->first();           
+        $otp = mt_rand(100000, 999999);
+        DB::table('t_otp')->insert([
+            'kode_otp' => $otp,
+            'id_user' => $getuser->id,
+            'status' => 0,
+            'created_at' => null,
+        ]);
+    
+        $mailData = [
+            'title' => 'Mail from umkmlevelup.id',
+            'body' => 'Harap isi kode otp berikut ini.',
+            'otp' => $otp
+        ];
+        
+        Mail::to($request->email)->send(new DemoMail($mailData));
+        $request->session()->forget('alert');
+        $d['email'] = $request->email;
+        $d['id_user'] = $getuser->id;
         DB::commit();
+
     } catch (\Throwable $th) {
         dd($th);
-        // // dd(str_contains($th->getMessage(), 'no_wa'));
-        // if (str_contains($th->getMessage(), 'no_wa')) {
-        //     $request->session()->flash('alert', [
-        //         'type' => 'error',
-        //         'message' => 'No Wa Sudah Terpakai.',
-        //     ]);
-        // }else{ 
-        //     $request->session()->flash('alert', [
-        //         'type' => 'error',
-        //         'message' => 'Email Sudah Terpakai.',
-        //     ]);   
-        // }
         return view('pendaftaran');
         DB::rollBack();
     }
     
-    $otp = mt_rand(100000, 999999);
-
-    // DB::table('t_otp')->where('id_user', $id)->where('status', 0)->update([
-    //     'status' => 2,
-    // ]);
-
-    DB::table('t_otp')->insert([
-        'kode_otp' => $otp,
-        'id_user' => $id,
-        'status' => 0,
-        'created_at' => null,
-    ]);
-
-    $mailData = [
-        'title' => 'Mail from umkmlevelup.id',
-        'body' => 'Harap isi kode otp berikut ini.',
-        'otp' => $otp
-    ];
-
-    Mail::to($request->email)->send(new DemoMail($mailData));
-    $request->session()->forget('alert');
-    $d['email'] = $request->email;
-    $d['id_user'] = $id;
+   
 
     return view('verifikasiOtp', $d);
 }

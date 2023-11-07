@@ -77,7 +77,7 @@
                 </div>
                 <div class="form-floating mb-4 shadow rounded-pill">
                     <input
-                      type="text"
+                      type="number"
                       class="form-control rounded-pill px-4"
                       name="no_wa"
                       placeholder="name@example.com"
@@ -120,7 +120,7 @@
               <button 
               {{-- type="submit"  --}}
               class="btn btn-primary rounded-pill p-3 g-recaptcha" 
-              data-sitekey="{{env('CAPTCHA_SITE_KEY')}}" 
+              {{-- data-sitekey="{{env('CAPTCHA_SITE_KEY')}}"  --}}
               onclick="onSubmit()" 
               {{-- data-action='submit' --}}
               style="
@@ -141,7 +141,7 @@
 @endsection
 
 @section('js')
-  <script src="https://www.google.com/recaptcha/api.js"></script>
+  {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
   <script>
     function onSubmit(token) {
       let name = $( "input[name='name']" ).val();
