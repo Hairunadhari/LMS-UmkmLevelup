@@ -168,6 +168,7 @@ public function register(Request $request)
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'aktif' => 1,
+            'final_level' => 0,
         ]);
         $getuser = DB::table('users')->where('email',$request->email)->first();           
         $otp = mt_rand(100000, 999999);
@@ -175,7 +176,6 @@ public function register(Request $request)
             'kode_otp' => $otp,
             'id_user' => $getuser->id,
             'status' => 0,
-            'final_level' => 0,
             'created_at' => null,
         ]);
     
