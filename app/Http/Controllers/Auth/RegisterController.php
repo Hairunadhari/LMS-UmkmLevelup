@@ -41,21 +41,21 @@ class RegisterController extends Controller
     //     //
     // }
 
-    protected function create(array $data)
-    {
-        $query = DB::table('users')->where('email', $data['email']);
-        $check = $query->count();
-        if ($check == 0) {
-            return DB::table('users')->insertGetId([
-                'name' => $data['name'],
-                'no_wa' => $data['no_wa'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-            ]);
-        }else{
-            return $query->first()->id;
-        }
-    }
+    // protected function create(array $data)
+    // {
+    //     $query = DB::table('users')->where('email', $data['email']);
+    //     $check = $query->count();
+    //     if ($check == 0) {
+    //         return DB::table('users')->insertGetId([
+    //             'name' => $data['name'],
+    //             'no_wa' => $data['no_wa'],
+    //             'email' => $data['email'],
+    //             'password' => Hash::make($data['password']),
+    //         ]);
+    //     }else{
+    //         return $query->first()->id;
+    //     }
+    // }
 
 
     /**
@@ -131,6 +131,20 @@ protected function validator(array $data)
 
 public function register(Request $request)
 {
+    $validator = Validator::make($request->all(), [
+        'name'     => 'required',
+        'email'     => 'required|email|unique:users,email',
+        'no_wa'     => 'required|email|unique:users,email',
+        'password'     => 'required|email|unique:users,email',
+        'password_confirmation'     => 'required|same:password',
+    ]);
+    if($validator->fails()){
+        return redirect()->back()->with('alert',[
+            'type' => "error",
+            'message' => $validator,
+        ]);
+    }
+
     try {
         DB::beginTransaction();
         $checkUser = DB::table('users')->where('email', $request->email)->where('aktif', 1)->whereNotNull('email_verified_at')->count();
@@ -162,18 +176,19 @@ public function register(Request $request)
         }
         DB::commit();
     } catch (\Throwable $th) {
-        // dd(str_contains($th->getMessage(), 'no_wa'));
-        if (str_contains($th->getMessage(), 'no_wa')) {
-            $request->session()->flash('alert', [
-                'type' => 'error',
-                'message' => 'No Wa Sudah Terpakai.',
-            ]);
-        }else{ 
-            $request->session()->flash('alert', [
-                'type' => 'error',
-                'message' => 'Email Sudah Terpakai.',
-            ]);   
-        }
+        dd($th);
+        // // dd(str_contains($th->getMessage(), 'no_wa'));
+        // if (str_contains($th->getMessage(), 'no_wa')) {
+        //     $request->session()->flash('alert', [
+        //         'type' => 'error',
+        //         'message' => 'No Wa Sudah Terpakai.',
+        //     ]);
+        // }else{ 
+        //     $request->session()->flash('alert', [
+        //         'type' => 'error',
+        //         'message' => 'Email Sudah Terpakai.',
+        //     ]);   
+        // }
         return view('pendaftaran');
         DB::rollBack();
     }

@@ -409,7 +409,6 @@
             videoElement.controls = true;
             videoElement.src = videoUrl;
             $('#video-container').append(videoElement);
-        }
 
 
         videoElement.addEventListener('loadedmetadata', function () {
@@ -438,6 +437,7 @@
                 });
             });
         });
+        }
         // }
         //    loadPdf();
 
