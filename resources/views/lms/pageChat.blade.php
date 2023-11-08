@@ -252,7 +252,7 @@
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
                         {{-- <input style="display: none" type="text"
-                            value="https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf"
+                            value="/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf"
                             id="file_location"> --}}
                         <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
                             id="file_location">
