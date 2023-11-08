@@ -2,8 +2,6 @@
 
 @section('container')
 <link rel="stylesheet" href="{{ asset('css/lowongan_exam.css')}}">
-
-
 <center>
     <section class="homeExam text-start" style="transform: translateY(7rem)">
         <div class="px-4 px-lg-5">
