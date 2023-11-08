@@ -30,7 +30,8 @@ Route::get('pendaftaran', function (Request $request) {
         return redirect()->intended('home');
     }
     $request->session()->forget('alert');
-    return view('underconstruct');
+    return view('pendaftaran');
+    // return view('underconstruct');
 });
 
 Route::get('verifikasiOtp', function (Request $request) {
@@ -82,7 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/update-progres-video', [App\Http\Controllers\MateriFrontController::class, 'update_progres_video']);
     Route::post('/update-progres-pdf', [App\Http\Controllers\MateriFrontController::class, 'update_progres_pdf']);
 });
-// Route::post('/add-sub-materi/{id}/{name}', [\App\Http\Controllers\MateriFrontController::class, 'addSubMateri'])->name("add-sub-materi/{id}/{name}");
+Route::post('/add-sub-materi/{id}/{name}', [\App\Http\Controllers\MateriFrontController::class, 'addSubMateri'])->name("add-sub-materi/{id}/{name}");
 // Route::post('/add-sub-materi/{id}/{name}',function(){
 //     echo 1;
 // });
