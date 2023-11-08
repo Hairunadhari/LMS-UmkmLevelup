@@ -27,8 +27,8 @@ class RegisterController extends Controller
         // if (Auth::check()) {
         //     return redirect()->intended('home');
         // }
-        $request->session()->forget('alert');
-        return view('pendaftaran');
+        $request->session()->forget('alert');    
+        return view('underconstruct');
     }
 
     /**

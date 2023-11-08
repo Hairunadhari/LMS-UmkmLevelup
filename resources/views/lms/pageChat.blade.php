@@ -219,13 +219,13 @@
 
                     <div class="top_profile">
                         <div class="navigation-buttons">
-                          <div class="col-md-12 px-1">
-                            <a href="{{url('/')}}/add-status/{{$sub_materi->id}}" class="btn btn-success btn-sm"
-                                style="float: left"><i class="fa fa-paper-plane"></i> Selesai Materi</a>
-                        </div>
+                            <div class="col-md-12 px-1">
+                                <a href="{{url('/')}}/add-status/{{$sub_materi->id}}" class="btn btn-success btn-sm"
+                                    style="float: left"><i class="fa fa-paper-plane"></i> Selesai Materi</a>
+                            </div>
                             {{-- <button type="button" class="btn btn-danger" style="float: left" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{$sub_materi->id}}">
-                                <i class="fas fa-search"></i> View PDF
+                            <i class="fas fa-search"></i> View PDF
                             </button> --}}
                             <span>Page : <span id="pageKe"></span> / <span id="totalHalaman"></span></span>
                         </div>
@@ -252,9 +252,9 @@
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
                         {{-- <input style="display: none" type="text"
-                            value="/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf"
+                            value="https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf"
                             id="file_location"> --}}
-                            <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
+                        <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
                             id="file_location">
                         <input style="display: none" type="text" value="{{$sub_materi->video_url}}" id="video_url">
                         <input style="display: none" type="text" value="{{$materiid}}" id="id_materi">
@@ -265,7 +265,7 @@
         </div>
         <div class="col-md-4">
             <div class="row mt-3">
-                
+
             </div>
             <div class="col-md-12">
                 <section class="msger" style="height: 40rem; overflow: auto">
@@ -287,7 +287,8 @@
                             <div class="msg-bubble">
                                 <div class="msg-info">
                                     <div class="msg-info-name">Arifin</div>
-                                    <div class="msg-info-time">12:45</div>
+                                    <div class="msg-info-time">{{ now()->setTimezone('Asia/Jakarta')->format('H:i') }}
+                                    </div>
                                 </div>
 
                                 <div class="msg-text">
@@ -330,10 +331,11 @@
 
 <script>
     $(document).ready(function () {
-        const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
+        // const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
         // let fileUrl = $('#file_location').val();
+        let fileUrl = '5oa1699346118.pdf';
         let videoUrl = $('#video_url').val();
         let id_materi = $('#id_materi').val();
         console.log("file pdf", fileUrl)
@@ -342,61 +344,127 @@
 
         let currentPage = 1;
         let pdfDoc = null;
+        $.ajax({
+            method: 'post',
+            url: '/http://127.0.0.1:8000/get-file',
+            data: {
+                _token: csrfToken,
+                filename: fileUrl
+            },
+            success: function (res) {
+                console.log('responss',res);
+                const loadPdf = async () => {
+                    try {
+                        pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
 
-        const loadPdf = async () => {
-            try {
-                pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
+                        const carouselInner = document.querySelector('.carousel-inner');
+                        carouselInner.innerHTML = '';
 
-                const carouselInner = document.querySelector('.carousel-inner');
-                carouselInner.innerHTML = '';
+                        console.log('Total halaman:', pdfDoc
+                        .numPages); // Menampilkan total halaman di konsol
 
-                console.log('Total halaman:', pdfDoc.numPages); // Menampilkan total halaman di konsol
+                        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+                            const page = document.createElement('div');
+                            page.classList.add('carousel-item');
+                            if (pageNum === 1) {
+                                page.classList.add('active');
+                            }
 
-                for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-                    const page = document.createElement('div');
-                    page.classList.add('carousel-item');
-                    if (pageNum === 1) {
-                        page.classList.add('active');
+                            const canvas = document.createElement('canvas');
+                            canvas.id = `pdf-canvas-${pageNum}`;
+                            page.appendChild(canvas);
+
+                            carouselInner.appendChild(page);
+
+                            renderPage(pageNum, canvas);
+                        }
+                    } catch (error) {
+                        console.error('Error loading PDF:', error);
                     }
-
-                    const canvas = document.createElement('canvas');
-                    canvas.id = `pdf-canvas-${pageNum}`;
-                    page.appendChild(canvas);
-
-                    carouselInner.appendChild(page);
-
-                    renderPage(pageNum, canvas);
-                }
-            } catch (error) {
-                console.error('Error loading PDF:', error);
-            }
-        };
-
-        const renderPage = (pageNumber, canvas) => {
-            pdfDoc.getPage(pageNumber).then((page) => {
-                const viewport = page.getViewport({
-                    scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
-                });
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-
-                const ctx = canvas.getContext('2d');
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
                 };
 
-                page.render(renderContext);
-                const pageKeElem = document.getElementById('pageKe');
-                const totalHalamanElem = document.getElementById('totalHalaman');
+                const renderPage = (pageNumber, canvas) => {
+                    pdfDoc.getPage(pageNumber).then((page) => {
+                        const viewport = page.getViewport({
+                            scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
+                        });
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
 
-                pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
-                totalHalamanElem.textContent = pdfDoc.numPages;
-            });
-        };
+                        const ctx = canvas.getContext('2d');
+                        const renderContext = {
+                            canvasContext: ctx,
+                            viewport: viewport
+                        };
 
-        loadPdf();
-        
+                        page.render(renderContext);
+                        const pageKeElem = document.getElementById('pageKe');
+                        const totalHalamanElem = document.getElementById(
+                        'totalHalaman');
+
+                        pageKeElem.textContent =
+                        pageNumber; // Ubah currentPage menjadi pageNumber
+                        totalHalamanElem.textContent = pdfDoc.numPages;
+                    });
+                };
+
+                loadPdf();
+            }
+        });
+        // const loadPdf = async () => {
+        //     try {
+        //         pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
+
+        //         const carouselInner = document.querySelector('.carousel-inner');
+        //         carouselInner.innerHTML = '';
+
+        //         console.log('Total halaman:', pdfDoc.numPages); // Menampilkan total halaman di konsol
+
+        //         for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+        //             const page = document.createElement('div');
+        //             page.classList.add('carousel-item');
+        //             if (pageNum === 1) {
+        //                 page.classList.add('active');
+        //             }
+
+        //             const canvas = document.createElement('canvas');
+        //             canvas.id = `pdf-canvas-${pageNum}`;
+        //             page.appendChild(canvas);
+
+        //             carouselInner.appendChild(page);
+
+        //             renderPage(pageNum, canvas);
+        //         }
+        //     } catch (error) {
+        //         console.error('Error loading PDF:', error);
+        //     }
+        // };
+
+        // const renderPage = (pageNumber, canvas) => {
+        //     pdfDoc.getPage(pageNumber).then((page) => {
+        //         const viewport = page.getViewport({
+        //             scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
+        //         });
+        //         canvas.width = viewport.width;
+        //         canvas.height = viewport.height;
+
+        //         const ctx = canvas.getContext('2d');
+        //         const renderContext = {
+        //             canvasContext: ctx,
+        //             viewport: viewport
+        //         };
+
+        //         page.render(renderContext);
+        //         const pageKeElem = document.getElementById('pageKe');
+        //         const totalHalamanElem = document.getElementById('totalHalaman');
+
+        //         pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
+        //         totalHalamanElem.textContent = pdfDoc.numPages;
+        //     });
+        // };
+
+        // loadPdf();
+
         if (videoUrl === '') {
             const h1Element = document.createElement('h1');
             h1Element.textContent = 'Tidak ada video';
@@ -411,32 +479,32 @@
             $('#video-container').append(videoElement);
 
 
-        videoElement.addEventListener('loadedmetadata', function () {
-            const video = this;
+            videoElement.addEventListener('loadedmetadata', function () {
+                const video = this;
 
-            video.addEventListener('timeupdate', function () {
-                const currentTime = video.currentTime;
-                const duration = video.duration;
-                const progres = (currentTime / duration) * 100;
+                video.addEventListener('timeupdate', function () {
+                    const currentTime = video.currentTime;
+                    const duration = video.duration;
+                    const progres = (currentTime / duration) * 100;
 
-                console.log('Waktu saat ini:', currentTime);
-                console.log('Durasi total:', duration);
-                console.log('Progres:', Math.floor(progres));
-                $.ajax({
-                    method: 'post',
-                    url: '/update-progres-video',
-                    data: {
-                        _token: csrfToken,
-                        id_submateri: id_submateri,
-                        id_materi: id_materi,
-                        progres_video: Math.floor(progres)
-                    },
-                    success: function (res) {
-                        console.log(res);
-                    }
+                    console.log('Waktu saat ini:', currentTime);
+                    console.log('Durasi total:', duration);
+                    console.log('Progres:', Math.floor(progres));
+                    $.ajax({
+                        method: 'post',
+                        url: '/update-progres-video',
+                        data: {
+                            _token: csrfToken,
+                            id_submateri: id_submateri,
+                            id_materi: id_materi,
+                            progres_video: Math.floor(progres)
+                        },
+                        success: function (res) {
+                            console.log(res);
+                        }
+                    });
                 });
             });
-        });
         }
         // }
         //    loadPdf();
@@ -661,7 +729,7 @@
 
         const renderPage = (pageNumber, canvas) => {
             pdfDoc.getPage(pageNumber).then((page) => {
-              const viewport = page.getViewport({
+                const viewport = page.getViewport({
                     scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
                 });
                 canvas.width = viewport.width;

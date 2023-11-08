@@ -225,4 +225,80 @@ class MateriFrontController extends Controller
         return response()->json(['success' => 'true']);
         
     }
+
+    public function addSubMateri(Request $request, $id, $name) {
+        if ($request->session()->get('id_user') == null) {
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'Silahkan periksa kembali email password anda.',
+            ]);
+            return redirect('login');
+        }
+        try {
+            DB::beginTransaction();
+
+            $lastId = DB::table('t_sub_materi')->insertGetId([
+                'nama' => $request->title,
+                'deskripsi' => $request->deskripsi,
+                'id_materi' => $id,
+                'created_by' => $request->session()->get('id_user'),
+                'created_at' => date("Y-m-d")
+            ]);
+            if ($request->hasFile('file') && $request->hasFile('video') ) {
+                $file = Str::random(3).time().'.'.$request->file->getClientOriginalExtension();
+                $request->file('file')->move(public_path().'/storage/data_upload_lms/', $file);
+
+                $video = Str::random(3).time().'.'.$request->video->getClientOriginalExtension();
+                $request->file('video')->move(public_path().'/storage/data_upload_lms/', $video);
+
+                DB::table('t_sub_materi_file')->insert([
+                    'id_sub_materi' => $lastId,
+                    'video_url' => env('APP_URL').'/storage/data_upload_lms/'.$video,
+                    'file_location' => env('APP_URL').'/storage/data_upload_lms/'.$file,
+                    'file_name' => $file,
+                    'video_name' => $video,
+                    'created_by' => $request->session()->get('id_user'),
+                    'created_at' => date("Y-m-d")
+                ]);
+
+            }elseif ($request->hasFile('file')) {
+                $file = Str::random(3).time().'.'.$request->file->getClientOriginalExtension();
+                $request->file('file')->move(public_path().'/storage/data_upload_lms/', $file);
+                DB::table('t_sub_materi_file')->insert([
+                    'id_sub_materi' => $lastId,
+                    'file_location' => env('APP_URL').'/storage/data_upload_lms/'.$file,
+                    'file_name' => $file,
+                    'created_by' => $request->session()->get('id_user'),
+                    'created_at' => date("Y-m-d")
+                ]);
+            }elseif ($request->hasFile('video')) {
+                $video = Str::random(3).time().'.'.$request->video->getClientOriginalExtension();
+                $request->file('video')->move(public_path().'/storage/data_upload_lms/', $video);
+                DB::table('t_sub_materi_file')->insert([
+                    'id_sub_materi' => $lastId,
+                    'video_url' => env('APP_URL').'/storage/data_upload_lms/'.$video,
+                    'video_name' => $video,
+                    'created_by' => $request->session()->get('id_user'),
+                    'created_at' => date("Y-m-d")
+                ]);
+            } else{
+                DB::table('t_sub_materi_file')->insert([
+                    'id_sub_materi' => $lastId,
+                    'created_by' => $request->session()->get('id_user'),
+                    'created_at' => date("Y-m-d")
+                ]);
+            }
+
+
+          
+            
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            // dd($th);
+            throw $th;
+        }
+
+        return response()->json(['message'=>'success']);
+    }
 }

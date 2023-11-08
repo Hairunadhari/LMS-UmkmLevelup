@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+  
     protected function authenticated(Request $request, $user)
     {
         return redirect()->route('home'); // Replace 'home' with the desired route after login
