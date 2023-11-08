@@ -1,7 +1,7 @@
 @extends('lms.main')
 
 @section('container')
-<link rel="stylesheet" href=" {{ asset('../css/lowongan_exam.css')}}">
+<link rel="stylesheet" href=" {{ asset('css/lowongan_exam.css')}}">
 
 
 <center>
