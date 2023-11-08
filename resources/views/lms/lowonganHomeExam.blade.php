@@ -25,11 +25,11 @@
                 <div class="col-md-2">
                     <center>
                         <div class="ls__left">
-                            <img src="{{asset ('../img/senbud-icon.png')}}  " alt="">
+                            <img src="{{asset ('../img/senbud-icon.png')}}" alt="">
                         </div>
                         <div class="tcc__bottom d-flex mt-2">
                             <div class="tccb__content gap-2 ">
-                                <div class="tccbl__left"><img src="{{asset ('../img/bg-left.png')}}  "
+                                <div class="tccbl__left"><img src="{{asset ('../img/bg-left.png')}}"
                                         alt="" style="width: 1.5rem;">
                                 </div>
                                 <div class="tccbl__right">
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="tccb__content gap-2" id="tccb__last">
-                                <div class="tccbl__left"><img src="{{asset ('../img/bg-right.png')}}  "
+                                <div class="tccbl__left"><img src="{{asset ('../img/bg-right.png')}}"
                                         alt="" style="width: 1.25rem;">
                                 </div>
                                 <div class="tccbl__right">
