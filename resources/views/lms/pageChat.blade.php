@@ -334,8 +334,7 @@
         // const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
-        // let fileUrl = $('#file_location').val();
-        let fileUrl = '5oa1699346118.pdf';
+        let fileUrl = $('#file_location').val();
         let videoUrl = $('#video_url').val();
         let id_materi = $('#id_materi').val();
         console.log("file pdf", fileUrl)
@@ -344,126 +343,60 @@
 
         let currentPage = 1;
         let pdfDoc = null;
-        $.ajax({
-            method: 'post',
-            url: '/http://127.0.0.1:8000/get-file',
-            data: {
-                _token: csrfToken,
-                filename: fileUrl
-            },
-            success: function (res) {
-                console.log('responss',res);
-                const loadPdf = async () => {
-                    try {
-                        pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
+       
+        const loadPdf = async () => {
+            try {
+                pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
 
-                        const carouselInner = document.querySelector('.carousel-inner');
-                        carouselInner.innerHTML = '';
+                const carouselInner = document.querySelector('.carousel-inner');
+                carouselInner.innerHTML = '';
 
-                        console.log('Total halaman:', pdfDoc
-                        .numPages); // Menampilkan total halaman di konsol
+                console.log('Total halaman:', pdfDoc.numPages); // Menampilkan total halaman di konsol
 
-                        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-                            const page = document.createElement('div');
-                            page.classList.add('carousel-item');
-                            if (pageNum === 1) {
-                                page.classList.add('active');
-                            }
-
-                            const canvas = document.createElement('canvas');
-                            canvas.id = `pdf-canvas-${pageNum}`;
-                            page.appendChild(canvas);
-
-                            carouselInner.appendChild(page);
-
-                            renderPage(pageNum, canvas);
-                        }
-                    } catch (error) {
-                        console.error('Error loading PDF:', error);
+                for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+                    const page = document.createElement('div');
+                    page.classList.add('carousel-item');
+                    if (pageNum === 1) {
+                        page.classList.add('active');
                     }
-                };
 
-                const renderPage = (pageNumber, canvas) => {
-                    pdfDoc.getPage(pageNumber).then((page) => {
-                        const viewport = page.getViewport({
-                            scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
-                        });
-                        canvas.width = viewport.width;
-                        canvas.height = viewport.height;
+                    const canvas = document.createElement('canvas');
+                    canvas.id = `pdf-canvas-${pageNum}`;
+                    page.appendChild(canvas);
 
-                        const ctx = canvas.getContext('2d');
-                        const renderContext = {
-                            canvasContext: ctx,
-                            viewport: viewport
-                        };
+                    carouselInner.appendChild(page);
 
-                        page.render(renderContext);
-                        const pageKeElem = document.getElementById('pageKe');
-                        const totalHalamanElem = document.getElementById(
-                        'totalHalaman');
-
-                        pageKeElem.textContent =
-                        pageNumber; // Ubah currentPage menjadi pageNumber
-                        totalHalamanElem.textContent = pdfDoc.numPages;
-                    });
-                };
-
-                loadPdf();
+                    renderPage(pageNum, canvas);
+                }
+            } catch (error) {
+                console.error('Error loading PDF:', error);
             }
-        });
-        // const loadPdf = async () => {
-        //     try {
-        //         pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
+        };
 
-        //         const carouselInner = document.querySelector('.carousel-inner');
-        //         carouselInner.innerHTML = '';
+        const renderPage = (pageNumber, canvas) => {
+            pdfDoc.getPage(pageNumber).then((page) => {
+                const viewport = page.getViewport({
+                    scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
+                });
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
 
-        //         console.log('Total halaman:', pdfDoc.numPages); // Menampilkan total halaman di konsol
+                const ctx = canvas.getContext('2d');
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
 
-        //         for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-        //             const page = document.createElement('div');
-        //             page.classList.add('carousel-item');
-        //             if (pageNum === 1) {
-        //                 page.classList.add('active');
-        //             }
+                page.render(renderContext);
+                const pageKeElem = document.getElementById('pageKe');
+                const totalHalamanElem = document.getElementById('totalHalaman');
 
-        //             const canvas = document.createElement('canvas');
-        //             canvas.id = `pdf-canvas-${pageNum}`;
-        //             page.appendChild(canvas);
+                pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
+                totalHalamanElem.textContent = pdfDoc.numPages;
+            });
+        };
 
-        //             carouselInner.appendChild(page);
-
-        //             renderPage(pageNum, canvas);
-        //         }
-        //     } catch (error) {
-        //         console.error('Error loading PDF:', error);
-        //     }
-        // };
-
-        // const renderPage = (pageNumber, canvas) => {
-        //     pdfDoc.getPage(pageNumber).then((page) => {
-        //         const viewport = page.getViewport({
-        //             scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
-        //         });
-        //         canvas.width = viewport.width;
-        //         canvas.height = viewport.height;
-
-        //         const ctx = canvas.getContext('2d');
-        //         const renderContext = {
-        //             canvasContext: ctx,
-        //             viewport: viewport
-        //         };
-
-        //         page.render(renderContext);
-        //         const pageKeElem = document.getElementById('pageKe');
-        //         const totalHalamanElem = document.getElementById('totalHalaman');
-
-        //         pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
-        //         totalHalamanElem.textContent = pdfDoc.numPages;
-        //     });
-        // };
-
-        // loadPdf();
+        loadPdf();
 
         if (videoUrl === '') {
             const h1Element = document.createElement('h1');
