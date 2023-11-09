@@ -258,6 +258,8 @@
                             id="file_location">
                         <input style="display: none" type="text" value="{{$sub_materi->video_url}}" id="video_url">
                         <input style="display: none" type="text" value="{{$materiid}}" id="id_materi">
+                        <input style="display: text" type="text" value="{{Auth::user()->id}}" id="user_id">
+                        <input style="display: text" type="text" value="{{Auth::user()->name}}" id="name_user">
                     </div>
                 </div>
             </div>
@@ -274,45 +276,36 @@
                             <i class="fas fa-comment-alt"></i> Chatting Group Materi
                         </div>
                         <div class="msger-header-options">
-                            <span><i class="fas fa-cog"></i></span>
+                            
                         </div>
                     </header>
 
                     <main class="msger-chat">
-                        <div class="msg left-msg">
-                            <div class="msg-img"
-                                style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)">
+                        @foreach ($chats as $chat)
+                    @if ($chat->user_id == session('id_user'))
+                        
+                    <div class="msg right-msg">
+                    @else
+                        
+                    <div class="msg left-msg">
+                    @endif
+                    <div class="msg-img text-center p-2">
+                        <i class="fas fa-user" style="font-size: 30px; color:gray"></i>
+                    </div>
+                    <div class="msg-bubble">
+                        <div class="msg-info">
+                            <div class="msg-info-name">{{$chat->name}}</div>
+                            <div class="msg-info-time">
+                                {{ \Carbon\Carbon::parse($chat->tanggal)->format('Y M d, H:i') }}
                             </div>
-
-                            <div class="msg-bubble">
-                                <div class="msg-info">
-                                    <div class="msg-info-name">Arifin</div>
-                                    <div class="msg-info-time">{{ now()->setTimezone('Asia/Jakarta')->format('H:i') }}
-                                    </div>
-                                </div>
-
-                                <div class="msg-text">
-                                    Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
-                                </div>
-                            </div>
+                            
                         </div>
-
-                        <div class="msg right-msg">
-                            <div class="msg-img"
-                                style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)">
-                            </div>
-
-                            <div class="msg-bubble">
-                                <div class="msg-info">
-                                    <div class="msg-info-name">Sajad</div>
-                                    <div class="msg-info-time">12:46</div>
-                                </div>
-
-                                <div class="msg-text">
-                                    You can change your name in JS section!
-                                </div>
-                            </div>
+                        <div class="msg-text">
+                            {{$chat->chat}} 
                         </div>
+                    </div>
+                </div>
+                @endforeach
                     </main>
 
                     <form class="msger-inputarea">
@@ -334,6 +327,7 @@
         // const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
+        console.log('csrftoken',csrfToken);
         let fileUrl = $('#file_location').val();
         let videoUrl = $('#video_url').val();
         let id_materi = $('#id_materi').val();
@@ -343,7 +337,7 @@
 
         let currentPage = 1;
         let pdfDoc = null;
-       
+
         const loadPdf = async () => {
             try {
                 pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
@@ -498,33 +492,41 @@
     });
 
     const msgerForm = get(".msger-inputarea");
-    const msgerInput = get(".msger-input");
+    let msgerInput = get(".msger-input");
     const msgerChat = get(".msger-chat");
+    let id_user = $('#user_id').val();
+    let sub_materi_id = $('#id_submateri').val();
+    const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-    const BOT_MSGS = [
-        "Hi, how are you?",
-        "Ohh... I can't understand what you trying to say. Sorry!",
-        "I like to play games... But I don't know how to play!",
-        "Sorry if my answers are not relevant. :))",
-        "I feel sleepy! :("
-    ];
 
     // Icons made by Freepik from www.flaticon.com
     const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
     const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
     const BOT_NAME = "BOT";
-    const PERSON_NAME = "Sajad";
+    const PERSON_NAME = $('#name_user').val();
 
     msgerForm.addEventListener("submit", event => {
         event.preventDefault();
-
-        const msgText = msgerInput.value;
+        let msgText = msgerInput.value;
         if (!msgText) return;
+
+        $.ajax({
+            method: 'post',
+            url: '/send-chatting',
+            data: {
+                _token: csrfToken,
+                chat: msgText,
+                id_user: id_user,
+                sub_materi_id: sub_materi_id,
+            },
+            success: function (res) {
+                console.log('respon', res);
+            }
+        });
 
         appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
         msgerInput.value = "";
 
-        botResponse();
     });
 
     function appendMessage(name, img, side, text) {
@@ -548,15 +550,7 @@
         msgerChat.scrollTop += 500;
     }
 
-    function botResponse() {
-        const r = random(0, BOT_MSGS.length - 1);
-        const msgText = BOT_MSGS[r];
-        const delay = msgText.split(" ").length * 100;
 
-        setTimeout(() => {
-            appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-        }, delay);
-    }
 
     // Utils
     function get(selector, root = document) {

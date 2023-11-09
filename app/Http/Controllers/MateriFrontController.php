@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DB;
+use App\Models\MateriChat;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MateriFrontController extends Controller
@@ -75,6 +76,12 @@ class MateriFrontController extends Controller
             'created_at' => date("Y-m-d H:i:s"),
             'created_by' => Auth::user()->id,
         ]);
+        $d['chats'] = DB::table('materi_chats')
+        ->select('materi_chats.*','users.name','users.id')
+        ->leftJoin('users','materi_chats.user_id','=','users.id')
+        // ->where('materi_chats.user_id','!=',session('id_user'))
+        ->where('materi_chats.sub_materi_id',$id)
+        ->get();
         // dd($d);
         return view('lms.pageChat', $d);
     }
@@ -299,6 +306,18 @@ class MateriFrontController extends Controller
             throw $th;
         }
 
+        return response()->json(['message'=>'success']);
+    }
+
+    public function send_chatting(Request $request){
+        $now = now()->setTimezone('Asia/Jakarta');
+
+        MateriChat::create([
+            'user_id' => $request->id_user,
+            'sub_materi_id' => $request->sub_materi_id,
+            'chat' => $request->chat,
+            'tanggal' => $now,
+        ]);
         return response()->json(['message'=>'success']);
     }
 }

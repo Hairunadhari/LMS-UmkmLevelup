@@ -84,6 +84,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/update-progres-pdf', [App\Http\Controllers\MateriFrontController::class, 'update_progres_pdf']);
 });
 Route::post('/add-sub-materi/{id}/{name}', [\App\Http\Controllers\MateriFrontController::class, 'addSubMateri'])->name("add-sub-materi/{id}/{name}");
+Route::post('/send-chatting', [\App\Http\Controllers\MateriFrontController::class, 'send_chatting']);
+
 // Route::post('/add-sub-materi/{id}/{name}',function(){
 //     echo 1;
 // });
