@@ -282,7 +282,7 @@
 
                     <main class="msger-chat">
                         @foreach ($chats as $chat)
-                    @if ($chat->user_id == session('id_user'))
+                    @if ($chat->user_id == Auth::user()->id)
                         
                     <div class="msg right-msg">
                     @else
