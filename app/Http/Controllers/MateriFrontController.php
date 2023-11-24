@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use DB;
+use PDF;
 use App\Models\MateriChat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class MateriFrontController extends Controller
 {
@@ -46,10 +48,20 @@ class MateriFrontController extends Controller
         ->where('t_sub_materi.aktif', 1)
         ->where('t_sub_materi.id_materi', $id)
         ->get();
-        // dd($subMateri);
-        
+
+        $tot_sub = DB::table('t_sub_materi')
+        ->select('t_sub_materi.*')
+        ->where('t_sub_materi.id_materi',$id)
+        ->where('t_sub_materi.aktif',1)
+        ->count();
+        $tot_progres_user = DB::table('user_progres_materis')
+        ->where('user_id',Auth::user()->id)
+        ->where('user_progres_materis.materi_id',$id)
+        ->sum('progres');
+        $tot = $tot_progres_user / $tot_sub;
+
         if ($Materi) {
-            return view("lms.lowonganHomeExam",compact('Materi', 'subMateri'));
+            return view("lms.lowonganHomeExam",compact('Materi', 'subMateri','tot'));
         }else {
             return response()->json(['message'=>'Tidak Ada Data'], 200);
         }
@@ -320,4 +332,16 @@ class MateriFrontController extends Controller
         ]);
         return response()->json(['message'=>'success']);
     }
+
+    public function downloadPdf($id){
+        $user_id = Crypt::decrypt($id);
+        $d = DB::table('users')
+        ->select('users.*')
+        ->where('users.id',$user_id)
+        ->first();
+        $pdf = PDF::loadView('generate.pdf',compact('d'));
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->download('sertifikat-umkm.pdf');
+    } 
+
 }

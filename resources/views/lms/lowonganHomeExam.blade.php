@@ -64,6 +64,12 @@
                 </div>
 
                 <div class="col-md-5 mt-3 mt-md-0">
+                    @if ($tot == 100)
+                    @php
+                        $hashid = Crypt::encrypt(Auth::user()->id)
+                    @endphp
+                    <a href="{{url('download-pdf', $hashid)}}" class="btn btn-danger mb-1"><i class="fas fa-file-pdf"></i> Download PDF</a>
+                    @endif
                   <div class="right_content text-white p-4 p-xl-5 fw-bold" style="background-color: #6b859b; border-radius: 1rem;">
                     <h1>Materi yang Tersedia</h1>
                     <div class="place-materi" style="height:29rem; overflow: auto">
