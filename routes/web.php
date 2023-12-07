@@ -30,7 +30,8 @@ Route::get('pendaftaran', function (Request $request) {
         return redirect()->intended('home');
     }
     $request->session()->forget('alert');
-    return view('pendaftaran');
+    // return view('pendaftaran');
+    return view('underconstruct');
 });
 
 Route::get('verifikasiOtp', function (Request $request) {
@@ -75,9 +76,18 @@ Route::get('getKelurahan/{id}', [IntegrasiController::class, 'getKelurahan']);
 // Route::group(['middleware' => 'disable-back-button'],function(){
 Route::group(['middleware' => ['auth']], function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::get('/page-materi/{id}', [App\Http\Controllers\MateriFrontController::class, 'viewMateri']);
+    Route::get('/page-materi/{materiid}/sub-materi/{id}', [App\Http\Controllers\MateriFrontController::class, 'viewMateri']);
     Route::get('/dashboard', [App\Http\Controllers\MateriFrontController::class, 'index']);
     Route::get('/lowonganHomeExam/{id}', [App\Http\Controllers\MateriFrontController::class, 'lowonganHomeExam']);
     Route::get('/add-status/{id}', [App\Http\Controllers\MateriFrontController::class, 'addStatus']);
+    Route::post('/update-progres-video', [App\Http\Controllers\MateriFrontController::class, 'update_progres_video']);
+    Route::post('/update-progres-pdf', [App\Http\Controllers\MateriFrontController::class, 'update_progres_pdf']);
 });
+Route::post('/add-sub-materi/{id}/{name}', [\App\Http\Controllers\MateriFrontController::class, 'addSubMateri'])->name("add-sub-materi/{id}/{name}");
+Route::post('/send-chatting', [\App\Http\Controllers\MateriFrontController::class, 'send_chatting']);
+Route::get('/download-pdf/{id}', [\App\Http\Controllers\MateriFrontController::class, 'downloadPdf']);
+
+// Route::post('/add-sub-materi/{id}/{name}',function(){
+//     echo 1;
+// });
 // });

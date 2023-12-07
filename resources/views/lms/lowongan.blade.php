@@ -1,7 +1,15 @@
 @extends('lms.main')
 @section('title') Home @endsection
 @section('container')
-<link rel="stylesheet" href=" {{ asset('css/lowongan.css')}}">
+<style>
+    /* Custom CSS */
+.accordion-button:not(.collapsed) {
+    color: black;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+</style>
+<link rel="stylesheet" href="{{ asset('css/lowongan.css')}}">
 <!-- NAV REKAYASA -->
 <nav style="z-index: 2;" class="navbar navbar-expand-lg navbar-light bg-light position-relative w-100 py-3">
     <div class="container-fluid px-4 px-lg-5">
@@ -70,9 +78,9 @@
                                 aria-labelledby="pills-materiSales-tab">
                                 <div class="row d-flex tc__mapel">
                                     @foreach ($Materi as $item)
-                                    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3" id="mapel">
+                                    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 mt-3"  id="mapel">
                                         <a href="{{url('/lowonganHomeExam/'.$item->id)  }}">
-                                            <div class="tc__content ">
+                                            <div class="tc__content " style="border: 1px solid gray">
                                                 <div class="tcc__top d-flex gap-3">
                                                     <div class="tcc__left"><img src="{{ asset('../img/matematica-icon.png')}}  "
                                                             alt=""></div>
@@ -91,12 +99,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="tccb__content gap-2" id="tccb__last">
-                                                        <div class="tccbl__left"><img
-                                                                src="{{ asset('../img/people-icon.png')}}  " alt=""
-                                                                style="width: 1.25rem;">
+                                                        <div class="tccbl__left " style="color: gray">
+                                                            <i class="fas fa-user-check"></i>
                                                         </div>
                                                         <div class="tccbl__right">
-                                                            <p>35</p>
+                                                            <p>{{$item->jumlah_progres_user_selesai}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tccb__content gap-2" id="tccb__last">
+                                                        <div class="tccbl__left " style="color: gray">
+                                                            <i class="fas fa-user-clock"></i>
+                                                        </div>
+                                                        <div class="tccbl__right">
+                                                            <p>{{$item->jumlah_progres_user_belom_selesai}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,8 +129,8 @@
                     </div>
                     <div class="col-md-4">
                         <h4 class="">Pengumuman</h4>
-                        <hr />
-                        <div class="pengumuman__content mt-2">
+                        <hr/>
+                        {{-- <div class="pengumuman__content mt-2">
                             <div class="pc__content mt-2" id="place__notifikasi">
                                 @foreach ($Notifikasi as $item)
                                 <div style="float: right">
@@ -131,6 +146,25 @@
                                 @endforeach
         
         
+                            </div>
+                        </div> --}}
+                        <div class="card" >
+                            <div class="card-body" style="background-color: #FAE3D3;">
+                                <div class="accordion accordion-flush" id="accordionFlushExample" >
+                                    @foreach ($Notifikasi as $item)
+                                    <div class="accordion-item" style="background-color: #FAE3D3;">
+                                        <h2 class="accordion-header" id="flush-heading{{$item->id}}">
+                                            <button class="accordion-button collapsed" style="background-color: #FAE3D3;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$item->id}}" aria-expanded="false" aria-controls="flush-collapse{{$item->id}}">
+                                                {{$item->judul_notifikasi}}
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$item->id}}" data-bs-parent="#accordionFlushExample">
+                                            <span class="badge badge-sm bg-primary mt-3 ms-3"><i class="fa fa-calendar-days"></i> {{$item->tanggal}}</span>
+                                            <div class="accordion-body">{!! $item->keterangan !!}</div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                  </div>
                             </div>
                         </div>
                     </div>

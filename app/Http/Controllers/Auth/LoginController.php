@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+  
     protected function authenticated(Request $request, $user)
     {
         return redirect()->route('home'); // Replace 'home' with the desired route after login
@@ -58,7 +59,7 @@ class LoginController extends Controller
             ]);
         }
         
-        return view('login');
+        return redirect('/home');
 
         // return back()->withErrors([
         //     'email' => 'The provided credentials do not match our records.',

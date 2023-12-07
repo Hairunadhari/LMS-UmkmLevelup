@@ -46,67 +46,7 @@
           >
             Pendaftaran
           </h1>
-          <h6 class="text-uppercase text-center">Umkm Levelup</h6>
-
-          {{-- <div class="row my-5">
-            <div class="col-lg-4 pt-3">
-              <div class="card h-100">
-                <div class="card-body">
-                  <h5 class="card-title text-center my-3">Makro</h5>
-                  <p class="card-text m-0">Memiliki modal usaha</p>
-                  <h6 class="card-text bolder">
-                    <= Rp1.000.000.000,00 (satu miliar rupiah)
-                  </h6>
-                  <p class="card-text m-0">Hasil penjualan tahunan</p>
-                  <h6 class="card-text bolder">
-                    <=Rp2.000.000.000,00 (dua miliar rupiah)
-                  </h6>
-                  <br />
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 pt-3">
-              <div class="card h-100">
-                <div class="card-body">
-                  <h5 class="card-title text-center my-3">Kecil</h5>
-                  <p class="card-text m-0">Memiliki modal usaha</p>
-                  <h6 class="card-text bolder">
-                    Rp.1.000.000.000,00 (satu miliar rupiah) -
-                    Rp.5.000.000.000,00 (lima miliar rupiah)
-                  </h6>
-                  <p class="card-text m-0">
-                    Memiliki hasil penjualan tahunan lebih dari
-                  </p>
-                  <h6 class="card-text bolder">
-                    Rp.2.000.000.000,00 (dua miliar rupiah)-Rp.15.000.000.000,00
-                    (lima belas miliar rupiah)
-                  </h6>
-                  <br />
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 pt-3">
-              <div class="card h-100">
-                <div class="card-body">
-                  <h5 class="card-title text-center my-3">Menengah</h5>
-                  <p class="card-text m-0">Memiliki modal usaha</p>
-                  <h6 class="card-text bolder">
-                    Rp.5.000.000.000,00 (lima miliar rupiah) -
-                    Rp.10.000.000.000,00 (sepuluh rniliar rupiah)
-                  </h6>
-                  <p class="card-text m-0">
-                    Memiliki hasil penjualan tahunan lebih dari
-                  </p>
-                  <h6 class="card-text bolder">
-                    Rp.15.000.000.000,00 (lima belas miliar rupiah) -
-                    Rp.50.000.000.000,00 (lima puluh miliar rupiah)
-                  </h6>
-                  <br />
-                </div>
-              </div>
-            </div>
-          </div> --}}
-        
+          <h6 class="text-uppercase text-center">Umkm Levelup</h6>        
           <form id="formDaftar" method="POST" action="{{ route('register') }}">
             @csrf
             <div class="row pt-2">
@@ -116,7 +56,6 @@
                     type="text"
                     class="form-control rounded-pill px-4"
                     name="name"
-                    id="floatingInput"
                     placeholder="name@example.com"
                     required
                   />
@@ -128,7 +67,6 @@
                     <input
                       type="email"
                       class="form-control rounded-pill px-4"
-                      id="floatingInput"
                         name="email"
                       placeholder="name@example.com"
                       required
@@ -139,10 +77,9 @@
                 </div>
                 <div class="form-floating mb-4 shadow rounded-pill">
                     <input
-                      type="text"
+                      type="number"
                       class="form-control rounded-pill px-4"
                       name="no_wa"
-                      id="floatingInput"
                       placeholder="name@example.com"
                       required
                     />
@@ -156,7 +93,6 @@
                         type="password"
                         class="form-control rounded-pill px-4"
                         name="password"
-                        id="floatingInput"
                         placeholder="name@example.com"
                         required
                       />
@@ -169,7 +105,6 @@
                       type="password"
                       class="form-control rounded-pill px-4"
                       name="konfirmasi_password"
-                      id="floatingInput"
                       placeholder="name@example.com"
                       required
                     />
@@ -185,9 +120,9 @@
               <button 
               {{-- type="submit"  --}}
               class="btn btn-primary rounded-pill p-3 g-recaptcha" 
-              data-sitekey="{{env('CAPTCHA_SITE_KEY')}}" 
-              data-callback='onSubmit' 
-              data-action='submit'
+              {{-- data-sitekey="{{env('CAPTCHA_SITE_KEY')}}"  --}}
+              onclick="onSubmit()" 
+              {{-- data-action='submit' --}}
               style="
                 background: linear-gradient(
                   93.89deg,
@@ -206,7 +141,7 @@
 @endsection
 
 @section('js')
-  <script src="https://www.google.com/recaptcha/api.js"></script>
+  {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
   <script>
     function onSubmit(token) {
       let name = $( "input[name='name']" ).val();
