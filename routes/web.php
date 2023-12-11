@@ -30,8 +30,8 @@ Route::get('pendaftaran', function (Request $request) {
         return redirect()->intended('home');
     }
     $request->session()->forget('alert');
-    return view('pendaftaran');
-    // return view('underconstruct');
+    // return view('pendaftaran');
+    return view('underconstruct');
 });
 
 Route::get('verifikasiOtp', function (Request $request) {
