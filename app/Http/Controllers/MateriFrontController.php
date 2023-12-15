@@ -236,7 +236,7 @@ class MateriFrontController extends Controller
                 }
                 
             } elseif ($a->video_url == null) {
-                if ($cek->progres_pdf < 100 && $request->progres_pdf > $cek->progres_pdf) {
+                if ($cek->progres_pdf < 100 && $request->progres_pdf > $cek->progres_pdf || $cek->progres_pdf < 100 && $request->progres_pdf == $cek->progres_pdf) {
                     DB::table('user_progres_materis')
                     ->where('user_id', Auth::user()->id)
                     ->where('sub_materi_id', $request->id_submateri)
