@@ -57,6 +57,7 @@ class MateriFrontController extends Controller
         $tot_progres_user = DB::table('user_progres_materis')
         ->where('user_id',Auth::user()->id)
         ->where('user_progres_materis.materi_id',$id)
+        ->where('status',1)
         ->sum('progres');
         // dd($tot_sub, $tot_progres_user);
         if ($tot_sub == 0) {
