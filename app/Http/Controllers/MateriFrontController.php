@@ -58,10 +58,16 @@ class MateriFrontController extends Controller
         ->where('user_id',Auth::user()->id)
         ->where('user_progres_materis.materi_id',$id)
         ->sum('progres');
-        $tot = $tot_progres_user / $tot_sub;
+        // dd($tot_sub, $tot_progres_user);
+        if ($tot_sub == 0) {
+            $totalKeseluruhanProgresUser = 0;
+        } else {
+            $totalKeseluruhanProgresUser = $tot_progres_user / $tot_sub;
+        }
+        // dd($totalKeseluruhanProgresUser);
 
         if ($Materi) {
-            return view("lms.lowonganHomeExam",compact('Materi', 'subMateri','tot'));
+            return view("lms.lowonganHomeExam",compact('Materi', 'subMateri','totalKeseluruhanProgresUser'));
         }else {
             return response()->json(['message'=>'Tidak Ada Data'], 200);
         }
