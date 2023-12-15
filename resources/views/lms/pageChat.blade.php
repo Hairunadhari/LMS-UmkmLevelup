@@ -221,7 +221,7 @@
                         <div class="navigation-buttons">
                             <div class="col-md-12 px-1">
                                 <a href="{{url('/')}}/add-status/{{$sub_materi->id}}" class="btn btn-success btn-sm"
-                                    style="float: left"><i class="fa fa-paper-plane"></i> Selesai Materi</a>
+                                    style="float: left"><i class="fa fa-paper-plane"></i> Selesaikan Semua Materi</a>
                             </div>
                             {{-- <button type="button" class="btn btn-danger" style="float: left" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{$sub_materi->id}}">
@@ -251,11 +251,11 @@
                             </div>
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
-                        {{-- <input style="display: none" type="text"
-                            value="/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf"
-                            id="file_location"> --}}
-                        <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
+                        <input style="display: none" type="text"
+                            value="/storage/data_upload_lms/tes.pdf"
                             id="file_location">
+                        {{-- <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
+                            id="file_location"> --}}
                         <input style="display: none" type="text" value="{{$sub_materi->video_url}}" id="video_url">
                         <input style="display: none" type="text" value="{{$materiid}}" id="id_materi">
                         <input style="display: none" type="text" value="{{Auth::user()->id}}" id="user_id">
