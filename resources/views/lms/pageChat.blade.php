@@ -254,8 +254,8 @@
                         {{-- <input style="display: none" type="text"
                             value="/storage/data_upload_lms/tes.pdf"
                             id="file_location"> --}}
-                        <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
-                            id="file_location">
+                            <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
+                                id="file_location">
                         <input style="display: none" type="text" value="{{$sub_materi->video_url}}" id="video_url">
                         <input style="display: none" type="text" value="{{$materiid}}" id="id_materi">
                         <input style="display: none" type="text" value="{{Auth::user()->id}}" id="user_id">

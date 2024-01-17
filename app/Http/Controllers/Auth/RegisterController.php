@@ -149,14 +149,19 @@ public function register(Request $request)
     
     if ($validator->fails()) {
         $messages = $validator->messages();
-    
         $alertMessage = $messages->first();
-    
+      
+        // Simpan data inputan email sebelumnya
+        session()->flash('name', $request->name);
+        session()->flash('email', $request->email);
+        session()->flash('no_wa', $request->no_wa);
+      
+        // Tampilkan pesan error
         return redirect()->back()->with('success', [
-            'type' => 'error',
-            'message' => $alertMessage,
+          'type' => 'error',
+          'message' => $alertMessage,
         ]);
-    }
+      }
     
 
     try {
@@ -193,7 +198,7 @@ public function register(Request $request)
 
     } catch (\Throwable $th) {
         dd($th);
-        return view('pendaftaran');
+        return view('ndaran');
         DB::rollBack();
     }
     
