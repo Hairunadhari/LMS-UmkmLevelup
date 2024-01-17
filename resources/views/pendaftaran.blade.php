@@ -141,8 +141,10 @@
                             <label for="floatingInput" class="ms-4"><i class="fa-solid fa-user me-3"></i> Nama</label>
                         </div>
                         <div class="form-floating mb-4 shadow rounded-pill">
-                          <input type="email" class="form-control rounded-pill px-4" name="email" value="{{ session('email') }}">
-
+                          <input type="email" class="form-control rounded-pill px-4" name="email" required value="{{ session('email') }}"
+                          data-error-required="Silahkan isi kolom ini!"
+                          data-error-invalid="sertakan @ di alamat email anda"
+                          data-error-end-with-at="@: Lengkapi alamat email anda dengan lengkap" />
 
                             <label for="floatingInput" class="ms-4">
                                 <i class="fa fa-envelope me-3"></i> Email</label>
