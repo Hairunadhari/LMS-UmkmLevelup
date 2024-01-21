@@ -1,6 +1,16 @@
 @extends('layout.main')
 
 @section('container')
+<style>
+  @media only screen and (max-width: 400px) {
+  button{
+    width: 200px;
+  }
+  .daftar-button{
+    width: 200px;
+  }
+}
+</style>
   <div
     class=""
     style="
@@ -71,7 +81,7 @@
           </div>
           
           <div class="gap-2 mx-auto w-50">
-            <button type="submit" class="btn btn-primary rounded-pill p-3 w-25"
+            <button type="submit" class="btn btn-primary rounded-pill"
             style="
               background: linear-gradient(
                 93.89deg,
@@ -83,9 +93,21 @@
             ">
             Login
             </button>
+            {{-- <button type="submit" class="btn btn-primary rounded-pill p-3 w-25"
+            style="
+              background: linear-gradient(
+                93.89deg,
+                #0100cc 0%,
+                #0166fe 47.54%,
+                #18d1ff 100.92%
+              );
+              float:left;
+            ">
+            Login
+            </button> --}}
             <div class="" style="float: right">
               <p>Lupa Password? <a href="forgot">klik disini</a></p> 
-              Belum memiliki akun? <a type="button" class="btn btn-primary"
+              Belum memiliki akun? <a type="button" class=" daftar-button btn btn-primary"
               style="
                 background: linear-gradient(
                   93.89deg,

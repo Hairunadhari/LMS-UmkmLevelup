@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
 use DB;
-use App\Models\User;
 use Mail;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Mail\DemoMail;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 
 class RegisterController extends Controller
@@ -25,10 +27,11 @@ class RegisterController extends Controller
     public function index(Request $request)
     {
         // if (Auth::check()) {
-        //     return redirect()->intended('home');
+        //     return view('pendaftaran');
         // }
-        $request->session()->forget('alert');    
-        return view('underconstruct');
+            return view('pendaftaran');
+        // $request->session()->forget('alert');    
+        // return view('underconstruct');
     }
 
     /**
@@ -133,7 +136,7 @@ public function register(Request $request)
 {
     $validator = Validator::make($request->all(), [
         'name'                  => 'required',
-        'email'                 => 'required|email|unique:users,email',
+        'email'                 => 'required|email',
         'no_wa'                 => 'required|unique:users,no_wa',
         'password'              => 'required|min:8',
         'konfirmasi_password' => 'required|same:password',
@@ -167,25 +170,30 @@ public function register(Request $request)
     try {
         DB::beginTransaction();
         
-        DB::table('users')->insert([
-            'name' => $request->name,
-            'no_wa' => $request->no_wa,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'aktif' => 1,
-            'final_level' => 0,
-        ]);
+        $cekuser = DB::table('users')->where('email',$request->email)->first();           
+        if ($cekuser == null) {
+            DB::table('users')->insert([
+                'name' => $request->name,
+                'no_wa' => $request->no_wa,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'aktif' => 1,
+                'final_level' => 0,
+            ]);
+        }
         $getuser = DB::table('users')->where('email',$request->email)->first();           
         $otp = mt_rand(100000, 999999);
+        $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+        $now = $konvers_tanggal->format('Y-m-d H:i:s');
         DB::table('t_otp')->insert([
             'kode_otp' => $otp,
             'id_user' => $getuser->id,
             'status' => 0,
-            'created_at' => null,
+            'created_at' => $now,
         ]);
     
         $mailData = [
-            'title' => 'Mail from umkmlevelup.id',
+            'title' => 'Mail from noreply@umkmlevelup.id',
             'body' => 'Harap isi kode otp berikut ini.',
             'otp' => $otp
         ];
@@ -210,7 +218,7 @@ public function register(Request $request)
 public function submitOtp(Request $request){
     $otp = $request->otp;
     try {
-        $checkOtp = DB::table('t_otp')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->count();
+        $checkOtp = DB::table('`t_otp`')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->count();
         // dd($request->id_user);
         if($checkOtp > 0){
             DB::table('t_otp')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->update([
@@ -240,5 +248,10 @@ public function submitOtp(Request $request){
     ]);
     return view('login');
 }
+
+    public function get_created_at_otp($id){
+        $data = DB::table('t_otp')->select('*')->where('id',$id)->first();
+        return respoonse()->json($data);
+    }
 
 }

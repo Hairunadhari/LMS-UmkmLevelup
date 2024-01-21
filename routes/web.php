@@ -44,6 +44,7 @@ Route::get('verifikasiOtp', function (Request $request) {
 // });
 
 Route::get('kuesioner', [HomeController::class, 'kuesioner']);
+Route::get('/get-time', [RegisterController::class, 'get_created_at_otp']);
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 

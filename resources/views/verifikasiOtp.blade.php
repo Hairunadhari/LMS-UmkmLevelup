@@ -4,8 +4,8 @@
     <div class="container-fluid">
       <form method="POST" action="{{ route('submit-otp') }}">
         @csrf
-        <input type="hidden" class="hidden" name="id_user" value="{{$id_user}}">
-        <input type="hidden" class="hidden" name="email" value="{{$email}}">
+        {{-- <input type="hidden" class="hidden" name="id_user" value="{{$id_user}}">
+        <input type="hidden" class="hidden" name="email" value="{{$email}}"> --}}
       <div class="container" style="margin-top: 10vh;">
         <div>
           <span class="step-heading">
@@ -13,7 +13,7 @@
               Masukan OTP
             </h1>
             <h5 class="text-center">Kami telah mengirimkan kode <br>
-              akses melalui email "{{$email}}" untuk verifikasi OTP</h5>
+              {{-- akses melalui email "{{$email}}" untuk verifikasi OTP</h5> --}}
           </span>
         </div>
         <br>
