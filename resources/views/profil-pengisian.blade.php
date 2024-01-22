@@ -47,7 +47,7 @@
                   aria-label="Floating label select example"
                 >
                   <option value="">-- Pilih --</option>
-                  <option value="Pria">Pria</option>
+                  <option value="Pria">Laki-laki</option>
                   <option value="Perempuan">Perempuan</option>
                 </select>
                 <label for="jenisKelamin" class="ms-4"
@@ -251,6 +251,7 @@
               id="nik"
               name="nik"
               placeholder="3175******"
+              oninput="validateNik(this)"
             />
             <label for="nik" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> NIK</label
@@ -266,6 +267,7 @@
               name="nib"
               required
               placeholder="128******"
+              oninput="validateNib(this)"
             />
             <label for="nib" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> NIB <span style="color: red; font-weight:bold">*</span></label
@@ -377,4 +379,20 @@
             $("#kelurahan").val('').change();
         }
     });
+
+    function validateNik(input) {
+        const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
+        input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka
+
+        if (value.length < 10 || value.length > 13) {
+            input.setCustomValidity('Nomor WA harus terdiri dari 10 atau 13 angka');
+        } else {
+            input.setCustomValidity(''); // Hapus teks error jika valid
+        }
+    }
+    function validateNib(input) {
+        const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
+        input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka
+
+    }
 </script>

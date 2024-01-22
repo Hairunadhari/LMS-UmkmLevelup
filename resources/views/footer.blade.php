@@ -1,25 +1,21 @@
+<style>
+    @media only screen and (max-width: 400px) {}
+
+</style>
 <div class="footer" style="background-color: #0C438D;">
     <div class="container text-white py-5 pb-2">
         <div class="row foot_top d-flex">
             <div class="col-md-3">
-                <div class="gambar d-flex align-items-center gap-3">
+                <div class="gambar d-flex align-items-center justify-content-center mb-3">
                     <div class="img-1">
                         <img src="{{asset('asset/logo-2.png')}}" alt="" width="100%">
-                        </div>
-                        <div class="img-2">
-                        <img src="{{asset('asset/loog-3.png')}}" alt="" width="100%">  
+                    </div>
+                    <div class="img-2">
+                        <img src="{{asset('asset/loog-3.png')}}" alt="" width="100%">
                     </div>
                 </div>
             </div>
             <div class="col-md-2"></div>
-            {{-- <div class="col-md-2">
-                <div class="menu">
-                    <p class="fw-bold">MENU</p>
-                    <a class="text-white" href="#">Home</a>
-                    <a class="text-white" href="#">UMKM</a>
-                    <a class="text-white" href="#">Pendaftaran</a>
-                </div>
-            </div> --}}
             <div class="col-md-3">
                 <div class="kantorpusat">
                     <p class="fw-bold">KANTOR PUSAT</p>

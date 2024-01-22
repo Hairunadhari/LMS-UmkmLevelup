@@ -218,8 +218,9 @@ public function register(Request $request)
 public function submitOtp(Request $request){
     $otp = $request->otp;
     try {
-        $checkOtp = DB::table('`t_otp`')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->count();
+        $checkOtp = DB::table('t_otp')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->count();
         // dd($request->id_user);
+        // dd($checkOtp);
         if($checkOtp > 0){
             DB::table('t_otp')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->update([
                 'status' => 1,

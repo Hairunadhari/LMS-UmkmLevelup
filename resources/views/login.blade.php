@@ -4,10 +4,10 @@
 <style>
   @media only screen and (max-width: 400px) {
   button{
-    width: 200px;
+    width: 190px;
   }
   .daftar-button{
-    width: 200px;
+    width: 190px;
   }
 }
 </style>
@@ -81,7 +81,7 @@
           </div>
           
           <div class="gap-2 mx-auto w-50">
-            <button type="submit" class="btn btn-primary rounded-pill"
+            <button type="submit" class="btn btn-primary "
             style="
               background: linear-gradient(
                 93.89deg,
@@ -126,7 +126,6 @@
         </form>
       </div>      
     </div>
-    @include('footer')
-</div>
+  </div>
     
 @endsection
