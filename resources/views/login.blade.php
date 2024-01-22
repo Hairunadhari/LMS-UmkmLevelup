@@ -2,7 +2,7 @@
 
 @section('container')
 <style>
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 600px) {
   button{
     width: 190px;
   }
