@@ -261,16 +261,16 @@
             >
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3" style="display: none">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
               class="form-control rounded-pill px-4"
               id="no_hp"
               name="no_hp"
-              required
+              {{-- required --}}
               placeholder="+062 *****"
-              value="{{$user->no_hp}}"
+              value=""
             />
             <label for="no_hp" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> No Telpon Paket Data <span style="color: red; font-weight:bold">*</span></label
