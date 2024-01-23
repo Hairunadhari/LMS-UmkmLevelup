@@ -37,7 +37,7 @@
                     </div>
                     <div class="email d-flex  align-items-center gap-2 mb-1">
                         <img src="{{asset('asset/dashicons_email-alt2.png')}}" alt="">
-                        <p class="mb-0">info.umkmlevelup@gmail.com</p>
+                        <p class="mb-0">tanya@umkmlevelup.id</p>
                     </div>
                 </div>
             </div>

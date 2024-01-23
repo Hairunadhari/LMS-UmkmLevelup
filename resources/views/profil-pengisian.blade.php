@@ -31,6 +31,7 @@
               name="namaPemilik"
               required
               value="{{auth()->user()->name}}"
+              readonly
             />
             <label for="namaPemilik" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Nama Lengkap Pemilik <span style="color: red; font-weight:bold">*</span></label
@@ -83,6 +84,7 @@
               required
               placeholder="toko@***.com"
               value="{{auth()->user()->email}}"
+              readonly
             />
             <label for="email" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Email Usaha (Toko) <span style="color: red; font-weight:bold">*</span></label
@@ -222,6 +224,8 @@
               id="no_telp"
               name="no_telp"
               placeholder="+021 *****"
+              value="{{auth()->user()->no_wa}}"
+              readonly
             />
             <label for="no_telp" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> No Telpon Utama </label
