@@ -46,12 +46,11 @@ class LoginController extends Controller
     
                 return redirect()->route('home'); 
             }
-            
-            $request->session()->flash('alert', [
-                'type' => 'error',
-                'message' => 'Email / Password anda salah.',
+            return redirect()->back()->with('error',[
+                'type'=>'error',
+                'message'=> 'Email / Password anda salah.',
             ]);
-            $request->session()->put('id_user', Auth::user()->id);
+          
         } catch (\Throwable $th) {
             $request->session()->flash('alert', [
                 'type' => 'error',

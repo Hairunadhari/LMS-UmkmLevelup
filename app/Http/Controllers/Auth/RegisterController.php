@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -137,7 +138,7 @@ public function register(Request $request)
     $validator = Validator::make($request->all(), [
         'name'                  => 'required',
         'email'                 => 'required|email',
-        'no_wa'                 => 'required|unique:users,no_wa',
+        'no_wa'                 => 'required',
         'password'              => 'required|min:8',
         'konfirmasi_password' => 'required|same:password',
     ],
@@ -167,8 +168,20 @@ public function register(Request $request)
       }
     
 
-    try {
-        DB::beginTransaction();
+      try {
+          DB::beginTransaction();
+          $cekWa = DB::table('users')->where('no_wa',$request->no_wa)->first();
+          if ($cekWa !== null) {
+              if ($request->no_wa == $cekWa->no_wa) {
+                  session()->flash('name', $request->name);
+                  session()->flash('email', $request->email);
+                  session()->flash('no_wa', $request->no_wa);
+                  return redirect()->back()->with('success', [
+                      'type' => 'error',
+                      'message' => 'No HP Sudah Dipakai',
+                  ]);
+              }           
+          }
         
         $cekuser = DB::table('users')->where('email',$request->email)->first();           
         if ($cekuser == null) {
@@ -200,8 +213,8 @@ public function register(Request $request)
         
         Mail::to($request->email)->send(new DemoMail($mailData));
         $request->session()->forget('alert');
-        $d['email'] = $request->email;
-        $d['id_user'] = $getuser->id;
+        $encryptEmail = Crypt::encrypt($request->email);
+        $encryptIduser = Crypt::encrypt($getuser->id);
         DB::commit();
 
     } catch (\Throwable $th) {
@@ -210,9 +223,9 @@ public function register(Request $request)
         DB::rollBack();
     }
     
-   
 
-    return view('verifikasiOtp', $d);
+    return redirect('verifikasiOtp/'.$encryptEmail.'/'.$encryptIduser);
+
 }
 
 public function submitOtp(Request $request){
@@ -247,12 +260,48 @@ public function submitOtp(Request $request){
         'type' => 'info',
         'message' => 'Selamat anda sudah terverifikasi, silahkan login kembali menggunakan email dan password anda.',
     ]);
-    return view('login');
+    return redirect('login');
 }
 
-    public function get_created_at_otp($id){
-        $data = DB::table('t_otp')->select('*')->where('id',$id)->first();
-        return respoonse()->json($data);
+
+    public function verifikasiOtp($encryptEmail, $encryptId_user){
+        $email = Crypt::decrypt($encryptEmail);
+        $id_user = Crypt::decrypt($encryptId_user);
+        return view('verifikasiOtp', compact('email', 'id_user'));
     }
 
+    public function resend_otp($email_user){
+        $getuser = DB::table('users')->where('email',$email_user)->first();           
+        $otp = mt_rand(100000, 999999);
+        $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+        $now = $konvers_tanggal->format('Y-m-d H:i:s');
+        DB::table('t_otp')->insert([
+            'kode_otp' => $otp,
+            'id_user' => $getuser->id,
+            'status' => 0,
+            'created_at' => $now,
+        ]);
+    
+        $mailData = [
+            'title' => 'Mail from noreply@umkmlevelup.id',
+            'body' => 'Harap isi kode otp berikut ini.',
+            'otp' => $otp
+        ];
+        
+        Mail::to($email_user)->send(new DemoMail($mailData));
+        return response()->json('success');
+    }
+
+    public function tes(){
+        $otp = mt_rand(100000, 999999);
+       
+        $mailData = [
+            'title' => 'Mail from noreply@umkmlevelup.id',
+            'body' => 'Harap isi kode otp berikut ini.',
+            'otp' => $otp
+        ];
+        
+        Mail::to('hairunadhari@gmail.com')->send(new DemoMail($mailData));
+        return 'success';
+    }
 }

@@ -76,20 +76,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
         integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    @if(session('alert'))
+
+    @if(Session::has('error'))
     <script>
         $.toast({
             heading: 'Terjadi kesalahan :',
-            text: "{{ session('alert')['message'] }}",
-            icon: "{{ session('alert')['type'] }}",
+            text: "{{Session::get('error')['message']}}",
+            icon: "{{Session::get('error')['type']}}",
             hideAfter: false,
-            // loader: true,        // Change it to false to disable loader
             position: 'top-right',
             loaderBg: '#9EC600' // To change the background
         })
     </script>
     @endif
-
     @if(session('success'))
     <script>
 

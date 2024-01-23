@@ -34,17 +34,19 @@ Route::get('pendaftaran', function (Request $request) {
     // return view('underconstruct');
 });
 
-Route::get('verifikasiOtp', function (Request $request) {
-    $request->session()->forget('alert');
-    return view('verifikasiOtp');
-});
+// Route::get('verifikasiOtp/{email}/{id_user}', function ($encryptEmail, $encryptId_user) {
+//     $email  = Crypt::decrypt($encryptEmail);
+//     Crypt::decrypt($encryptId_user);
+//     return view('verifikasiOtp', compact('email', 'id_user'));
+// });
+Route::get('verifikasiOtp/{email}/{id_user}', [App\Http\Controllers\Auth\RegisterController::class, 'verifikasiOtp']);
+
 
 // Route::get('kuesioner', function () {
     
 // });
 
 Route::get('kuesioner', [HomeController::class, 'kuesioner']);
-Route::get('/get-time', [RegisterController::class, 'get_created_at_otp']);
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
@@ -87,6 +89,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::post('/add-sub-materi/{id}/{name}', [\App\Http\Controllers\MateriFrontController::class, 'addSubMateri'])->name("add-sub-materi/{id}/{name}");
 Route::post('/send-chatting', [\App\Http\Controllers\MateriFrontController::class, 'send_chatting']);
 Route::get('/download-pdf/{id}', [\App\Http\Controllers\MateriFrontController::class, 'downloadPdf']);
+Route::get('/resend-otp/{email_user}', [App\Http\Controllers\Auth\RegisterController::class, 'resend_otp']);
+Route::get('/tes', [App\Http\Controllers\Auth\RegisterController::class, 'tes']);
+
 
 // Route::post('/add-sub-materi/{id}/{name}',function(){
 //     echo 1;

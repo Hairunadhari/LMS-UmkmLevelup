@@ -383,12 +383,6 @@
     function validateNik(input) {
         const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
         input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka
-
-        if (value.length < 10 || value.length > 13) {
-            input.setCustomValidity('Nomor WA harus terdiri dari 10 atau 13 angka');
-        } else {
-            input.setCustomValidity(''); // Hapus teks error jika valid
-        }
     }
     function validateNib(input) {
         const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
