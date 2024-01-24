@@ -301,7 +301,7 @@ public function submitOtp(Request $request){
             'otp' => $otp
         ];
         
-        Mail::to('hairunadhari@gmail.com')->send(new DemoMail($mailData));
+        Mail::to('demotestmail099@gmail.com')->send(new DemoMail($mailData));
         return 'success';
     }
 }
