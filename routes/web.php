@@ -91,6 +91,7 @@ Route::post('/send-chatting', [\App\Http\Controllers\MateriFrontController::clas
 Route::get('/download-pdf/{id}', [\App\Http\Controllers\MateriFrontController::class, 'downloadPdf']);
 Route::get('/resend-otp/{email_user}', [App\Http\Controllers\Auth\RegisterController::class, 'resend_otp']);
 Route::get('/tes', [App\Http\Controllers\Auth\RegisterController::class, 'tes']);
+Route::get('/tesipin', [App\Http\Controllers\Auth\RegisterController::class, 'tesipin']);
 
 
 // Route::post('/add-sub-materi/{id}/{name}',function(){

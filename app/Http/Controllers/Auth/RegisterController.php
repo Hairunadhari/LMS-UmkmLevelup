@@ -301,7 +301,20 @@ public function submitOtp(Request $request){
             'otp' => $otp
         ];
         
-        Mail::to('demotestmail099@gmail.com')->send(new DemoMail($mailData));
+        Mail::to('hairunadhari@gmail.com')->send(new DemoMail($mailData));
+        return 'success';
+    }
+
+    public function tesipin(){
+        $otp = mt_rand(100000, 999999);
+       
+        $mailData = [
+            'title' => 'Mail from noreply@umkmlevelup.id',
+            'body' => 'Harap isi kode otp berikut ini.',
+            'otp' => $otp
+        ];
+        
+        Mail::to('arifin.officialwork@gmail.com')->send(new DemoMail($mailData));
         return 'success';
     }
 }
