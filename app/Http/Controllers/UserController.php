@@ -120,7 +120,7 @@ class UserController extends Controller
         //     return redirect($request->session()->get('url'));
         // }else{
             // return redirect('home');
-            return redirect('https://umkmlevelup.id/home');
+            return redirect('home');
         // }
     }
 

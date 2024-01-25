@@ -46,6 +46,8 @@
                   name="jenisKelamin"
                   required
                   aria-label="Floating label select example"
+                  oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                  onchange="this.setCustomValidity('')"
                 >
                   <option value="">-- Pilih --</option>
                   <option value="Pria">Laki-laki</option>
@@ -68,6 +70,8 @@
               name="namaUsaha"
               required
               placeholder="Toko ...."
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
             />
             <label for="namaUsaha" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Nama Usaha (Toko) <span style="color: red; font-weight:bold">*</span></label
@@ -115,6 +119,8 @@
                     name="provinsi"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
                     >
                     <option value="">-- Pilih --</option>
                     @foreach ($dataProv as $item)
@@ -137,6 +143,8 @@
                     name="kabupaten"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
                     >
                     <option selected value="">-- Pilih --</option>
                     </select>
@@ -157,6 +165,8 @@
                     name="kecamatan"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
                     >
                     <option selected value="">-- Pilih --</option>
                     </select>
@@ -177,6 +187,8 @@
                     name="kelurahan"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
                     >
                     <option selected value="">-- Pilih --</option>
                     </select>
@@ -193,7 +205,8 @@
             </div>
             <div class="col-lg-5">
                 <div class="form-floating mb-3 shadow ">
-                    <textarea class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px"></textarea>
+                    <textarea oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                    onchange="this.setCustomValidity('')" class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px"></textarea>
                     <label for="alamat" class="ms-2"
                     ><i
                     class="fa fa-edit me-2"
@@ -241,6 +254,8 @@
               name="no_hp"
               required
               placeholder="+062 *****"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
             />
             <label for="no_hp" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> No Telpon Paket Data <span style="color: red; font-weight:bold">*</span></label

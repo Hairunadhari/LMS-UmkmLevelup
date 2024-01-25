@@ -61,7 +61,10 @@
               id="namaPemilik"
               name="namaPemilik"
               required
+              
               value="{{$user->nama_pemilik}}"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
             />
             <label for="namaPemilik" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Nama Lengkap Pemilik <span style="color: red; font-weight:bold">*</span></label
@@ -76,8 +79,10 @@
                   name="jenisKelamin"
                   required
                   aria-label="Floating label select example"
+                  oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
                 >
-                  <option value="">-- Pilih --</option>
+                  <option value="" disabled>-- Pilih --</option>
                   <option value="Pria" {{$user->jenis_kelamin == "Pria" ? "selected" : ""}}>Pria</option>
                   <option value="Perempuan" {{$user->jenis_kelamin == "Perempuan" ? "selected" : ""}}>Perempuan</option>
                 </select>
@@ -99,6 +104,8 @@
               required
               placeholder="Toko ...."
               value="{{$user->nama_usaha}}"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
             />
             <label for="namaUsaha" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Nama Usaha (Toko) <span style="color: red; font-weight:bold">*</span></label
@@ -115,6 +122,8 @@
               required
               placeholder="toko@***.com"
               value="{{$user->email_usaha}}"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
             />
             <label for="email" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> Email Usaha (Toko) <span style="color: red; font-weight:bold">*</span></label
@@ -146,7 +155,7 @@
                     required
                     aria-label="Floating label select example"
                     >
-                    <option value="">-- Pilih --</option>
+                    <option value="" disabled>-- Pilih --</option>
                     @foreach ($dataProv as $item)
                         <option  value="{{$item->id_provinsi}}" {{$item->id_provinsi == $user->id_provinsi ? "selected" : ""}}>{{$item->nama_provinsi}}</option>
                     @endforeach
@@ -167,6 +176,8 @@
                     name="kabupaten"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
                     >
                     <option selected value="{{$user->id_kabupaten}}">{{$nama_kabupaten}}</option>
                     </select>
@@ -187,6 +198,8 @@
                     name="kecamatan"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
                     >
                     <option selected value="{{$user->id_kecamatan}}">{{$nama_kecamatan}}</option>
                     </select>
@@ -207,6 +220,8 @@
                     name="kelurahan"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
                     >
                     <option selected value="{{$user->id_keluarahan}}">{{$nama_kelurahan}}</option>
                     </select>
@@ -223,7 +238,8 @@
             </div>
             <div class="col-lg-5">
                 <div class="form-floating mb-3 shadow ">
-                    <textarea class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px">{{$user->alamat_lengkap}}</textarea>
+                    <textarea oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                    onchange="this.setCustomValidity('')" class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px">{{$user->alamat_lengkap}}</textarea>
                     <label for="alamat" class="ms-2"
                     ><i
                     class="fa fa-edit me-2"
@@ -302,6 +318,9 @@
               required
               placeholder="128******"
               value="{{$user->nib}}"
+              oninput="validateNib(this)"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
             />
             <label for="nib" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> NIB <span style="color: red; font-weight:bold">*</span></label
@@ -413,5 +432,10 @@
             $("#kelurahan").val('').change();
         }
     });
+    function validateNib(input) {
+        const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
+        input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka
+
+    }
 </script>
 @endsection
