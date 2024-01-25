@@ -170,7 +170,7 @@ public function register(Request $request)
 
       try {
           DB::beginTransaction();
-          $cekWa = DB::table('users')->where('no_wa',$request->no_wa)->first();
+          $cekWa = DB::table('users')->where('aktif', 1)->where('no_wa',$request->no_wa)->first();
           if ($cekWa !== null) {
               if ($request->no_wa == $cekWa->no_wa) {
                   session()->flash('name', $request->name);
@@ -183,7 +183,7 @@ public function register(Request $request)
               }           
           }
         
-        $cekuser = DB::table('users')->where('email',$request->email)->first();           
+        $cekuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
         if ($cekuser == null) {
             DB::table('users')->insert([
                 'name' => $request->name,
@@ -194,7 +194,7 @@ public function register(Request $request)
                 'final_level' => 0,
             ]);
         }
-        $getuser = DB::table('users')->where('email',$request->email)->first();           
+        $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
         $otp = mt_rand(100000, 999999);
         $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
         $now = $konvers_tanggal->format('Y-m-d H:i:s');
@@ -238,7 +238,7 @@ public function submitOtp(Request $request){
             DB::table('t_otp')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->update([
                 'status' => 1,
             ]);
-            DB::table('users')->where('id', $request->id_user)->update([
+            DB::table('users')->where('aktif', 1)->where('id', $request->id_user)->update([
                 'email_verified_at' => date("Y-m-d H:i:s"),
             ]);
         }else{
@@ -271,7 +271,7 @@ public function submitOtp(Request $request){
     }
 
     public function resend_otp($email_user){
-        $getuser = DB::table('users')->where('email',$email_user)->first();           
+        $getuser = DB::table('users')->where('aktif', 1)->where('email',$email_user)->first();           
         $otp = mt_rand(100000, 999999);
         $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
         $now = $konvers_tanggal->format('Y-m-d H:i:s');
@@ -302,6 +302,19 @@ public function submitOtp(Request $request){
         ];
         
         Mail::to('hairunadhari@gmail.com')->send(new DemoMail($mailData));
+        return 'success';
+    }
+
+    public function tesipin(){
+        $otp = mt_rand(100000, 999999);
+       
+        $mailData = [
+            'title' => 'Mail from noreply@umkmlevelup.id',
+            'body' => 'Harap isi kode otp berikut ini.',
+            'otp' => $otp
+        ];
+        
+        Mail::to('arifin.officialwork@gmail.com')->send(new DemoMail($mailData));
         return 'success';
     }
 }

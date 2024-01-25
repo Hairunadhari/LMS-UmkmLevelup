@@ -229,7 +229,7 @@
           </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
@@ -245,14 +245,14 @@
             >
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3" style="display: none">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
               class="form-control rounded-pill px-4"
               id="no_hp"
               name="no_hp"
-              required
+              value=""
               placeholder="+062 *****"
               oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
                                 onchange="this.setCustomValidity('')"
@@ -262,7 +262,7 @@
             >
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
@@ -277,7 +277,7 @@
             >
           </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
