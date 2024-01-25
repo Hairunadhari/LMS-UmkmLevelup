@@ -138,7 +138,7 @@
                                 placeholder="name@example.com" required
                                 oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
                                 onchange="this.setCustomValidity('')" />
-                            <label for="floatingInput" class="ms-4"><i class="fa-solid fa-user me-3"></i> Nama Lengkap</label>
+                            <label for="floatingInput" class="ms-4"><i class="fa-solid fa-user me-3"></i> Nama Lengkap (Sesuai KTP)</label>
                         </div>
                         <div class="form-floating mb-4 shadow rounded-pill">
                           <input type="email" class="form-control rounded-pill px-4" name="email" required value="{{ session('email') }}"
@@ -301,7 +301,7 @@
         } else {
           let msg = '';
           if (name == '') {
-            msg = "Nama Lengkap"
+            msg = "Nama Lengkap (Sesuai KTP)"
           } else if (email == '') {
             msg = "Email"
           } else if (no_wa == '') {
