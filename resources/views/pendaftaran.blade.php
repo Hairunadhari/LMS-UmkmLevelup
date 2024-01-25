@@ -152,10 +152,9 @@
                         <div class="form-floating mb-4 shadow rounded-pill">
                             <input type="text" class="form-control rounded-pill px-4" name="no_wa" required value="{{ session('no_wa') }}"
                                 oninput="validatePhoneNumber(this)"
-                                oninvalid="this.setCustomValidity('Nomor Wa harus terdiri dari 10 atau 13 angka')" />
+                                oninvalid="this.setCustomValidity('Nomor WhatsApp Aktif harus terdiri dari 10 - 13 angka')" />
 
-                            <label for="floatingInput" class="ms-4"><i class="fa fa-phone me-3"></i> No Hp (Wa
-                                Aktif)</label>
+                            <label for="floatingInput" class="ms-4"><i class="fa fa-phone me-3"></i> No. Telp (WhatsApp Aktif)</label>
                         </div>
                         <div class="row">
                             <div class="col form-floating mb-4">
@@ -305,7 +304,7 @@
           } else if (email == '') {
             msg = "Email"
           } else if (no_wa == '') {
-            msg = "No Wa"
+            msg = "No. Telp (WhatsApp Aktif)"
           } else {
             msg = "Password / Konfirmasi"
           }
