@@ -2,6 +2,7 @@
     @media only screen and (max-width: 400px) {}
 
 </style>
+
 <div class="footer" style="background-color: #0C438D;">
     <div class="container text-white py-5 pb-2">
         <div class="row foot_top d-flex">
