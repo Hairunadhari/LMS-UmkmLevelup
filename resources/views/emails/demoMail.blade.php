@@ -32,7 +32,7 @@
 
                         <!-- Your inverted logo is here -->
                         <div style="display: flex; margin-top: 40px;">
-                            <img style=" text-align: center; color: #ffffff;  width:90px; height:70px" alt="Logo"
+                            <img style=" text-align: center; color: #ffffff;  width:80px; height:80px" alt="Logo"
                             src="https://umkmlevelup.id/asset/logo-kominfo.png" align="center">
                             <img style=" text-align: center; color: #ffffff; width:120px; height:40px; margin-top: 10px;" alt="Logo"
                             src="https://umkmlevelup.id/asset/logo-umkm-putih.png" align="center">
