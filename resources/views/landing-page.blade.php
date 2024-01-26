@@ -246,15 +246,25 @@
             <a href="#"><img src="{{url('/')}}/asset/logo-umkm-putih.png" alt="" class="img-fluid" width="150"></a>
           </div>
           <div class="text-center mb-4">
-            <p>UMKM Level Up adalah Program yang diselenggarakan Kementerian Komunikasi dan Informatika dalam rangka mendorong UMKM untuk naik kelas dari sisi adopsi teknologi digital.</p>
+            <p>UMKM Level Up adalah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendukung pelaku UMKM #SiapLevelUp melalui adopsi teknologi digital.</p>
           </div>
           <div class="col-6 col-md-4 d-flex justify-content-around mx-auto mb-4">
-            <i class="fa-brands fa-facebook-f"></i>
-            <i class="fa-brands fa-twitter"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-youtube"></i>
-            <i class="fa-brands fa-tiktok"></i>
-            <i class="fa-solid fa-circle-play"></i>
+            {{-- <a href="test" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a> --}}
+            {{-- <a href="test" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-twitter"></i>
+            </a> --}}
+            <a href="https://instagram.com/umkm.levelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@umkmlevelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.youtube.com/@umkmlevelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            {{-- <i class="fa-solid fa-circle-play"></i> --}}
           </div>
         </div>
         <div class="col-md-3">
@@ -263,12 +273,12 @@
           </div>
           <div class="text-center text-md-start">
             <p class="m-0"><i class="fa-solid fa-phone"></i> 0821-1999-7-210</p>
-            <p class="m-0"><i class="fa-solid fa-envelope"></i> umkm_ditekodig@kominfo.go.id</p>
+            <p class="m-0"><i class="fa-solid fa-envelope"></i> tanya@umkmlevelup.id</p>
           </div>
         </div>
       </div>
       <hr>
-      <p class="text-center">Copyright © 2023 UMKM Level Up | Direktorat Ekonomi Digital | Kementerian Komunikasi dan Informatika</p>
+      <p class="text-center">Copyright © 2024 UMKM Level Up | Direktorat Pemberdayaan Informatika | Kementerian Komunikasi dan Informatika</p>
     </div>
   </section>
   <!-- footer -->

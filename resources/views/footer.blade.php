@@ -44,7 +44,7 @@
         </div>
         <div class="foot_bottom mt-5 text-center">
             <hr style="width:100%;text-align:center; margin-left: auto; margin-right: auto; margin-top: 0;">
-            <p>Copyright By @ KOMINFO 2022</p>
+            <p>Copyright By @ KOMINFO 2024</p>
         </div>
     </div>
 </div>
