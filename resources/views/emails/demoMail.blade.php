@@ -23,20 +23,31 @@
         </div>
         <!-- Start footer -->
         <table align="center"
-            style="text-align: center; vertical-align: top; width: 70%; max-width: 70%; background-color: #0C438D;"
+            style="vertical-align: top; width: 70%; max-width: 70%; background-color: #0C438D;"
             width="600">
             <tbody>
                 <tr>
-                    <td style="width: 596px; vertical-align: top; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px;"
+                    <td style="width: 550px; vertical-align: top; padding-left: 20px; padding-right: 0px; padding-top: 30px; padding-bottom: 30px;"
                         width="596">
 
                         <!-- Your inverted logo is here -->
-                        <img style=" text-align: center; color: #ffffff;" alt="Logo"
+                        <div style="display: flex; margin-top: 40px;">
+                            <img style=" text-align: center; color: #ffffff;  width:90px; height:70px" alt="Logo"
                             src="https://umkmlevelup.id/asset/logo-kominfo.png" align="center">
+                            <img style=" text-align: center; color: #ffffff; width:120px; height:40px; margin-top: 10px;" alt="Logo"
+                            src="https://umkmlevelup.id/asset/logo-umkm-putih.png" align="center">
+                        </div>
 
+                    </td>
+                    <td style="width: 596px; vertical-align: top; padding-left: 10px; padding-right: 10px; padding-top: 30px; padding-bottom: 30px;"
+                        width="596">
+                        <p
+                            style="font-size: 15px; font-weight: bold; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
+                            Kantor Pusat
+                        </p>
                         <p
                             style="font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
-                            Jl. Medan Merdeka Barat No. 9, Jakarta 10110 , tanya@umkmlevelup
+                            Jl. Medan Merdeka Barat No. 9, Jakarta 10110
                         </p>
 
                         <p
@@ -44,6 +55,33 @@
                             <a target="_blank" style="text-decoration: underline; color: #ffffff;"
                                 href="https://umkmlevelup.id">
                                 www.umkmlevelup.id
+                            </a>
+                        </p>
+
+                    </td>
+                    <td style="width: 500px; vertical-align: top; padding-left: 10px; padding-right: 10px; padding-top: 30px; padding-bottom: 30px;"
+                        width="596">
+                        <p
+                            style="font-size: 15px; font-weight: bold; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
+                            Kontak Kami
+                        </p>
+                        <p
+                            style="font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
+                            <img src="https://umkmlevelup.id/asset/bi_telephone-fill.png" style="height:15px;" alt=""> 0821-1999-7-210
+                        </p>
+
+                        <p
+                            style="margin-bottom: 0; font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
+                            <img src="https://umkmlevelup.id/asset/carbon_location-filled.png" style="height:15px" alt=""><a target="_blank" style="text-decoration: underline; color: #ffffff;"
+                                href="https://umkmlevelup.id">
+                                Jl. Medan Merdeka Barat No. 9, Jakarta 10110
+                            </a>
+                        </p>
+                        <p
+                            style="margin-bottom: 0; font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
+                            <img src="https://umkmlevelup.id/asset/dashicons_email-alt2.png" style="height:15px" alt=""><a target="_blank" style="text-decoration: underline; color: #ffffff;"
+                                href="https://umkmlevelup.id">
+                                tanya@umkmlevelup.id
                             </a>
                         </p>
 
