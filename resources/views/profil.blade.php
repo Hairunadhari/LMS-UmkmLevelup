@@ -616,5 +616,60 @@
             errorMessage.text("Silahkan isi kolom ini!");
         }
     }
+
+    function onSubmit(token) {
+        console.log(token);
+        let name = $("input[name='name']").val();
+        let email = $("input[name='email']").val();
+        let no_wa = $("input[name='no_wa']").val();
+        let password = $("input[name='password']").val();
+        let konfirmasi_password = $("input[name='konfirmasi_password']").val();
+        // Simpan nilai input dalam sebuah objek
+        let nilaiInput = {
+          name: name,
+          email: email,
+          no_wa: no_wa,
+          password: password,
+          konfirmasi_password: konfirmasi_password
+        };
+        console.log(nilaiInput.name);
+
+        if (name != '' && password != '' && email != '' && no_wa != '') {
+          if (konfirmasi_password != password) {
+            $.toast({
+              heading: 'Mohon Lakukan',
+              text: "Konfirmasi password tidak sama dengan password yang dimasukkan",
+              icon: "error",
+              hideAfter: false,
+              position: 'top-right',
+              loaderBg: '#9EC600'
+            });
+
+          } else {
+            $(".for-loading").attr('style', 'display:');
+            document.getElementById("formDaftar").submit();
+          }
+        } else {
+          let msg = '';
+          if (name == '') {
+            msg = "Nama Lengkap (Sesuai KTP)"
+          } else if (email == '') {
+            msg = "Email"
+          } else if (no_wa == '') {
+            msg = "No. Telp (WhatsApp Aktif)"
+          } else {
+            msg = "Password / Konfirmasi"
+          }
+
+          $.toast({
+            heading: 'Mohon Lakukan',
+            text: "Pengisian " + msg + " dengan benar",
+            icon: "error",
+            hideAfter: false,
+            position: 'top-right',
+            loaderBg: '#9EC600'
+          })
+        }
+    }
 </script>
 @endsection

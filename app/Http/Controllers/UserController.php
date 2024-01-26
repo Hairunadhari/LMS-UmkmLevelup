@@ -14,6 +14,7 @@ class UserController extends Controller
 {
     public function submitProfil(Request $request)
     {
+        // dd($request);
        try {
             DB::beginTransaction();
             
