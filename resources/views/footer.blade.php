@@ -2,8 +2,12 @@
     @media only screen and (max-width: 400px) {}
 
 </style>
+<<<<<<< HEAD
 
 <div class="footer" style="background-color: #0C438D;">
+=======
+{{-- <div class="footer" style="background-color: #0C438D;">
+>>>>>>> 4a9af79aef3d0ca7559b7d6faf445d86997798e5
     <div class="container text-white py-5 pb-2">
         <div class="row foot_top d-flex">
             <div class="col-md-3">
@@ -48,4 +52,55 @@
             <p>Copyright By @ KOMINFO 2024</p>
         </div>
     </div>
-</div>
+</div> --}}
+
+
+<section style="background-color: #0C438D;">
+    <div class="container-fluid text-white pt-5 pt-md-5 pb-2 pb-md-2">
+      <div class="row" style="font-size: 14px;">
+        <div class="col-md-3">
+          <div class="text-center mb-4">
+            <h5 class="mb-4">Sebuah Program dari :</h5>
+            <a href="#"><img src="{{url('/')}}/asset/logo-kominfo.png" alt="" class="img-fluid" width="80"></a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center mb-4">
+            <a href="#"><img src="{{url('/')}}/asset/logo-umkm-putih.png" alt="" class="img-fluid" width="150"></a>
+          </div>
+          <div class="text-center mb-4">
+            <p>UMKM Level Up adalah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendukung pelaku UMKM #SiapLevelUp melalui adopsi teknologi digital.</p>
+          </div>
+          <div class="col-6 col-md-4 d-flex justify-content-around mx-auto mb-4">
+            {{-- <a href="test" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a> --}}
+            {{-- <a href="test" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-twitter"></i>
+            </a> --}}
+            <a href="https://instagram.com/umkm.levelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@umkmlevelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.youtube.com/@umkmlevelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            {{-- <i class="fa-solid fa-circle-play"></i> --}}
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="text-center mb-4">
+            <h5 class="mb-4">Contact Us</h5>
+          </div>
+          <div class="text-center text-md-start">
+            <p class="m-0"><i class="fa-solid fa-phone"></i> 0821-1999-7-210</p>
+            <p class="m-0"><i class="fa-solid fa-envelope"></i> tanya@umkmlevelup.id</p>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <p class="text-center">Copyright © 2024 UMKM Level Up | Direktorat Pemberdayaan Informatika | Kementerian Komunikasi dan Informatika</p>
+    </div>
+  </section>
