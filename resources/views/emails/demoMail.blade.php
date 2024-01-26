@@ -51,14 +51,29 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                             UMKM Level Up adalah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendukung pelaku UMKM #SiapLevelUp melalui adopsi teknologi digital.
                         </p>
 
-                        <p
+                        <span
                             style="margin-bottom: 0; font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
                             <a href="https://instagram.com/umkm.levelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
-                                <img src="https://umkmlevelup.id/asset/instagram.png" style="height:15px;" alt="">
+                                <img  src="https://umkmlevelup.id/asset/instagram.png" style="height:15px; background-color: #ffffff; border-radius: 4px" alt="">
                             </a>
-                            <img src="https://umkmlevelup.id/asset/instagram.png" style="height:15px;" alt="">
                             
-                        </p>
+                        </span>
+                        <span
+                            style="margin-bottom: 0; font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
+                            <a href="https://instagram.com/umkm.levelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
+                                <img  src="https://umkmlevelup.id/asset/instagram.png" style="height:15px; background-color: #ffffff" alt="">
+                            </a>
+                            
+                        </span>
+                        <span
+                            style="margin-bottom: 0; font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
+                            <a href="https://instagram.com/umkm.levelup" target="_blank" style="color: #fff; text-decoration:none; line-height: 14px">
+                                <img  src="https://umkmlevelup.id/asset/instagram.png" style="height:15px; background-color: #ffffff" alt="">
+                            </a>
+                            
+                        </span>
+                        
+                        
 
                     </td>
                     <td style="text-align: center;  width: 200px; vertical-align: top; padding-left: 10px; padding-right: 10px; padding-top: 30px; padding-bottom: 30px;"
