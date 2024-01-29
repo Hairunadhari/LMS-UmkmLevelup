@@ -176,11 +176,11 @@
 														<tr>
 															<td class="pad">
 																<div style="color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
-																	<div>
-																		<p style="margin: 0; word-break: break-word;"> 0821-1999-7-210</p>
+																	<div >
+																			<p style="margin: 0; word-break: break-word;"><img src="https://umkmlevelup.id/asset/bi_telephone-fill.png" alt="" style="height: 12px;"> 0821-1999-7-210</p>
 																	</div>
 																	<div>
-																		<p style="margin: 0; word-break: break-word;"> tanya@umkmlevelup.id</p>
+																		<a style="margin: 0; word-break: break-word; text-decoration: none; color: #ffffff"><img src="https://umkmlevelup.id/asset/dashicons_email-alt2.png" alt="" style="height: 12px;"> tanya@umkmlevelup.id</a>
 																	</div>
 																</div>
 															</td>
