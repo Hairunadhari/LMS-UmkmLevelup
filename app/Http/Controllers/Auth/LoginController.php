@@ -39,23 +39,25 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+        $credentials['aktif'] = 1;
 
         try {
+            if (!Auth::validate($credentials)) {
+                throw new \Exception('Tidak menemukan akun dengan email '.$request['email'].'.');
+            }
+
             if (Auth::attempt($credentials, $request->remember)) {
                 $request->session()->regenerate();
     
                 return redirect()->route('home'); 
+            }else{
+                throw new \Exception('Maaf password anda salah');
             }
-            
-            $request->session()->flash('alert', [
-                'type' => 'error',
-                'message' => 'Email / Password anda salah.',
-            ]);
-            $request->session()->put('id_user', Auth::user()->id);
+          
         } catch (\Throwable $th) {
-            $request->session()->flash('alert', [
-                'type' => 'error',
-                'message' => 'Silahkan periksa kembali email password anda.',
+            return redirect()->back()->with('error',[
+                'type'=>'error',
+                'message'=> $th->getMessage(),   
             ]);
         }
         

@@ -1,6 +1,7 @@
 @extends('layout.main')
 
 @section('container')
+
   <div
     class="pt-5"
     style="
@@ -74,7 +75,7 @@
               <h4><strong>Modul Pembelajaran </strong> Umkm Levelup</h4>
               <hr/>
               <div class="card-text">
-                <p>Lorem ipsum dolor sit amet consectetur. Vulputate turpis odio malesuada nunc. Elit ornare aenean malesuada</p></div>
+                <p>"Kembangkan Usaha Mikro, Kecil, dan Menengahmu dengan Pembelajaran Levelup. Temukan strategi terbaik untuk pertumbuhan dan keberhasilan usahamu. Pelajari langkah-langkah praktis untuk meningkatkan performa dan daya saing dalam bisnismu. Raih kesuksesan melalui pengetahuan yang tepat dan terpercaya."</p></div>
               <a href="dashboard" class="btn btn-danger"><i class="fa fa-graduation-cap"></i> Ikuti Learning</a>
             </div>
           </div>

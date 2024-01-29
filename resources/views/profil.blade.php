@@ -54,31 +54,43 @@
           </div>
         </div>
         <div class="col-lg-3">
-          <div class="form-floating shadow  mb-3 rounded-pill">
+          <div class="form-floating shadow  mb-1 rounded-pill">
             <input
               type="text"
               class="form-control rounded-pill px-4"
               id="namaPemilik"
               name="namaPemilik"
               required
+              
               value="{{$user->nama_pemilik}}"
+              oninput="validatenamapemilik()"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
             />
-            <label for="namaPemilik" class="ms-4"
-              ><i class="fa-solid fa-user me-2"></i> Nama Lengkap Pemilik <span style="color: red; font-weight:bold">*</span></label
-            >
+            <label for="namaPemilik" class="ms-4">
+              <i class="fa-solid fa-user me-2"></i> Nama Lengkap Pemilik 
+              <span style="color: red; font-weight:bold">*</span>
+            </label>
+            
           </div>
+              <div class="" style="color: red; font-weight: bold;"><p class="" style="
+              opacity: .5" id="error-namalengkap"></p></div>
         </div>
+
         <div class="col-lg-3">
-            <div class="form-floating mb-3 shadow rounded-pill">
+            <div class="form-floating mb-1 shadow rounded-pill">
                 <select
                   class="form-select rounded-pill shadow px-4"
                   id="jenisKelamin"
                   name="jenisKelamin"
                   required
                   aria-label="Floating label select example"
+                  oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                  onchange="this.setCustomValidity('')"
+                  onclick="validatekelamin()"
                 >
-                  <option value="">-- Pilih --</option>
-                  <option value="Pria" {{$user->jenis_kelamin == "Pria" ? "selected" : ""}}>Pria</option>
+                  <option value="" disabled>-- Pilih --</option>
+                  <option value="Pria" {{$user->jenis_kelamin == "Pria" ? "selected" : ""}}>Laki-laki</option>
                   <option value="Perempuan" {{$user->jenis_kelamin == "Perempuan" ? "selected" : ""}}>Perempuan</option>
                 </select>
                 <label for="jenisKelamin" class="ms-4"
@@ -88,9 +100,12 @@
                   >Jenis Kelamin <span style="color: red; font-weight:bold">*</span></label
                 >
             </div>
+            <div class="" style="color: red; font-weight: bold;"><p class="" style="
+              opacity: .5" id="error-kelamin"></p></div>
         </div>
+
         <div class="col-lg-3">
-          <div class="form-floating shadow  mb-3 rounded-pill">
+          <div class="form-floating shadow  mb-1 rounded-pill">
             <input
               type="text"
               class="form-control rounded-pill px-4"
@@ -99,14 +114,20 @@
               required
               placeholder="Toko ...."
               value="{{$user->nama_usaha}}"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+              onchange="this.setCustomValidity('')"
+              oninput="validatenamausaha()"
             />
-            <label for="namaUsaha" class="ms-4"
-              ><i class="fa-solid fa-user me-2"></i> Nama Usaha (Toko) <span style="color: red; font-weight:bold">*</span></label
-            >
+            <label for="namaUsaha" class="ms-4"><i class="fa-solid fa-user me-2">
+              </i> Nama Usaha (Toko) 
+              <span style="color: red; font-weight:bold">*</span>
+            </label>
           </div>
+          <div class="" style="color: red; font-weight: bold;"><p class="" style="opacity: .5" id="error-namausaha"></p></div>
         </div>
+
         <div class="col-lg-3">
-          <div class="form-floating shadow  mb-3 rounded-pill">
+          <div class="form-floating shadow  mb-1 rounded-pill">
             <input
               type="email"
               class="form-control rounded-pill px-4"
@@ -115,12 +136,20 @@
               required
               placeholder="toko@***.com"
               value="{{$user->email_usaha}}"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
+              oninput="validateemailusaha()"
+
             />
             <label for="email" class="ms-4"
-              ><i class="fa-solid fa-user me-2"></i> Email Usaha (Toko) <span style="color: red; font-weight:bold">*</span></label
+              ><i class="fa-solid fa-user me-2"></i> Email Usaha (Toko) <span style="color: red; font-weight:bold">*</span>
+                </label
             >
           </div>
+              <div class="" style="color: red; font-weight: bold;"><p class="" style="
+                opacity: .5" id="error-emailusaha"></p></div>
         </div>
+
         <div class="col-md-12 mb-4 mt-4">
           <div class="row">
             <div class="col">
@@ -138,15 +167,18 @@
             <div class="col-lg-7">
                 <div class="row">
                 <div class="col-lg-6">
-                <div class="form-floating mb-3 shadow rounded-pill">
+                <div class="form-floating mb-1 shadow rounded-pill">
                     <select
                     class="form-select rounded-pill shadow px-4"
                     id="provinsi"
                     name="provinsi"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
+                                onclick="validateprovinsi()"
                     >
-                    <option value="">-- Pilih --</option>
+                    <option value="" disabled>-- Pilih --</option>
                     @foreach ($dataProv as $item)
                         <option  value="{{$item->id_provinsi}}" {{$item->id_provinsi == $user->id_provinsi ? "selected" : ""}}>{{$item->nama_provinsi}}</option>
                     @endforeach
@@ -158,15 +190,22 @@
                     >Alamat Usaha <span style="color: red; font-weight:bold">*</span></label
                     >
                 </div>
+                <div class="" style="color: red; font-weight: bold;"><p class="" style="
+                  opacity: .5" id="error-provinsi"></p></div>
                 </div>
+
                 <div class="col-lg-6">
-                <div class="form-floating mb-3 shadow rounded-pill">
+                <div class="form-floating mb-1 shadow rounded-pill">
                     <select
                     class="form-select rounded-pill shadow px-4"
                     id="kabupaten"
                     name="kabupaten"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
+                                onclick="validatekabupaten()"
+
                     >
                     <option selected value="{{$user->id_kabupaten}}">{{$nama_kabupaten}}</option>
                     </select>
@@ -178,15 +217,21 @@
                     >
                     {{-- <small for="floatingSelect">alamat usaha harus berada sesuai dengan target lokasi untuk pelaksanaan program pemdampingan umkm levelup</small> --}}
                 </div>
+                <div class="" style="color: red; font-weight: bold;"><p class="" style="
+                  opacity: .5" id="error-kabupaten"></p></div>
                 </div>
+
                 <div class="col-lg-6">
-                <div class="form-floating mb-3 shadow rounded-pill">
+                <div class="form-floating mb-1 shadow rounded-pill">
                     <select
                     class="form-select rounded-pill shadow px-4"
                     id="kecamatan"
                     name="kecamatan"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
+                                onclick="validatekecamatan()"
                     >
                     <option selected value="{{$user->id_kecamatan}}">{{$nama_kecamatan}}</option>
                     </select>
@@ -198,15 +243,20 @@
                     >
                     {{-- <small for="floatingSelect">alamat usaha harus berada sesuai dengan target lokasi untuk pelaksanaan program pemdampingan umkm levelup</small> --}}
                 </div>
+                <div class="" style="color: red; font-weight: bold;"><p class="" style="
+                  opacity: .5" id="error-kecamatan"></p></div>
                 </div>
                 <div class="col-lg-6">
-                <div class="form-floating mb-3 shadow rounded-pill">
+                <div class="form-floating mb-1 shadow rounded-pill">
                     <select
                     class="form-select rounded-pill shadow px-4"
                     id="kelurahan"
                     name="kelurahan"
                     required
                     aria-label="Floating label select example"
+                    oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
+                                onclick="validatekelurahan()"
                     >
                     <option selected value="{{$user->id_keluarahan}}">{{$nama_kelurahan}}</option>
                     </select>
@@ -218,18 +268,24 @@
                     >
                     {{-- <small for="floatingSelect">alamat usaha harus berada sesuai dengan target lokasi untuk pelaksanaan program pemdampingan umkm levelup</small> --}}
                 </div>
+                <div class="" style="color: red; font-weight: bold;"><p class="" style="
+                  opacity: .5" id="error-kelurahan"></p></div>
+                </div>
                 </div>
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="form-floating mb-3 shadow ">
-                    <textarea class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px">{{$user->alamat_lengkap}}</textarea>
+                <div class="form-floating mb-1 shadow ">
+                    <textarea oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')" oninput="validatealamat()"
+                    onchange="this.setCustomValidity('')" class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px">{{$user->alamat_lengkap}}</textarea>
                     <label for="alamat" class="ms-2"
                     ><i
                     class="fa fa-edit me-2"
                     ></i
                     >Alamat Lengkap <span style="color: red; font-weight:bold">*</span></label>
                 </div>
+                <div class="" style="color: red; font-weight: bold;"><p class="" style="
+                  opacity: .5" id="error-alamat"></p></div>
             </div>
         </div>
         <div class="col-md-12 mb-4 mt-4">
@@ -261,22 +317,24 @@
             >
           </div>
         </div>
-        <div class="col-lg-3">
+
+        <div class="col-lg-3" style="display: none">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
               class="form-control rounded-pill px-4"
               id="no_hp"
               name="no_hp"
-              required
+              {{-- required --}}
               placeholder="+062 *****"
-              value="{{$user->no_hp}}"
+              value=""
             />
             <label for="no_hp" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> No Telpon Paket Data <span style="color: red; font-weight:bold">*</span></label
             >
           </div>
         </div>
+
         <div class="col-lg-3">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
@@ -292,6 +350,7 @@
             >
           </div>
         </div>
+
         <div class="col-lg-3">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
@@ -302,12 +361,18 @@
               required
               placeholder="128******"
               value="{{$user->nib}}"
+              oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
+                                onchange="this.setCustomValidity('')"
+                                oninput="validatenib()"
             />
             <label for="nib" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> NIB <span style="color: red; font-weight:bold">*</span></label
             >
           </div>
+          <div class="" style="color: red; font-weight: bold;"><p class="" style="
+            opacity: .5" id="error-nib"></p></div>
         </div>
+        
       </div>
       <div class="col-md-12 text-center mb-5 mt-5">
         <button type="submit" class="btn btn-primary rounded-pill p-3 "
@@ -413,5 +478,198 @@
             $("#kelurahan").val('').change();
         }
     });
+    function validateNib(input) {
+        const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
+        input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka
+
+    }
+    function validatenamapemilik() {
+        var inputNamaPemilik = $("#namaPemilik").val();
+        var errorMessage = $("#error-namalengkap");
+
+        // Clear previous error message
+        errorMessage.text("");
+
+        // Check if the input is empty
+        if (inputNamaPemilik.trim() === "") {
+            // Display the error message
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validatenamausaha() {
+        var inputNamaPemilik = $("#namaUsaha").val();
+        var errorMessage = $("#error-namausaha");
+
+        // Clear previous error message
+        errorMessage.text("");
+
+        // Check if the input is empty
+        if (inputNamaPemilik.trim() === "") {
+            // Display the error message
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validateemailusaha() {
+        var inputNamaPemilik = $("#email").val();
+        var errorMessage = $("#error-emailusaha");
+
+        // Clear previous error message
+        errorMessage.text("");
+
+        // Check if the input is empty
+        if (inputNamaPemilik.trim() === "") {
+            // Display the error message
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validatekelamin() {
+        var inputNamaPemilik = $("#jenisKelamin").val();
+        var errorMessage = $("#error-kelamin");
+
+        // Clear previous error message
+        errorMessage.text("");
+
+        // Check if the input is empty
+        if (inputNamaPemilik.trim() === "") {
+            // Display the error message
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validateprovinsi() {
+        var inputNamaPemilik = $("#provinsi").val();
+        var errorMessage = $("#error-provinsi");
+
+        // Clear previous error message
+        errorMessage.text("");
+        
+        // Check if the input is empty
+        if (inputNamaPemilik == null) {
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validatekabupaten() {
+        var inputNamaPemilik = $("#kabupaten").val();
+        var errorMessage = $("#error-kabupaten");
+        // Clear previous error message
+        errorMessage.text("");
+        
+        // Check if the input is empty
+        if (inputNamaPemilik === "") {
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validatekecamatan() {
+        var inputNamaPemilik = $("#kecamatan").val();
+        var errorMessage = $("#error-kecamatan");
+
+        // Clear previous error message
+        errorMessage.text("");
+        
+        // Check if the input is empty
+        if (inputNamaPemilik === "") {
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validatekelurahan() {
+        var inputNamaPemilik = $("#kelurahan").val();
+        var errorMessage = $("#error-kelurahan");
+
+        // Clear previous error message
+        errorMessage.text("");
+        
+        // Check if the input is empty
+        if (inputNamaPemilik === "") {
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validatealamat() {
+        var inputNamaPemilik = $("#alamat").val();
+        var errorMessage = $("#error-alamat");
+
+        // Clear previous error message
+        errorMessage.text("");
+        
+        // Check if the input is empty
+        if (inputNamaPemilik === "") {
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validatekelamin() {
+        var inputNamaPemilik = $("#jenisKelamin").val();
+        var errorMessage = $("#error-kelamin");
+        // Clear previous error message
+        errorMessage.text("");
+        
+        // Check if the input is empty
+        if (inputNamaPemilik == null) {
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+    function validatenib() {
+        var inputNamaPemilik = $("#nib").val();
+        var errorMessage = $("#error-nib");
+        // Clear previous error message
+        errorMessage.text("");
+        
+        // Check if the input is empty
+        if (inputNamaPemilik === "") {
+            errorMessage.text("Silahkan isi kolom ini!");
+        }
+    }
+
+    function onSubmit(token) {
+        console.log(token);
+        let name = $("input[name='name']").val();
+        let email = $("input[name='email']").val();
+        let no_wa = $("input[name='no_wa']").val();
+        let password = $("input[name='password']").val();
+        let konfirmasi_password = $("input[name='konfirmasi_password']").val();
+        // Simpan nilai input dalam sebuah objek
+        let nilaiInput = {
+          name: name,
+          email: email,
+          no_wa: no_wa,
+          password: password,
+          konfirmasi_password: konfirmasi_password
+        };
+        console.log(nilaiInput.name);
+
+        if (name != '' && password != '' && email != '' && no_wa != '') {
+          if (konfirmasi_password != password) {
+            $.toast({
+              heading: 'Mohon Lakukan',
+              text: "Konfirmasi password tidak sama dengan password yang dimasukkan",
+              icon: "error",
+              hideAfter: false,
+              position: 'top-right',
+              loaderBg: '#9EC600'
+            });
+
+          } else {
+            $(".for-loading").attr('style', 'display:');
+            document.getElementById("formDaftar").submit();
+          }
+        } else {
+          let msg = '';
+          if (name == '') {
+            msg = "Nama Lengkap (Sesuai KTP)"
+          } else if (email == '') {
+            msg = "Email"
+          } else if (no_wa == '') {
+            msg = "No. Telp (WhatsApp Aktif)"
+          } else {
+            msg = "Password / Konfirmasi"
+          }
+
+          $.toast({
+            heading: 'Mohon Lakukan',
+            text: "Pengisian " + msg + " dengan benar",
+            icon: "error",
+            hideAfter: false,
+            position: 'top-right',
+            loaderBg: '#9EC600'
+          })
+        }
+    }
 </script>
 @endsection

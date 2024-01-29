@@ -48,9 +48,15 @@ class HomeController extends Controller
     public function profil(){
         $d = [];
         $d['user'] = DB::table('profil_user')->where('id_user', Auth::user()->id)->first();
-        $d['nama_kabupaten'] = DB::table('m_kabupaten')->where('id_kabupaten', $d['user']->id_kabupaten)->first()->nama_kabupaten;
-        $d['nama_kecamatan'] = DB::table('m_kecamatan')->where('id_kecamatan', $d['user']->id_kecamatan)->first()->nama_kecamatan;
-        $d['nama_kelurahan'] = DB::table('m_kelurahan')->where('id_kelurahan', $d['user']->id_keluarahan)->first()->nama_kelurahan;
+        if ($d['user'] == '') {
+            $d['nama_kabupaten'] = '';    
+            $d['nama_kecamatan'] = '';
+            $d['nama_kelurahan'] = '';
+        }else{
+            $d['nama_kabupaten'] = DB::table('m_kabupaten')->where('id_kabupaten', $d['user']->id_kabupaten)->first()->nama_kabupaten;
+            $d['nama_kecamatan'] = DB::table('m_kecamatan')->where('id_kecamatan', $d['user']->id_kecamatan)->first()->nama_kecamatan;
+            $d['nama_kelurahan'] = DB::table('m_kelurahan')->where('id_kelurahan', $d['user']->id_keluarahan)->first()->nama_kelurahan;
+        }
         $forms = DB::table('forms')->orderBy('id', 'DESC')->first();
         $d['dataProv'] = DB::table('m_provinsi')->where('aktif', 1)->get();
         $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id;
