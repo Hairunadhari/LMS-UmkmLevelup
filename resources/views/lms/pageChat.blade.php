@@ -219,13 +219,13 @@
 
                     <div class="top_profile">
                         <div class="navigation-buttons">
-                          <div class="col-md-12 px-1">
-                            <a href="{{url('/')}}/add-status/{{$sub_materi->id}}" class="btn btn-success btn-sm"
-                                style="float: left"><i class="fa fa-paper-plane"></i> Selesai Materi</a>
-                        </div>
+                            <div class="col-md-12 px-1">
+                                <a href="{{url('/')}}/add-status/{{$sub_materi->id}}" class="btn btn-success btn-sm"
+                                    style="float: left"><i class="fa fa-paper-plane"></i> Selesaikan Semua Materi</a>
+                            </div>
                             {{-- <button type="button" class="btn btn-danger" style="float: left" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal{{$sub_materi->id}}">
-                                <i class="fas fa-search"></i> View PDF
+                            <i class="fas fa-search"></i> View PDF
                             </button> --}}
                             <span>Page : <span id="pageKe"></span> / <span id="totalHalaman"></span></span>
                         </div>
@@ -252,12 +252,14 @@
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
                         {{-- <input style="display: none" type="text"
-                            value="/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf"
+                            value="/storage/data_upload_lms/tes.pdf"
                             id="file_location"> --}}
-                        <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
-                        id="file_location">
+                            <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
+                                id="file_location">
                         <input style="display: none" type="text" value="{{$sub_materi->video_url}}" id="video_url">
                         <input style="display: none" type="text" value="{{$materiid}}" id="id_materi">
+                        <input style="display: none" type="text" value="{{Auth::user()->id}}" id="user_id">
+                        <input style="display: none" type="text" value="{{Auth::user()->name}}" id="name_user">
                     </div>
                 </div>
             </div>
@@ -265,7 +267,7 @@
         </div>
         <div class="col-md-4">
             <div class="row mt-3">
-                
+
             </div>
             <div class="col-md-12">
                 <section class="msger" style="height: 40rem; overflow: auto">
@@ -274,44 +276,36 @@
                             <i class="fas fa-comment-alt"></i> Chatting Group Materi
                         </div>
                         <div class="msger-header-options">
-                            <span><i class="fas fa-cog"></i></span>
+                            
                         </div>
                     </header>
 
                     <main class="msger-chat">
-                        <div class="msg left-msg">
-                            <div class="msg-img"
-                                style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)">
+                        @foreach ($chats as $chat)
+                    @if ($chat->user_id == Auth::user()->id)
+                        
+                    <div class="msg right-msg">
+                    @else
+                        
+                    <div class="msg left-msg">
+                    @endif
+                    <div class="msg-img text-center p-2">
+                        <i class="fas fa-user" style="font-size: 30px; color:gray"></i>
+                    </div>
+                    <div class="msg-bubble">
+                        <div class="msg-info">
+                            <div class="msg-info-name">{{$chat->name}}</div>
+                            <div class="msg-info-time">
+                                {{ \Carbon\Carbon::parse($chat->tanggal)->format('Y M d, H:i') }}
                             </div>
-
-                            <div class="msg-bubble">
-                                <div class="msg-info">
-                                    <div class="msg-info-name">Arifin</div>
-                                    <div class="msg-info-time">12:45</div>
-                                </div>
-
-                                <div class="msg-text">
-                                    Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
-                                </div>
-                            </div>
+                            
                         </div>
-
-                        <div class="msg right-msg">
-                            <div class="msg-img"
-                                style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)">
-                            </div>
-
-                            <div class="msg-bubble">
-                                <div class="msg-info">
-                                    <div class="msg-info-name">Sajad</div>
-                                    <div class="msg-info-time">12:46</div>
-                                </div>
-
-                                <div class="msg-text">
-                                    You can change your name in JS section!
-                                </div>
-                            </div>
+                        <div class="msg-text">
+                            {{$chat->chat}} 
                         </div>
+                    </div>
+                </div>
+                @endforeach
                     </main>
 
                     <form class="msger-inputarea">
@@ -330,9 +324,10 @@
 
 <script>
     $(document).ready(function () {
-        // const fileUrl = '/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf';
+        // const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
+        console.log('csrftoken',csrfToken);
         let fileUrl = $('#file_location').val();
         let videoUrl = $('#video_url').val();
         let id_materi = $('#id_materi').val();
@@ -396,7 +391,7 @@
         };
 
         loadPdf();
-        
+
         if (videoUrl === '') {
             const h1Element = document.createElement('h1');
             h1Element.textContent = 'Tidak ada video';
@@ -409,35 +404,35 @@
             videoElement.controls = true;
             videoElement.src = videoUrl;
             $('#video-container').append(videoElement);
-        }
 
 
-        videoElement.addEventListener('loadedmetadata', function () {
-            const video = this;
+            videoElement.addEventListener('loadedmetadata', function () {
+                const video = this;
 
-            video.addEventListener('timeupdate', function () {
-                const currentTime = video.currentTime;
-                const duration = video.duration;
-                const progres = (currentTime / duration) * 100;
+                video.addEventListener('timeupdate', function () {
+                    const currentTime = video.currentTime;
+                    const duration = video.duration;
+                    const progres = (currentTime / duration) * 100;
 
-                console.log('Waktu saat ini:', currentTime);
-                console.log('Durasi total:', duration);
-                console.log('Progres:', Math.floor(progres));
-                $.ajax({
-                    method: 'post',
-                    url: '/update-progres-video',
-                    data: {
-                        _token: csrfToken,
-                        id_submateri: id_submateri,
-                        id_materi: id_materi,
-                        progres_video: Math.floor(progres)
-                    },
-                    success: function (res) {
-                        console.log(res);
-                    }
+                    console.log('Waktu saat ini:', currentTime);
+                    console.log('Durasi total:', duration);
+                    console.log('Progres:', Math.floor(progres));
+                    $.ajax({
+                        method: 'post',
+                        url: '/update-progres-video',
+                        data: {
+                            _token: csrfToken,
+                            id_submateri: id_submateri,
+                            id_materi: id_materi,
+                            progres_video: Math.floor(progres)
+                        },
+                        success: function (res) {
+                            console.log(res);
+                        }
+                    });
                 });
             });
-        });
+        }
         // }
         //    loadPdf();
 
@@ -497,33 +492,41 @@
     });
 
     const msgerForm = get(".msger-inputarea");
-    const msgerInput = get(".msger-input");
+    let msgerInput = get(".msger-input");
     const msgerChat = get(".msger-chat");
+    let id_user = $('#user_id').val();
+    let sub_materi_id = $('#id_submateri').val();
+    const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-    const BOT_MSGS = [
-        "Hi, how are you?",
-        "Ohh... I can't understand what you trying to say. Sorry!",
-        "I like to play games... But I don't know how to play!",
-        "Sorry if my answers are not relevant. :))",
-        "I feel sleepy! :("
-    ];
 
     // Icons made by Freepik from www.flaticon.com
     const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
     const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
     const BOT_NAME = "BOT";
-    const PERSON_NAME = "Sajad";
+    const PERSON_NAME = $('#name_user').val();
 
     msgerForm.addEventListener("submit", event => {
         event.preventDefault();
-
-        const msgText = msgerInput.value;
+        let msgText = msgerInput.value;
         if (!msgText) return;
+
+        $.ajax({
+            method: 'post',
+            url: '/send-chatting',
+            data: {
+                _token: csrfToken,
+                chat: msgText,
+                id_user: id_user,
+                sub_materi_id: sub_materi_id,
+            },
+            success: function (res) {
+                console.log('respon', res);
+            }
+        });
 
         appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
         msgerInput.value = "";
 
-        botResponse();
     });
 
     function appendMessage(name, img, side, text) {
@@ -547,15 +550,7 @@
         msgerChat.scrollTop += 500;
     }
 
-    function botResponse() {
-        const r = random(0, BOT_MSGS.length - 1);
-        const msgText = BOT_MSGS[r];
-        const delay = msgText.split(" ").length * 100;
 
-        setTimeout(() => {
-            appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-        }, delay);
-    }
 
     // Utils
     function get(selector, root = document) {
@@ -661,7 +656,7 @@
 
         const renderPage = (pageNumber, canvas) => {
             pdfDoc.getPage(pageNumber).then((page) => {
-              const viewport = page.getViewport({
+                const viewport = page.getViewport({
                     scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
                 });
                 canvas.width = viewport.width;

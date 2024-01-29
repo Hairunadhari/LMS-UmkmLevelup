@@ -9,7 +9,7 @@
 }
 
 </style>
-<link rel="stylesheet" href=" {{ asset('css/lowongan.css')}}">
+<link rel="stylesheet" href="{{ asset('css/lowongan.css')}}">
 <!-- NAV REKAYASA -->
 <nav style="z-index: 2;" class="navbar navbar-expand-lg navbar-light bg-light position-relative w-100 py-3">
     <div class="container-fluid px-4 px-lg-5">

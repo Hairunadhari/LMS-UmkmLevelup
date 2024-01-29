@@ -1,9 +1,7 @@
 @extends('lms.main')
 
 @section('container')
-<link rel="stylesheet" href=" {{ asset('../css/lowongan_exam.css')}}">
-
-
+<link rel="stylesheet" href="{{ asset('css/lowongan_exam.css')}}">
 <center>
     <section class="homeExam text-start" style="transform: translateY(7rem)">
         <div class="px-4 px-lg-5">
@@ -25,11 +23,11 @@
                 <div class="col-md-2">
                     <center>
                         <div class="ls__left">
-                            <img src="{{asset ('../img/senbud-icon.png')}}  " alt="">
+                            <img src="{{asset ('../img/senbud-icon.png')}}" alt="">
                         </div>
                         <div class="tcc__bottom d-flex mt-2">
                             <div class="tccb__content gap-2 ">
-                                <div class="tccbl__left"><img src="{{asset ('../img/bg-left.png')}}  "
+                                <div class="tccbl__left"><img src="{{asset ('../img/bg-left.png')}}"
                                         alt="" style="width: 1.5rem;">
                                 </div>
                                 <div class="tccbl__right">
@@ -37,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="tccb__content gap-2" id="tccb__last">
-                                <div class="tccbl__left"><img src="{{asset ('../img/bg-right.png')}}  "
+                                <div class="tccbl__left"><img src="{{asset ('../img/bg-right.png')}}"
                                         alt="" style="width: 1.25rem;">
                                 </div>
                                 <div class="tccbl__right">
@@ -66,6 +64,12 @@
                 </div>
 
                 <div class="col-md-5 mt-3 mt-md-0">
+                    @if ($totalKeseluruhanProgresUser == 100)
+                    @php
+                        $hashid = Crypt::encrypt(Auth::user()->id)
+                    @endphp
+                    <a href="{{url('download-pdf', $hashid)}}" class="btn btn-danger mb-1"><i class="fas fa-file-pdf"></i> Download Sertifikat</a>
+                    @endif
                   <div class="right_content text-white p-4 p-xl-5 fw-bold" style="background-color: #6b859b; border-radius: 1rem;">
                     <h1>Materi yang Tersedia</h1>
                     <div class="place-materi" style="height:29rem; overflow: auto">

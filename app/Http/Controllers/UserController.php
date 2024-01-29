@@ -14,6 +14,7 @@ class UserController extends Controller
 {
     public function submitProfil(Request $request)
     {
+        // dd($request);
        try {
             DB::beginTransaction();
             
@@ -67,7 +68,10 @@ class UserController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
+            $request->session()->flash('alert', [
+                'type' => 'error',
+                'message' => 'Error saat mengisi kelengkapan data.',
+            ]);
        }
        $request->session()->flash('success', [
             'type' => 'info',
@@ -80,7 +84,7 @@ class UserController extends Controller
         //     return redirect('home');
         // }
 
-        return redirect('https://umkmlevelup.id/home');
+        return redirect('/home');
     }
 
     public function updateProfil(Request $request)
@@ -120,7 +124,7 @@ class UserController extends Controller
         //     return redirect($request->session()->get('url'));
         // }else{
             // return redirect('home');
-            return redirect('https://umkmlevelup.id/home');
+            return redirect('home');
         // }
     }
 
@@ -165,7 +169,7 @@ class UserController extends Controller
 
     public function resetting(Request $request) {
         if ($request->password == $request->konfirmasi_password) {
-            DB::table('users')->where('id', $request->id)->update([
+            DB::table('users')->where('aktif', 1)->where('id', $request->id)->update([
                 'password' => Hash::make($request->password),
             ]);
         }else{
