@@ -207,6 +207,32 @@
 														<tr>
 															<td class="pad" style="padding-left:10px;padding-right:10px;">
 																<div class="alignment" align="center">
+																	<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="90%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; text-align: center">
+																		<a href="https://instagram.com/umkm.levelup"><img src="https://umkmlevelup.id/asset/instagram-brands.png" alt="" style="height: 12px;"></a>
+																		<a href="https://www.tiktok.com/@umkmlevelup" style="margin-left: 20px; margin-right: 20px;"><img src="https://umkmlevelup.id/asset/tik-tok-brands.png" alt="" style="height: 12px;"></a>
+																		<a href="https://www.youtube.com/@umkmlevelup"><img src="https://umkmlevelup.id/asset/youtube-brands.png" alt="" style="height: 12px;"></a>
+																		
+																	</table>
+																</div>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #0C438D;  width: 70%; margin: 0 auto;" >
+										<tbody>
+											<tr>
+												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+													<table class="divider_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad" style="padding-left:10px;padding-right:10px;">
+																<div class="alignment" align="center">
 																	<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="90%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 																			<hr>
 																	</table>
