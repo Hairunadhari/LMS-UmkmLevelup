@@ -106,14 +106,14 @@
         </div>
     </div>
     <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-		<tbody>
+		<tbody >
 			<tr>
 				<td>
 					<table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 						<tbody>
 							<tr>
 								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background: #0C438D; color: #000000; width: 70%; margin: 0 auto;" width="680">
+									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; padding-top: 20px; mso-table-rspace: 0pt; background: #0C438D; color: #000000; width: 70%; margin: 0 auto;" width="680">
 										<tbody>
 											<tr>
 												<td class="column column-1" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
@@ -121,7 +121,7 @@
 													<table class="paragraph_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
 															<td class="pad">
-																<div style="color:#fafafa;font-family:Arial, Helvetica Neue, Helvetica, sans-serif; font-size:13px; line-height:150%;text-align:center;mso-line-height-alt:24px;">
+																<div style="color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif; font-size:13px; line-height:150%;text-align:center;mso-line-height-alt:24px;">
 																	<p style="margin: 0; word-break: break-word;"><span>Sebuah Program dari :</span></p>
 																</div>
 															</td>
@@ -132,7 +132,7 @@
 															<td class="pad" style="vertical-align: middle; color: #000000; font-family: inherit; font-size: 14px; text-align: center;">
 																<table class="alignment" cellpadding="0" cellspacing="0" role="presentation" align="center" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 																	<tr>
-																		<td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;"><img class="icon" src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/5961/icon-001.png" height="64" width="64" align="center" style="display: block; height: auto; margin: 0 auto; border: 0;"></td>
+																		<td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;"><img class="icon" src="http://umkmlevelup.id/asset/logo-kominfo.png" height="64" width="64" align="center" style="display: block; height: auto; margin: 0 auto; border: 0;"></td>
 																	</tr>
 																</table>
 															</td>
@@ -145,7 +145,7 @@
 															<td class="pad" style="vertical-align: middle; color: #000000; font-family: inherit; font-size: 14px; text-align: center;">
 																<table class="alignment" cellpadding="0" cellspacing="0" role="presentation" align="center" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 																	<tr>
-																		<td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;"><img class="icon" src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/5961/icon-002.png" height="64" width="64" align="center" style="display: block; height: auto; margin: 0 auto; border: 0;"></td>
+																		<td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;"><img class="icon" src="http://umkmlevelup.id/asset/logo-umkm-putih.png"  align="center" style="display: block;  width: 120px; margin: 0 auto; border: 0;"></td>
 																	</tr>
 																</table>
 															</td>
@@ -154,7 +154,7 @@
 													<table class="paragraph_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
 															<td class="pad">
-																<div style="color:#fafafa;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
+																<div style="color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
 																	<p style="margin: 0; word-break: break-word;"><span>UMKM Level Up adalah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendukung pelaku UMKM #SiapLevelUp melalui adopsi teknologi digital.</span></p>
 																</div>
 															</td>
@@ -166,7 +166,7 @@
 													<table class="paragraph_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
 															<td class="pad">
-																<div style="color:#fafafa;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:13px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
+																<div style="color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:13px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
 																	<p style="margin: 0; word-break: break-word;"><span>Contact Us</span></p>
 																</div>
 															</td>
@@ -175,12 +175,12 @@
 													<table class="paragraph_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
 															<td class="pad">
-																<div style="color:#fafafa;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
+																<div style="color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
 																	<div>
-																		<p style="margin: 0; word-break: break-word;"><span> 0821-1999-7-210</span></p>
+																		<p style="margin: 0; word-break: break-word;"> 0821-1999-7-210</p>
 																	</div>
 																	<div>
-																		<p style="margin: 0; word-break: break-word;"><span> tanya@umkmlevelup.id</span></p>
+																		<p style="margin: 0; word-break: break-word;"> tanya@umkmlevelup.id</p>
 																	</div>
 																</div>
 															</td>
