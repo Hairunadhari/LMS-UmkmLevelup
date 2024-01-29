@@ -2,12 +2,7 @@
     @media only screen and (max-width: 400px) {}
 
 </style>
-<<<<<<< HEAD
-
-<div class="footer" style="background-color: #0C438D;">
-=======
 {{-- <div class="footer" style="background-color: #0C438D;">
->>>>>>> 4a9af79aef3d0ca7559b7d6faf445d86997798e5
     <div class="container text-white py-5 pb-2">
         <div class="row foot_top d-flex">
             <div class="col-md-3">
@@ -60,7 +55,7 @@
       <div class="row" style="font-size: 14px;">
         <div class="col-md-3">
           <div class="text-center mb-4">
-            <h5 class="mb-4">Sebuah Program dari :</h5>
+            <h5 class="mb-4">Sebuah Program darasasi :</h5>
             <a href="#"><img src="{{url('/')}}/asset/logo-kominfo.png" alt="" class="img-fluid" width="80"></a>
           </div>
         </div>
