@@ -269,7 +269,7 @@
         </div>
         <div class="col-md-3">
           <div class="text-center mb-4">
-            <h5 class="mb-4">Contact Us</h5>
+            <h5 class="mb-4">Contact us</h5>
           </div>
           <div class="text-center text-md-start">
             <p class="m-0"><i class="fa-solid fa-phone"></i> 0821-1999-7-210</p>
