@@ -1,17 +1,17 @@
 @extends('layout.main')
 
 @section('container')
-
-  <div
-    class="pt-5"
-    style="
+<div
+class="pt-5"
+style="
       background-image: url('./assets/bg-home.png');
       background-repeat: no-repeat;
       background-size: cover;
       background-position-X: bottom;
       height: 40vh;
-    "
+      "
   >
+ 
   
     <div class="container">
       <nav aria-label="breadcrumb">
