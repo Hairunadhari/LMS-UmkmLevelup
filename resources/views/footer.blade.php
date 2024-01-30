@@ -55,7 +55,7 @@
       <div class="row" style="font-size: 14px;">
         <div class="col-md-3">
           <div class="text-center mb-4">
-            <h5 class="mb-4">Sebuah Program darasasi :</h5>
+            <h5 class="mb-4">Sebuah Program dari :</h5>
             <a href="#"><img src="{{url('/')}}/asset/logo-kominfo.png" alt="" class="img-fluid" width="80"></a>
           </div>
         </div>
