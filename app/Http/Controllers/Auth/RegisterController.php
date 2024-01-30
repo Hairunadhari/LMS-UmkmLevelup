@@ -193,7 +193,16 @@ public function register(Request $request)
                 'aktif' => 1,
                 'final_level' => 0,
             ]);
+        }else{
+            session()->flash('name', $request->name);
+            session()->flash('email', $request->email);
+            session()->flash('no_wa', $request->no_wa);
+            return redirect()->back()->with('success', [
+                'type' => 'error',
+                'message' => 'Email Sudah Dipakai',
+            ]);
         }
+
         $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
         $otp = mt_rand(100000, 999999);
         $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
