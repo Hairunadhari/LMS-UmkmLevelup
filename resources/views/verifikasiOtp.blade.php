@@ -56,7 +56,9 @@
                     <div class="row">
                         <div class="col-12 text-center">
                             <div class="otp-input-wrapper">
-                                <input type="text" maxlength="6" name="otp" pattern="[0-9]*" autocomplete="off">
+                                <input type="text" required oninvalid="this.setCustomValidity('Harap Lengkapi Kode Otp!')"
+                                onchange="this.setCustomValidity('')"
+                                 maxlength="6" name="otp" pattern="[0-9]*" autocomplete="off">
                                 <svg viewBox="0 0 380 1" xmlns="http://www.w3.org/2000/svg">
                                     <line x1="0" y1="0" x2="380" y2="0" stroke="#3e3e3e" stroke-width="2"
                                         stroke-dasharray="44,22" />
@@ -89,60 +91,55 @@
     </form>
 </div>
 <script>
-    function clickEvent(first, last) {
-        // ev = ev || window.event; // Event object 'ev'
-        // var key = ev.which || ev.keyCode; // Detecting keyCode
-        // if (key == 86 && ctrl) {
-        // // print in console.
-        // console.log("Ctrl+V is pressed.");
-        // }else{
-        if (first.value.length) {
-            document.getElementById(last).focus();
-        }
-        // }
+
+$(document).ready(function () {
+    let localStorageKey = 'countdownStartTime';
+    let id_user = $('#id_user').val();
+    let email_user = $('#email_user').val();
+    
+    // Function to start countdown
+    function startCountdown(targetTime) {
+        // Memperbarui timer setiap 1 detik
+        let countdownInterval = setInterval(function () {
+            let now = new Date().getTime();
+            let timeDifference = targetTime - now;
+
+            // Menghitung menit dan detik
+            let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Menampilkan timer di elemen dengan id "timer"
+            if (seconds >= 0) {
+                $('#timer').html(
+                    `<button class="btn btn-light rounded-pill p-3" disabled>Mengirim Ulang Kode OTP dalam ${seconds} detik</button>`
+                );
+            } else {
+                $('#timer').html(
+                    `<button class="btn btn-light rounded-pill p-3" disabled>Mengirim Ulang Kode OTP</button>`
+                );
+            }
+
+            // Jika waktu sudah habis, hentikan countdown dan hapus waktu awal dari localStorage
+            if (timeDifference <= 0) {
+                clearInterval(countdownInterval);
+                $('#timer').hide();
+                $('#kirimulangotp').show();
+                localStorage.removeItem(localStorageKey);
+            }
+        }, 1000);
     }
-    $(document).ready(function () {
-        let localStorageKey = 'countdownStartTime';
-        let id_user = $('#id_user').val();
-        let email_user = $('#email_user').val();
 
-        // Function to start countdown
-        function startCountdown(targetTime) {
-            // Memperbarui timer setiap 1 detik
-            let countdownInterval = setInterval(function () {
-                let now = new Date().getTime();
-                let timeDifference = targetTime - now;
+    let statusOtp = localStorage.getItem("statusOtp");
+    // Mengambil waktu awal dari localStorage
+    let startTime = localStorage.getItem(localStorageKey);
 
-                // Menghitung menit dan detik
-                let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-                // Menampilkan timer di elemen dengan id "timer"
-                if (seconds >= 0) {
-                    $('#timer').html(
-                        `<button class="btn btn-light rounded-pill p-3" disabled>Mengirim Ulang Kode OTP dalam ${seconds}s</button>`
-                    );
-                } else {
-                    $('#timer').html(
-                        `<button class="btn btn-light rounded-pill p-3" disabled>Mengirim Ulang Kode OTP</button>`
-                    );
-                }
-
-                // Jika waktu sudah habis, hentikan countdown dan hapus waktu awal dari localStorage
-                if (timeDifference <= 0) {
-                    clearInterval(countdownInterval);
-                    $('#timer').hide();
-                    $('#kirimulangotp').show();
-                    localStorage.removeItem(localStorageKey);
-                }
-            }, 1000);
-        }
-
-
-        // Mengambil waktu awal dari localStorage
-        let startTime = localStorage.getItem(localStorageKey);
-
-        // Jika tidak tersimpan, atur waktu awal dan simpan di localStorage
+    if (!statusOtp) {
+        localStorage.setItem("statusOtp", true);
+        
+    
+        // Jika tidak tersimpan, atur waktu awal saat ini dan simpan di localStorage
         if (!startTime) {
+            startTime = new Date().getTime();
+            localStorage.setItem(localStorageKey, startTime);
             $('#timer').hide();
         } else {
             // Menghitung waktu akhir (60 detik dari waktu awal)
@@ -153,40 +150,50 @@
             $('#kirimulangotp').hide();
             $('#timer').show();
         }
+    }
+    if (startTime) {
+         // Menghitung waktu akhir (60 detik dari waktu awal)
+         let endTime = parseInt(startTime) + (60 * 1000);
 
-        $(document).on('click', '#kirimulangotp', function (e) {
-            // Sembunyikan tombol "Kirim Ulang Kode OTP"
-            $('#kirimulangotp').hide();
+        // Memulai countdown timer
+        startCountdown(endTime);
+        $('#kirimulangotp').hide();
+        $('#timer').show();
+    } 
+    
 
-            // Tampilkan timer
-            $('#timer').show();
-            startTime = new Date().getTime();
-            localStorage.setItem(localStorageKey, startTime);
+    $(document).on('click', '#kirimulangotp', function (e) {
+        // Sembunyikan tombol "Kirim Ulang Kode OTP"
+        $('#kirimulangotp').hide();
 
-            // Hitung waktu akhir (60 detik dari waktu awal)
-            let endTime = parseInt(startTime) + (60 * 1000);
-            $.ajax({
-                method: 'get',
-                url: '/resend-otp/'+email_user,
-                success: function (res) {
-                    console.log('testing', res);
-                    startCountdown(endTime);
+        // Tampilkan timer
+        $('#timer').show();
+        startTime = new Date().getTime();
+        localStorage.setItem(localStorageKey, startTime);
 
-                },
-                error: function (res) {
-                  $.toast({
-                      heading: 'Terjadi kesalahan :',
-                      text: "Gagal mengirim kode Otp",
-                      icon: "error",
-                      hideAfter: false,
-                      position: 'top-right',
-                      loaderBg: '#9EC600' // To change the background
-                  })
-                }
-            });
-
+        // Hitung waktu akhir (60 detik dari waktu awal)
+        let endTime = parseInt(startTime) + (60 * 1000);
+        $.ajax({
+            method: 'get',
+            url: '/resend-otp/'+email_user,
+            success: function (res) {
+                console.log('testing', res);
+                startCountdown(endTime);
+            },
+            error: function (res) {
+                $.toast({
+                    heading: 'Terjadi kesalahan :',
+                    text: "Gagal mengirim kode Otp",
+                    icon: "error",
+                    hideAfter: false,
+                    position: 'top-right',
+                    loaderBg: '#9EC600' // To change the background
+                })
+            }
         });
     });
+});
+
 
 </script>
 @endsection

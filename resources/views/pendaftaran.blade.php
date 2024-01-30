@@ -320,5 +320,9 @@
         }
     }
 
+    $(document).ready(function () {
+        let statusOtp = 'statusOtp';
+        localStorage.removeItem(statusOtp);
+    });
 </script>
 @endsection

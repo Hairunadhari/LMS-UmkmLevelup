@@ -262,7 +262,7 @@ public function submitOtp(Request $request){
         $d['email'] = $request->email;
         $d['id_user'] = $request->id_user;
         
-        return view('verifikasiOtp', $d);
+        return back()->with($d);
     }
     $request->session()->forget('alert');
     $request->session()->flash('success', [
