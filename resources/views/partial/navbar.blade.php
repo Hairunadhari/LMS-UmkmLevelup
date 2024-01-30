@@ -36,7 +36,9 @@
                 <ul>
                     <li><span class="badge badge-primary bg-success"><i class="fa fa-user"></i> Hi, {{ auth()->user()->name }}</span></li>
                     <li><a href="home"><i class="fa fa-home"></i> Home</a></li>
+                    @if (auth()->user()->profil == 1)
                     <li><a href="profil"><i class="fa fa-address-book"></i> Profil</a></li>
+                    @endif
                     <li><a href="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                 </ul>
             </nav>

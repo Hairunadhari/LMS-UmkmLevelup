@@ -66,6 +66,7 @@
               oninput="validatenamapemilik()"
               oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
                                 onchange="this.setCustomValidity('')"
+                                readonly
             />
             <label for="namaPemilik" class="ms-4">
               <i class="fa-solid fa-user me-2"></i> Nama Lengkap Pemilik 
@@ -134,6 +135,7 @@
               id="email"
               name="email"
               required
+              readonly
               placeholder="toko@***.com"
               value="{{$user->email_usaha}}"
               oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
@@ -273,19 +275,19 @@
                 </div>
                 </div>
                 </div>
-            </div>
-            <div class="col-lg-5">
-                <div class="form-floating mb-1 shadow ">
-                    <textarea oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')" oninput="validatealamat()"
-                    onchange="this.setCustomValidity('')" class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px">{{$user->alamat_lengkap}}</textarea>
-                    <label for="alamat" class="ms-2"
-                    ><i
-                    class="fa fa-edit me-2"
-                    ></i
-                    >Alamat Lengkap <span style="color: red; font-weight:bold">*</span></label>
+                <div class="col-lg-5">
+                    <div class="form-floating mb-1 shadow ">
+                        <textarea oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')" oninput="validatealamat()"
+                        onchange="this.setCustomValidity('')" class="form-control  shadow px-4" placeholder="Alamat Lengkap" id="alamat" name="alamat" required style="height: 130px">{{$user->alamat_lengkap}}</textarea>
+                        <label for="alamat" class="ms-2"
+                        ><i
+                        class="fa fa-edit me-2"
+                        ></i
+                        >Alamat Lengkap <span style="color: red; font-weight:bold">*</span></label>
+                    </div>
+                    <div class="" style="color: red; font-weight: bold;"><p class="" style="
+                      opacity: .5" id="error-alamat"></p></div>
                 </div>
-                <div class="" style="color: red; font-weight: bold;"><p class="" style="
-                  opacity: .5" id="error-alamat"></p></div>
             </div>
         </div>
         <div class="col-md-12 mb-4 mt-4">
@@ -302,7 +304,8 @@
           </div>
         </div>
 
-        <div class="col-lg-3">
+      <div class="row">
+        <div class="col-lg-4">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
@@ -318,7 +321,7 @@
           </div>
         </div>
 
-        <div class="col-lg-3" style="display: none">
+        <div class="col-lg-4" style="display: none">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
@@ -335,7 +338,7 @@
           </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
@@ -351,7 +354,7 @@
           </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
           <div class="form-floating shadow  mb-3 rounded-pill">
             <input
               type="text"
@@ -372,7 +375,6 @@
           <div class="" style="color: red; font-weight: bold;"><p class="" style="
             opacity: .5" id="error-nib"></p></div>
         </div>
-        
       </div>
       <div class="col-md-12 text-center mb-5 mt-5">
         <button type="submit" class="btn btn-primary rounded-pill p-3 "
