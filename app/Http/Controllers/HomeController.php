@@ -48,6 +48,12 @@ class HomeController extends Controller
     public function profil(){
         $d = [];
         $d['user'] = DB::table('profil_user')->where('id_user', Auth::user()->id)->first();
+        if ($d['user'] == null) {
+            return redirect()->back()->with('success', [
+                'type' => 'error',
+                'message' => 'Harap lengkapi profil usaha anda terlebih dahulu!',
+              ]);
+        }
         if ($d['user'] == '') {
             $d['nama_kabupaten'] = '';    
             $d['nama_kecamatan'] = '';
