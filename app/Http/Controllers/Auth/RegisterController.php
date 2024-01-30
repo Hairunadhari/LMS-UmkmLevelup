@@ -253,7 +253,7 @@ public function submitOtp(Request $request){
         $d['email'] = $request->email;
         $d['id_user'] = $request->id_user;
         
-        return view('verifikasiOtp', $d);
+        return back()->with($d);
     }
     $request->session()->forget('alert');
     $request->session()->flash('success', [
@@ -289,7 +289,7 @@ public function submitOtp(Request $request){
         ];
         
         Mail::to($email_user)->send(new DemoMail($mailData));
-        return response()->json('success');
+        return response()->json($getuser);
     }
 
     public function tes(){
