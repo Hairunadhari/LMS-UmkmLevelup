@@ -289,7 +289,7 @@ public function submitOtp(Request $request){
         ];
         
         Mail::to($email_user)->send(new DemoMail($mailData));
-        return response()->json($getuser);
+        return response()->json('success');
     }
 
     public function tes(){
