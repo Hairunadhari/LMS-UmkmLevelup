@@ -366,7 +366,7 @@
               value="{{$user->nib}}"
               oninvalid="this.setCustomValidity('Silahkan isi kolom ini!')"
                                 onchange="this.setCustomValidity('')"
-                                oninput="validatenib()"
+                                oninput="validatenib(this)"
             />
             <label for="nib" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> NIB <span style="color: red; font-weight:bold">*</span></label
@@ -374,6 +374,10 @@
           </div>
           <div class="" style="color: red; font-weight: bold;"><p class="" style="
             opacity: .5" id="error-nib"></p></div>
+            <div style="margin-left: 10px;">
+
+              <small>(Bagi yang belum memiliki NIB isi kolom dengan 0000000000000000 'angka 0 sebanyak 16 digit')</small>
+            </div>
         </div>
       </div>
       <div class="col-md-12 text-center mb-5 mt-5">
@@ -480,11 +484,7 @@
             $("#kelurahan").val('').change();
         }
     });
-    function validateNib(input) {
-        const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
-        input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka
-
-    }
+  
     function validatenamapemilik() {
         var inputNamaPemilik = $("#namaPemilik").val();
         var errorMessage = $("#error-namalengkap");
@@ -607,9 +607,11 @@
             errorMessage.text("Silahkan isi kolom ini!");
         }
     }
-    function validatenib() {
+    function validatenib(input) {
         var inputNamaPemilik = $("#nib").val();
         var errorMessage = $("#error-nib");
+        const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
+        input.value = value.substring(0, 16); 
         // Clear previous error message
         errorMessage.text("");
         
