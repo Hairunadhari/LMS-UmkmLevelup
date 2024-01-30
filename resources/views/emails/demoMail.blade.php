@@ -155,7 +155,7 @@
 														<tr>
 															<td class="pad">
 																<div style="color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
-																	<p style="margin: 0; word-break: break-word;"><span>UMKM Level Up adalah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendukung pelaku UMKM #SiapLevelUp melalui adopsi teknologi digital.</span></p>
+																	<p style="margin: 0; word-break: break-word;padding:0 1%; text-align:justify"><span>UMKM Level Up adalah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendukung pelaku UMKM #SiapLevelUp melalui adopsi teknologi digital.</span></p>
 																</div>
 															</td>
 														</tr>
@@ -260,7 +260,7 @@
 														<tr>
 															<td class="pad">
 																<div style="font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;line-height:120%;text-align:center;mso-line-height-alt:14.399999999999999px;">
-																	<p style="margin: 0; word-break: break-word;"><span>Copyright © 2024 UMKM Level Up | Direktorat Pemberdayaan Informatika | Kementerian Komunikasi dan Informatika</span></p>
+																	<p style="margin: 0; word-break: break-word;padding: 0 1%"><span>Copyright © 2024 UMKM Level Up | Direktorat Pemberdayaan Informatika | Kementerian Komunikasi dan Informatika</span></p>
 																</div>
 															</td>
 														</tr>
