@@ -170,7 +170,7 @@ public function register(Request $request)
 
       try {
           DB::beginTransaction();
-          $cekWa = DB::table('users')->where('aktif', 1)->where('no_wa',$request->no_wa)->first();
+          $cekWa = DB::table('users')->where('aktif', 1)->where('no_wa',$request->no_wa)->whereNotNull('email_verified_at')->first();
           if ($cekWa !== null) {
               if ($request->no_wa == $cekWa->no_wa) {
                   session()->flash('name', $request->name);
@@ -183,7 +183,7 @@ public function register(Request $request)
               }           
           }
         
-        $cekuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
+        $cekuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNotNull('email_verified_at')->first();           
         if ($cekuser == null) {
             DB::table('users')->insert([
                 'name' => $request->name,
