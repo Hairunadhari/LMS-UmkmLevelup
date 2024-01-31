@@ -172,7 +172,6 @@ public function register(Request $request)
           DB::beginTransaction();
           $cekWa = DB::table('users')->where('aktif', 1)->where('no_wa',$request->no_wa)->whereNotNull('email_verified_at')->first();
           if ($cekWa !== null) {
-              if ($request->no_wa == $cekWa->no_wa) {
                   session()->flash('name', $request->name);
                   session()->flash('email', $request->email);
                   session()->flash('no_wa', $request->no_wa);
@@ -180,7 +179,6 @@ public function register(Request $request)
                       'type' => 'error',
                       'message' => 'No HP Sudah Dipakai',
                   ]);
-              }           
           }
         
         $cekuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNotNull('email_verified_at')->first();           
