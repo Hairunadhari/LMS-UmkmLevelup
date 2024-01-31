@@ -155,7 +155,7 @@
 														<tr>
 															<td class="pad">
 																<div style="color:#ffffff;font-family:Arial, Helvetica Neue, Helvetica, sans-serif;font-size:12px;line-height:150%;text-align:center;mso-line-height-alt:24px;">
-																	<p style="margin: 0; word-break: break-word;padding:0 1%; text-align:justify"><span>UMKM Level Up adalah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendukung pelaku UMKM #SiapLevelUp melalui adopsi teknologi digital.</span></p>
+																	<p style="margin: 0; word-break: break-word;padding:0 1%;"><span>UMKM Level Up adalah Program yang diselenggarakan oleh Kementerian Komunikasi dan Informatika dalam rangka mendukung pelaku UMKM #SiapLevelUp melalui adopsi teknologi digital.</span></p>
 																</div>
 															</td>
 														</tr>
