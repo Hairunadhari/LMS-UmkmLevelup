@@ -5,8 +5,8 @@
     <form method="POST" action="{{ route('submit-otp') }}">
         @csrf
         <input type="hidden" class="hidden" name="id_user" id="id_user" value="{{$id_user}}">
-        <input type="hidden" class="hidden" name="email" id="email_user" value="hairunadhari@gmail.com">
-        {{-- <input type="hidden" class="hidden" name="email" id="email_user" value="{{$email}}"> --}}
+        {{-- <input type="hidden" class="hidden" name="email" id="email_user" value="hairunadhari@gmail.com"> --}}
+        <input type="hidden" class="hidden" name="email" id="email_user" value="{{$email}}">
         <div class="container" style="margin-top: 10vh;">
             <div>
                 <span class="step-heading">
@@ -181,7 +181,7 @@ $(document).ready(function () {
                 $.toast({
                     heading: 'Notifikasi :',
                     text: "Kode Otp Berhasil Terkirim, Silahkan Cek Ulang Email "+ email_user,
-                    icon: "error",
+                    icon: "success",
                     hideAfter: false,
                     position: 'top-right',
                     loaderBg: '#9EC600' // To change the background
