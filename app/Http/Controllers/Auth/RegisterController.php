@@ -185,14 +185,24 @@ public function register(Request $request)
         
         $cekuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNotNull('email_verified_at')->first();           
         if ($cekuser == null) {
-            DB::table('users')->insert([
-                'name' => $request->name,
-                'no_wa' => $request->no_wa,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'aktif' => 1,
-                'final_level' => 0,
-            ]);
+            $cekuserVerifiedNull = DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNull('email_verified_at')->orderBy('id','desc')->first();           
+            if ($cekuserVerifiedNull != null) {
+                DB::table('users')->update([
+                    'name' => $request->name,
+                    'no_wa' => $request->no_wa,
+                    'password' => Hash::make($request->password),
+                ]);
+            } else{
+                DB::table('users')->insert([
+                    'name' => $request->name,
+                    'no_wa' => $request->no_wa,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'aktif' => 1,
+                    'final_level' => 0,
+                ]);
+            }
+            
         }else{
             session()->flash('name', $request->name);
             session()->flash('email', $request->email);
@@ -280,7 +290,7 @@ public function submitOtp(Request $request){
     }
 
     public function resend_otp($email_user){
-        $getuser = DB::table('users')->where('aktif', 1)->where('email',$email_user)->first();           
+        $getuser = DB::table('users')->where('aktif', 1)->where('email',$email_user)->orderBy('id','desc')->first();           
         $otp = mt_rand(100000, 999999);
         $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
         $now = $konvers_tanggal->format('Y-m-d H:i:s');

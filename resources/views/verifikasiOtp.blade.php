@@ -183,7 +183,7 @@ $(document).ready(function () {
             error: function (res) {
                 $.toast({
                     heading: 'Terjadi kesalahan :',
-                    text: "Gagal mengirim kode Otp",
+                    text: "Gagal mengirim kode Otp, "+res,
                     icon: "error",
                     hideAfter: false,
                     position: 'top-right',
