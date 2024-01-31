@@ -177,7 +177,15 @@ $(document).ready(function () {
             method: 'get',
             url: '/resend-otp/'+email_user,
             success: function (res) {
-                console.log('testing', res);
+                console.log('status =', res);
+                $.toast({
+                    heading: 'Notifikasi :',
+                    text: "Kode Otp Berhasil Terkirim, Silahkan Cek Ulang Email "+ email_user,
+                    icon: "error",
+                    hideAfter: false,
+                    position: 'top-right',
+                    loaderBg: '#9EC600' // To change the background
+                })
                 startCountdown(endTime);
             },
             error: function (res) {
