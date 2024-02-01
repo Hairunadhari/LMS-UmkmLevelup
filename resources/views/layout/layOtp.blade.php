@@ -33,7 +33,7 @@
   </head>
   <body
     style="
-      background-image: url('./assets/new_background_login.png');
+      background-image: url('https://umkmlevelup.id/assets/new_background_login.png');
       background-repeat: no-repeat;
       background-size: contain;
       background-position-y: bottom;
