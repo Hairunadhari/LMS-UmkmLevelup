@@ -185,7 +185,7 @@ public function register(Request $request)
         if ($cekuser == null) {
             $cekuserVerifiedNull = DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNull('email_verified_at')->orderBy('id','desc')->first();           
             if ($cekuserVerifiedNull != null) {
-                DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNotNull('email_verified_at')->orderBy('id','desc')->update([
+                DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNull('email_verified_at')->orderBy('id','desc')->update([
                     'name' => $request->name,
                     'no_wa' => $request->no_wa,
                     'password' => Hash::make($request->password),
