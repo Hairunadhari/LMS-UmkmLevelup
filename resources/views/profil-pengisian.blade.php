@@ -346,7 +346,7 @@
         </div>
         <div style="margin-left: 10px;">
 
-          <small>(Bagi yang belum memiliki NIB isi kolom dengan 0000000000000000 'angka 0 sebanyak 16 digit')</small>
+          <small>(Bagi yang belum memiliki NIB isi kolom dengan 0 (angka 0))</small>
         </div>
 
       </div>
@@ -460,8 +460,10 @@
         input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka
     }
     function validateNib(input) {
+      if (input.val() != 0 || input.val() != "0") {
         const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
-        input.value = value.substring(0, 16); // Hapus angka jika lebih dari 13 angka
+        input.value = value.substring(0, 16); // Hapus angka jika lebih dari 13 angka 
+      }
 
     }
  

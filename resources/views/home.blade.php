@@ -50,9 +50,11 @@ style="
             <div class="card-body">
               <h4>Kuesioner : <strong>{{$item['title']}}</strong></h4>
               <div class="card-text">{!! $item['desc'] !!}</div>
-              {{-- <a class="btn btn-info">Ikuti Kuesioner</a> --}}
               <hr />
-              <div><small class="text-danger">Anda sudah mengikuti ini</small></div>
+              <div>
+                <small class="text-danger">Anda sudah mengikuti ini</small><hr>
+                <a href="{{$item['link']}}" class="btn btn-dark btn-sm">Lihat Kuesioner <i class="fa fa-arrow-right"></i></a>
+              </div>
             </div>
           </div>
           @endforeach
