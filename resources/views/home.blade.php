@@ -53,7 +53,7 @@ style="
               <hr />
               <div>
                 <small class="text-danger">Anda sudah mengikuti ini</small><hr>
-                <a href="{{$item['link']}}&read=true" class="btn btn-dark btn-sm">Lihat Kuesioner <i class="fa fa-arrow-right"></i></a>
+                <a href="{{$item['link']}}" class="btn btn-dark btn-sm">Lihat Kuesioner <i class="fa fa-arrow-right"></i></a>
               </div>
             </div>
           </div>
