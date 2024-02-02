@@ -144,7 +144,7 @@ public function register(Request $request)
     ],
         [
             'name'=>'Nama Harus Diisi',
-            'email'=>'Email Sudah Dipakai',
+            'email'=>'Email Harus Diisi',
             'no_wa'=>'No HP Sudah Dipakai',
             'password'=>'Password min 8 character',
             'konfirmasi_password'=>'Konfirmasi Password Tidak Cocok',
@@ -247,12 +247,12 @@ public function register(Request $request)
 
 public function submitOtp(Request $request){
     $otp = $request->otp;
+    // dd($request->id_user);
+    // dd($checkOtp);
     try {
-        $checkOtp = DB::table('t_otp')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->count();
-        // dd($request->id_user);
-        // dd($checkOtp);
-        if($checkOtp > 0){
-            DB::table('t_otp')->where('kode_otp', $otp)->where('id_user', $request->id_user)->where('status', 0)->update([
+        $checkOtp = DB::table('t_otp')->where('id_user', $request->id_user)->where('status', 0)->latest()->first();
+        if($checkOtp->kode_otp == $otp){
+            DB::table('t_otp')->where('id_user', $request->id_user)->where('kode_otp',$otp)->where('status', 0)->latest()->update([
                 'status' => 1,
             ]);
             DB::table('users')->where('aktif', 1)->where('id', $request->id_user)->update([
