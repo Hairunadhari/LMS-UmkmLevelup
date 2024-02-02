@@ -376,7 +376,7 @@
             opacity: .5" id="error-nib"></p></div>
             <div style="margin-left: 10px;">
 
-              <small>(Bagi yang belum memiliki NIB isi kolom dengan 0000000000000000 'angka 0 sebanyak 16 digit')</small>
+              <small>(Bagi yang belum memiliki NIB isi kolom dengan 0 (angka 0))</small>
             </div>
         </div>
       </div>

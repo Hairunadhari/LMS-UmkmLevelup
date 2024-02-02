@@ -24,7 +24,7 @@ class HomeController extends Controller
         $d['dataProv'] = DB::table('m_provinsi')->where('aktif', 1)->get();
         if($check == 0){
             $d['done'] = false;
-            $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id.'&read=true';
+            $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.urlencode(env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id);
             $d['data'][0]['title'] = $forms->title;
             $d['data'][0]['desc'] = $forms->description;
         }else{
@@ -33,12 +33,12 @@ class HomeController extends Controller
             $submission = DB::table('form_submissions')->where('id_user', Auth::user()->id)->orderBy('form_id', 'desc')->first();
             if($checkSubmission == 0){
                 // $d['data'][0]['link'] = '';
-                $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'?submission_id='.$hashids->encode($submission->id);
+                $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.urlencode(env('KUISIONER_URL').'/forms/'.$forms->slug.'?submission_id='.$hashids->encode($submission->id).'&read=true');
                 $d['data'][0]['title'] = $forms->title;
                 $d['data'][0]['desc'] = $forms->description;
             }else{
                 $d['done'] = false;
-                $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'?submission_id='.$hashids->encode($submission->id);
+                $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.urlencode(env('KUISIONER_URL').'/forms/'.$forms->slug.'?submission_id='.$hashids->encode($submission->id));
                 $d['data'][0]['title'] = $forms->title;
                 $d['data'][0]['desc'] = $forms->description;
             }
