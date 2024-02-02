@@ -24,7 +24,7 @@ class HomeController extends Controller
         $d['dataProv'] = DB::table('m_provinsi')->where('aktif', 1)->get();
         if($check == 0){
             $d['done'] = false;
-            $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id;
+            $d['data'][0]['link'] = config('app.url').'/kuesioner?href='.env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id.'&read=true';
             $d['data'][0]['title'] = $forms->title;
             $d['data'][0]['desc'] = $forms->description;
         }else{
