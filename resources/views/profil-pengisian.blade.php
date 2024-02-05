@@ -457,12 +457,12 @@
   });
   function validateNik(input) {
         const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
-        input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka
+        input.value = value.substring(0, 16); // Hapus angka jika lebih dari 13 angka
     }
     function validateNib(input) {
       if (input.val() != 0 || input.val() != "0") {
         const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
-        input.value = value.substring(0, 16); // Hapus angka jika lebih dari 13 angka 
+        input.value = value.substring(0, 13); // Hapus angka jika lebih dari 13 angka 
       }
 
     }

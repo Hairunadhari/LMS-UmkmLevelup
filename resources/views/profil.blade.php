@@ -611,7 +611,7 @@
         var inputNamaPemilik = $("#nib").val();
         var errorMessage = $("#error-nib");
         const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
-        input.value = value.substring(0, 16); 
+        input.value = value.substring(0, 13); 
         // Clear previous error message
         errorMessage.text("");
         
