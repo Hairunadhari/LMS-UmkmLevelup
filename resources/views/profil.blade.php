@@ -347,6 +347,7 @@
               name="nik"
               placeholder="3175******"
               value="{{$user->nik}}"
+              oninput="validateNik(this)"
             />
             <label for="nik" class="ms-4"
               ><i class="fa-solid fa-user me-2"></i> NIK</label
@@ -611,7 +612,7 @@
         var inputNamaPemilik = $("#nib").val();
         var errorMessage = $("#error-nib");
         const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
-        input.value = value.substring(0, 16); 
+        input.value = value.substring(0, 13); 
         // Clear previous error message
         errorMessage.text("");
         
@@ -620,7 +621,10 @@
             errorMessage.text("Silahkan isi kolom ini!");
         }
     }
-
+    function validateNik(input) {
+        const value = input.value.replace(/\D/g, ''); // Hapus karakter non-angka
+        input.value = value.substring(0, 16); // Hapus angka jika lebih dari 13 angka
+    }
     function onSubmit(token) {
         console.log(token);
         let name = $("input[name='name']").val();
