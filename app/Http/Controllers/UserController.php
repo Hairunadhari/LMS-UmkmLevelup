@@ -66,9 +66,6 @@ class UserController extends Controller
             ]);
 
             DB::commit();
-            if($checkUser == 0){
-                return redirect(config('app.url').'/kuesioner?href='.urlencode(env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id));
-            }
         } catch (\Throwable $th) {
             DB::rollBack();
             $request->session()->flash('alert', [
@@ -86,6 +83,11 @@ class UserController extends Controller
         // }else{
         //     return redirect('home');
         // }
+
+        if($checkUser == 0){
+            $forms = DB::table('forms')->whereNull('deleted_at')->orderBy('id', 'DESC')->first();
+            return redirect(config('app.url').'/kuesioner?href='.urlencode(env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id));
+        }
 
         return redirect('/home');
     }
