@@ -9,6 +9,7 @@ use App\Mail\ForgotMail;
 use Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -94,6 +95,27 @@ class UserController extends Controller
 
     public function updateProfil(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nik'                  => 'size:16',
+            'nib'                  => 'size:13',
+           
+        ],
+            [
+                'nik'=>'NIK harus terdiri dari 16 karakter.',
+                'nib'=>'NIB harus terdiri dari 13 karakter.',
+               
+            ]
+        );
+        
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+            $alertMessage = $messages->first();
+            // Tampilkan pesan error
+            return redirect()->back()->with('error', [
+              'type' => 'error',
+              'message' => $alertMessage,
+            ]);
+          }
        try {
             DB::beginTransaction();
                 DB::table('profil_user')->where('id_user', Auth::user()->id)->update([
