@@ -67,9 +67,6 @@ class UserController extends Controller
             ]);
 
             DB::commit();
-            if($checkUser == 0){
-                return redirect(config('app.url').'/kuesioner?href='.urlencode(env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id));
-            }
         } catch (\Throwable $th) {
             DB::rollBack();
             $request->session()->flash('alert', [
@@ -88,13 +85,18 @@ class UserController extends Controller
         //     return redirect('home');
         // }
 
+        if($checkUser == 0){
+            $forms = DB::table('forms')->whereNull('deleted_at')->orderBy('id', 'DESC')->first();
+            return redirect(config('app.url').'/kuesioner?href='.urlencode(env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id));
+        }
+
         return redirect('/home');
     }
 
     public function updateProfil(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nik'                  => 'size:16',
+            'nik'                  => 'nullable|size:16',
             'nib'                  => 'size:13',
            
         ],
@@ -141,7 +143,7 @@ class UserController extends Controller
             dd($th);
        }
        $request->session()->flash('success', [
-            'type' => 'info',
+            'type' => 'success',
             'message' => 'Profil sudah diupdate.',
         ]);
         // if($request->session()->has('url'))
