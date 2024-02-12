@@ -66,6 +66,9 @@ class UserController extends Controller
             ]);
 
             DB::commit();
+            if($checkUser == 0){
+                return redirect(config('app.url').'/kuesioner?href='.urlencode(env('KUISIONER_URL').'/forms/'.$forms->slug.'/'.Auth::user()->id));
+            }
         } catch (\Throwable $th) {
             DB::rollBack();
             $request->session()->flash('alert', [
