@@ -46,6 +46,10 @@ class LoginController extends Controller
                 throw new \Exception('Tidak menemukan akun dengan email '.$request['email'].'.');
             }
 
+            if (!$user->email_verified_at) {
+                throw new \Exception('Email belum diverifikasi.');
+            }
+
             if (Auth::attempt($credentials, $request->remember)) {
                 $request->session()->regenerate();
     
