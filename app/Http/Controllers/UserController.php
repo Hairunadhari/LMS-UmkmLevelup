@@ -96,7 +96,7 @@ class UserController extends Controller
     public function updateProfil(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nik'                  => 'size:16',
+            'nik'                  => 'nullable|size:16',
             'nib'                  => 'size:13',
            
         ],
@@ -143,7 +143,7 @@ class UserController extends Controller
             dd($th);
        }
        $request->session()->flash('success', [
-            'type' => 'info',
+            'type' => 'success',
             'message' => 'Profil sudah diupdate.',
         ]);
         // if($request->session()->has('url'))

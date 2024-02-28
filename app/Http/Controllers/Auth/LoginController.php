@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 // use Session;
 
@@ -40,9 +41,10 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
         $credentials['aktif'] = 1;
+        $user = User::where('email', $credentials['email'])->first();
 
         try {
-            if (!Auth::validate($credentials)) {
+            if (!$user) {
                 throw new \Exception('Tidak menemukan akun dengan email '.$request['email'].'.');
             }
 
