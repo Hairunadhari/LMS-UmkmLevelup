@@ -87,7 +87,7 @@
                         </div>
                     </header>
 
-                    <main class="msger-chat">
+                    <main class="msger-chat" id="chats">
                         @foreach ($chats as $chat)
                     @if ($chat->user_id == Auth::user()->id)
                         
@@ -131,6 +131,9 @@
 
 <script>
     $(document).ready(function () {
+        setInterval(function() {
+    $('#chats').load(location.href + ' #chats');
+}, 5000);
         // const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
