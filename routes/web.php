@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\MailController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\IntegrasiController;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\IntegrasiController;
+use App\Http\Controllers\ArtikelController;
 
 
 /*
@@ -93,6 +94,8 @@ Route::get('/resend-otp/{email_user}', [App\Http\Controllers\Auth\RegisterContro
 Route::get('/tes', [App\Http\Controllers\Auth\RegisterController::class, 'tes']);
 Route::get('/tesipin', [App\Http\Controllers\Auth\RegisterController::class, 'tesipin']);
 
+Route::get('/artikel', [ArtikelController::class, 'index']);
+Route::get('/artikel/detail/{id}', [ArtikelController::class, 'detail']);
 
 // Route::post('/add-sub-materi/{id}/{name}',function(){
 //     echo 1;
