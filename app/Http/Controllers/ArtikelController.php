@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Crypt;
 class ArtikelController extends Controller
 {
     public function index(){
-        $data = MateriArtikel::where('status',1)->get();
+        $data = MateriArtikel::where('status',1)->where('end','>=',date('Y-m-d'))->get();
         foreach ($data as $key ) {
             $key->encryptId = Crypt::encrypt($key->id);
         }
