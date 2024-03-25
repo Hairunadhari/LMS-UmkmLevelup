@@ -1,5 +1,19 @@
 @extends('lms.main')
 @section('container')
+<style>
+    #pdf-container{
+        margin-top: 2%; 
+        padding: 10px 70px; 
+        height:100vh; 
+        background-color:#3b3b3b; 
+        border-radius:5px;
+    }
+     @media only screen and (max-width: 600px) {
+        #pdf-container{
+            padding: 0;
+        }
+    }
+</style>
 <link rel="stylesheet" href=" {{ asset('css/pageChat.css')}}">
 
 <div class="Content ">
@@ -34,7 +48,7 @@
                             </div>
                             <span>Page : <span id="pageKe"></span> / <span id="totalHalaman"></span></span>
                         </div>
-                        <div style="margin-top: 2%; padding: 10px 70px; height:100vh; background-color:#3b3b3b; border-radius:5px"
+                        <div style=""
                             id="pdf-container">
                             <div id="controls" class="carousel slide" data-interval="false">
                                 <!-- Button trigger modal -->
@@ -55,9 +69,9 @@
                             
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
-                        {{-- <input style="display: none" type="text"
-                            value="/storage/data_upload_lms/tes.pdf"
-                            id="file_location"> --}}
+                        <input style="display: none" type="text"
+                            value="/tes.pdf"
+                            id="file_location">
                             
                             {{-- <input style="display: none" type="text" value="https://www.youtube.com/embed/PH7JrJ4_MBw?si=cryHmtkj4tbGsUW4" id="video_url"> --}}
                             {{-- <input style="display: none" type="text" value="/storage/data_upload_lms/materi.mp4" id="video_url"> --}}

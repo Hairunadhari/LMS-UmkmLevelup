@@ -2,129 +2,110 @@
 
 @section('container')
 <style>
-  @media only screen and (max-width: 600px) {
-  button{
-    width: 190px;
-  }
-  .daftar-button{
-    width: 190px;
-  }
-}
-</style>
-  <div
-    class=""
-    style="
-      background-image: url(./assets/background_regist_body.png);
+  .con-login{
+    background-image: url('./assets/background_regist_body.png');
       background-repeat-y: no-repeat;
       background-repeat-x: no-repeat;
       background-size: cover;
       background-position-y: bottom;
-      height: 82svh;
-    "
-  >
-    <div
-      class="pt-5"
-      style="
-        background-image: url('./assets/background_regist_bawah.png');
+      height: 82vh;
+      
+  }
+  .con-login2{
+    background-image: url('./assets/background_regist_bawah.png');
         background-repeat: no-repeat;
         background-size: contain;
         background-position-y: bottom;
         height: 85vh;
-      "
-    >
-    
-      <div class="container">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb justify-content-end">
-            {{-- <li class="breadcrumb-item active">Registrasi</li> --}}
-            {{-- <li class="breadcrumb-item active" aria-current="page">
-              Step By Step
-            </li> --}}
-          </ol>
-        </nav>
-        <h1
-          class="text-uppercase text-center font-bold"
-          style="font-size: 3rem; font-weight: bolder"
-        >
-          Login
-        </h1>
-        <h6 class="text-uppercase text-center">Umkm Levelup</h6>
-        <form method="POST" action="{{ route('submit-login') }}">
-          @csrf
-          <div class="row pt-5">
-            <div class="col-lg-6 offset-lg-3">
-              <div class="form-floating mb-4 shadow rounded-pill">
-                  <input
-                    type="email"
-                    class="form-control rounded-pill px-4"
-                    id="floatingInput"
-                      name="email"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa fa-envelope me-3"></i> Email</label
-                  >
-              </div>
-              <div class="form-floating mb-5 shadow rounded-pill">
-                  <input
-                    type="password"
-                    class="form-control rounded-pill px-4"
-                    name="password"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput" class="ms-4"
-                    ><i class="fa fa-key me-3"></i> Password</label
-                  >
-              </div>
-            </div>
-          </div>
-          
-          <div class="gap-2 mx-auto w-50">
-            <button type="submit" class="btn btn-primary "
-            style="
-              background: linear-gradient(
+  }
+  .buttonlogin{
+    height: max-content;
+
+    background: linear-gradient(
                 93.89deg,
                 #0100cc 0%,
                 #0166fe 47.54%,
                 #18d1ff 100.92%
               );
-              float:left;
-            ">
-            Login
-            </button>
-            {{-- <button type="submit" class="btn btn-primary rounded-pill p-3 w-25"
-            style="
-              background: linear-gradient(
-                93.89deg,
-                #0100cc 0%,
-                #0166fe 47.54%,
-                #18d1ff 100.92%
-              );
-              float:left;
-            ">
-            Login
-            </button> --}}
-            <div class="" style="float: right">
-              <p>Lupa Password? <a href="forgot">klik disini</a></p> 
-              Belum memiliki akun? <a type="button" class=" daftar-button btn btn-primary"
-              style="
-                background: linear-gradient(
-                  93.89deg,
-                  #cc6600 0%,
-                  #fe9d01 47.54%,
-                  #ffcd18 100.92%
-                );
-                border:none;
-                
-              "
-              href="pendaftaran">
-              Daftar
-              </a>
-            </div>
-          </div>
-        </form>
-      </div>      
+              /* float:left; */
+  }
+  .container-button{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .daftar-button{
+    background: linear-gradient(93.89deg, #cc6600 0%, #fe9d01 47.54%, #ffcd18 100.92%);
+    border:none;
+
+  }
+  .form-floating{
+    margin-bottom: 2rem;
+  }
+    @media only screen and (max-width: 600px) {
+        button {
+            width: 40%;
+        }
+        
+
+        .daftar-button {
+            width: auto;
+        }
+        .container-button{
+          display: block;
+          /* justify-content: center; */
+          /* align-items: center; */
+          text-align: center;
+        }
+        .con-login{
+          /* margin-bottom: 1rem; */
+        }
+        .form-floating{
+        margin-bottom: 1rem;
+      }
+    }
+
+</style>
+<div class="con-login" style="">
+    <div class="pt-5 con-login2" style="">
+        <div class="container">
+            <h1 class="text-uppercase text-center font-bold" style="font-size: 3rem; font-weight: bolder">
+                Login
+            </h1>
+            <h6 class="text-uppercase text-center">Umkm Levelup</h6>
+            <form method="POST" action="{{ route('submit-login') }}">
+                @csrf
+                <div class="row pt-5">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="form-floating  shadow rounded-pill">
+                            <input type="email" class="form-control rounded-pill px-4" id="floatingInput" name="email"
+                                placeholder="name@example.com" />
+                            <label for="floatingInput" class="ms-4"><i class="fa fa-envelope me-3"></i> Email</label>
+                        </div>
+                        <div class="form-floating shadow rounded-pill">
+                            <input type="password" class="form-control rounded-pill px-4" name="password"
+                                id="floatingInput" placeholder="name@example.com" />
+                            <label for="floatingInput" class="ms-4"><i class="fa fa-key me-3"></i> Password</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-button">
+                    <button type="submit" class="btn btn-primary buttonlogin" >
+                        Login
+                    </button>
+                    <div class="conbutton-daftar">
+                      <div>
+                        <p>Lupa Password? <a href="forgot">klik disini</a></p>
+                        Belum memiliki akun? 
+
+                      </div>
+                        <a type="button" class="daftar-button btn btn-primary" style="width: 40%"  href="pendaftaran">
+                            Daftar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
 @endsection
