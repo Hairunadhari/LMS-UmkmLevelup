@@ -36,7 +36,7 @@
   <!-- navbar -->
 
  <section class="p-5 w-100">
-    <h3 style="color: #0C438D">List Artikel</h3>
+    <h3 style="color: #0C438D">Daftar Artikel</h3>
     <div class="row" style="height: 100%;">
         @foreach ($data as $item)
         <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2 " style="height: 100% !important; border-radius: 10px">
