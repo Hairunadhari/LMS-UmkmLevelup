@@ -69,9 +69,9 @@
                             
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
-                        <input style="display: none" type="text"
+                        {{-- <input style="display: none" type="text"
                             value="/tes.pdf"
-                            id="file_location">
+                            id="file_location"> --}}
                             
                             {{-- <input style="display: none" type="text" value="https://www.youtube.com/embed/PH7JrJ4_MBw?si=cryHmtkj4tbGsUW4" id="video_url"> --}}
                             {{-- <input style="display: none" type="text" value="/storage/data_upload_lms/materi.mp4" id="video_url"> --}}
