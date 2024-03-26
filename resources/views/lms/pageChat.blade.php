@@ -1,18 +1,40 @@
 @extends('lms.main')
 @section('container')
 <style>
-    #pdf-container{
-        margin-top: 2%; 
-        padding: 10px 70px; 
-        height:100vh; 
-        background-color:#3b3b3b; 
-        border-radius:5px;
+    #pdf-container {
+        margin-top: 2%;
+        padding: 10px 70px;
+        height: 100vh;
+        background-color: #3b3b3b;
+        border-radius: 5px;
     }
-     @media only screen and (max-width: 600px) {
-        #pdf-container{
+
+    .navigation-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+    .buttondetail{
+            display: none;
+        }
+    @media only screen and (max-width: 600px) {
+        #pdf-container {
             padding: 0;
         }
+        .navigation-buttons {
+            display: block;
+        }
+        .selesaikan, .detailmateri{
+            text-align: center
+        }
+        .selesaikan{
+            margin-bottom: 1rem;
+        }
+        .buttondetail{
+            display: inline;
+        }
+        
     }
+
 </style>
 <link rel="stylesheet" href=" {{ asset('css/pageChat.css')}}">
 
@@ -41,42 +63,50 @@
 
                     <div class="top_profile">
                         <div class="navigation-buttons">
-                            <div class="col-md-12 px-1">
-                                <a href="{{url('/')}}/add-status/{{$sub_materi->id}}" class="btn btn-success btn-sm"
-                                    style="float: left"><i class="fa fa-paper-plane"></i> Selesaikan Semua Materi</a>
-                                    
+                            <div class="selesaikan">
+                                <a href="{{url('/')}}/add-status/{{$sub_materi->id}}" class="btn btn-success btn-sm"><i
+                                        class="fa fa-paper-plane"></i> Selesaikan Semua Materi</a>
                             </div>
-                            <span>Page : <span id="pageKe"></span> / <span id="totalHalaman"></span></span>
+                            <div class="detailmateri">
+                                <button type="button"  class="btn btn-dark buttondetail" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal{{$sub_materi->id}}">
+                                    <i class="fas fa-eye"></i> Detail Materi
+                                </button>
+                                <span>Page : <span id="pageKe"></span> / <span id="totalHalaman"></span></span>
+                            </div>
                         </div>
-                        <div style=""
-                            id="pdf-container">
+                        <div style="" id="pdf-container">
                             <div id="controls" class="carousel slide" data-interval="false">
                                 <!-- Button trigger modal -->
-                                <div class="carousel-inner"  data-interval="false">
-                                    <div class="spinner-border text-light" style="display: none"   id="pdfLoader" role="status">
+                                <div class="carousel-inner" data-interval="false">
+                                    <div class="spinner-border text-light" style="display: none" id="pdfLoader"
+                                        role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
                                 </div>
-                                <button class="carousel-control-prev" id="prev-slide" style="z-index: 9999;  " type="button" data-bs-target="#controls" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon bg-dark" style="height: 5rem;" aria-hidden="true"></span>
+                                <button class="carousel-control-prev" id="prev-slide" style="z-index: 9999;  "
+                                    type="button" data-bs-target="#controls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon bg-dark" style="height: 5rem;"
+                                        aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next" id="next-slide" style="z-index: 9999;" type="button" data-bs-target="#controls" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon bg-dark" style="height: 5rem;" aria-hidden="true"></span>
+                                <button class="carousel-control-next" id="next-slide" style="z-index: 9999;"
+                                    type="button" data-bs-target="#controls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon bg-dark" style="height: 5rem;"
+                                        aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
-                            
+
                         </div>
                         <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
-                        {{-- <input style="display: none" type="text"
-                            value="/tes.pdf"
-                            id="file_location"> --}}
-                            
-                            {{-- <input style="display: none" type="text" value="https://www.youtube.com/embed/PH7JrJ4_MBw?si=cryHmtkj4tbGsUW4" id="video_url"> --}}
-                            {{-- <input style="display: none" type="text" value="/storage/data_upload_lms/materi.mp4" id="video_url"> --}}
-                             
-                        <input style="display: none" type="text" value="{{$sub_materi->file_location}}" id="file_location">
+                        {{-- <input style="display: none" type="text" value="/tes.pdf" id="file_location"> --}}
+
+                        {{-- <input style="display: none" type="text" value="https://www.youtube.com/embed/PH7JrJ4_MBw?si=cryHmtkj4tbGsUW4" id="video_url"> --}}
+                        {{-- <input style="display: none" type="text" value="/storage/data_upload_lms/materi.mp4" id="video_url"> --}}
+
+                        <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
+                        id="file_location">
                         <input style="display: none" type="text" value="{{$sub_materi->video_url}}" id="video_url">
                         <input style="display: none" type="text" value="{{$materiid}}" id="id_materi">
                         <input style="display: none" type="text" value="{{Auth::user()->id}}" id="user_id">
@@ -97,36 +127,36 @@
                             <i class="fas fa-comment-alt"></i> Chatting Group Materi
                         </div>
                         <div class="msger-header-options">
-                            
+
                         </div>
                     </header>
 
                     <main class="msger-chat" id="chats">
                         @foreach ($chats as $chat)
-                    @if ($chat->user_id == Auth::user()->id)
-                        
-                    <div class="msg right-msg">
-                    @else
-                        
-                    <div class="msg left-msg">
-                    @endif
-                    <div class="msg-img text-center p-2">
-                        <i class="fas fa-user" style="font-size: 30px; color:gray"></i>
-                    </div>
-                    <div class="msg-bubble">
-                        <div class="msg-info">
-                            <div class="msg-info-name">{{$chat->name}}</div>
-                            <div class="msg-info-time">
-                                {{ \Carbon\Carbon::parse($chat->tanggal)->format('Y M d, H:i') }}
+                        @if ($chat->user_id == Auth::user()->id)
+
+                        <div class="msg right-msg">
+                            @else
+
+                            <div class="msg left-msg">
+                                @endif
+                                <div class="msg-img text-center p-2">
+                                    <i class="fas fa-user" style="font-size: 30px; color:gray"></i>
+                                </div>
+                                <div class="msg-bubble">
+                                    <div class="msg-info">
+                                        <div class="msg-info-name">{{$chat->name}}</div>
+                                        <div class="msg-info-time">
+                                            {{ \Carbon\Carbon::parse($chat->tanggal)->format('Y M d, H:i') }}
+                                        </div>
+
+                                    </div>
+                                    <div class="msg-text">
+                                        {{$chat->chat}}
+                                    </div>
+                                </div>
                             </div>
-                            
-                        </div>
-                        <div class="msg-text">
-                            {{$chat->chat}} 
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+                            @endforeach
                     </main>
 
                     <form class="msger-inputarea">
@@ -145,13 +175,13 @@
 
 <script>
     $(document).ready(function () {
-        setInterval(function() {
-    $('#chats').load(location.href + ' #chats');
-}, 5000);
+        setInterval(function () {
+            $('#chats').load(location.href + ' #chats');
+        }, 5000);
         // const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
-        console.log('csrftoken',csrfToken);
+        console.log('csrftoken', csrfToken);
         let fileUrl = $('#file_location').val();
         let videoUrl = $('#video_url').val();
         let id_materi = $('#id_materi').val();
@@ -409,14 +439,25 @@
 </script>
 @endsection
 @section('modal')
+<style>
+    @media only screen and (max-width: 600px) {
+        #pdf-container {
+            margin-top: 2%;
+            padding: 0;
+            height: max-content;
+            background-color: #3b3b3b;
+            border-radius: 5px;
+        }
+    }
 
+</style>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal{{$sub_materi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">View Sub Materi PDF</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">View Detail Materi</h1>
                 <div style="display: flex; justify-content: center;">
                     <span style="margin-right: 20px;">Page : <span id="pageKex"></span> / <span
                             id="totalHalamanx"></span></span>
@@ -424,10 +465,13 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div style="margin-top: 2%; padding: 10px 70px; height:100vh; background-color:#3b3b3b; border-radius:5px"
-                    id="pdf-container">
+                <div style="" id="pdf-container">
                     <div id="controlsx" class="carousel slide" data-interval="false">
                         <div class="carousel-inner carouselx" data-interval="false">
+                            <div class="spinner-border text-light" style="margin-left: 45%; display:none"  id="pdfLoadermodal"
+                                role="status">
+                                <span class="visually-hidden" >Loading...</span>
+                            </div>
                         </div>
                         <button class="carousel-control-prev" id="prev-slidex" style="z-index: 9999;  " type="button"
                             data-bs-target="#controlsx" data-bs-slide="prev">
@@ -452,7 +496,7 @@
 </div>
 
 
-{{-- <script>
+<script>
     $(document).ready(function () {
         // const fileUrl = '/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf';
         let id_submateri = $('#id_submateri').val();
@@ -466,6 +510,8 @@
 
         const loadPdf = async () => {
             try {
+                const pdfLoader = document.getElementById('pdfLoadermodal');
+                pdfLoader.style.display = 'block';
                 pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
 
                 const carouselInner = document.querySelector('.carouselx');
@@ -489,13 +535,15 @@
                 }
             } catch (error) {
                 console.error('Error loading PDF:', error);
+                const pdfLoader = document.getElementById('pdfLoadermodal');
+                pdfLoader.style.display = 'none';
             }
         };
 
         const renderPage = (pageNumber, canvas) => {
             pdfDoc.getPage(pageNumber).then((page) => {
                 const viewport = page.getViewport({
-                    scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
+                    scale: 0.5 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
                 });
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
@@ -551,7 +599,7 @@
                 console.log(progres);
                 $.ajax({
                     method: 'post',
-                    url: '/update-progres',
+                    url: '/update-progres-pdf',
                     data: {
                         _token: csrfToken,
                         id_submateri: id_submateri,
@@ -572,5 +620,5 @@
 
     });
 
-</script> --}}
+</script>
 @endsection
