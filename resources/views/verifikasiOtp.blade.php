@@ -2,15 +2,29 @@
 
 @section('container')
 <style>
+    .masukanotp {
+        font-size: 4rem;
+        font-weight: bolder;
+    }
+
+    .verifikasibutton {
+        display: flex;
+        justify-content: center;
+    }
+
+    .verifikasibutton button {
+        padding: 1rem;
+    }
+
     .otp-input-wrapper {
         width: 380px;
-        text-align: center;
+        text-align: left;
         display: inline-block;
     }
 
-    .otp-input-wrapper input {
+    input {
         padding: 0;
-        width: 400px;
+        width: 404px;
         font-size: 32px;
         font-weight: 600;
         color: #3e3e3e;
@@ -34,18 +48,49 @@
     }
 
     @media only screen and (max-width: 600px) {
+        .masukanotp {
+            font-size: 1.5rem;
+        }
+
+        .verifikasibutton {
+            padding: 0;
+        }
+
+        input {
+            width: max-content;
+            font-size: 20px;
+            margin-left: 22px;
+            letter-spacing: 30px;
+        }
+
+        .otp-input-wrapper {
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .svg {
+            /* position: relative;
+            display: block; */
+            display: flex;
+            justify-content: center;
+            width: auto;
+            height: 2px;
+            /* margin-left: 15px; */
+        }
         .otp-input-wrapper svg {
             position: relative;
             display: block;
-            width: 250px;
+            width: 240px;
             height: 2px;
         }
-
-        h1 {
-            font-size: 1rem;
+        .verifikasibutton button{
+            padding: 10px;
         }
 
     }
+   
+
 
 </style>
 <div class="container-fluid">
@@ -57,7 +102,7 @@
         <div class="container">
             <div>
                 <span class="step-heading">
-                    <h1 class="text-uppercase text-center font-bold mt-5" style="">
+                    <h1 class="text-uppercase text-center font-bold mt-5 masukanotp" style="">
                         Masukan OTP
                     </h1>
                     <h5 class="text-center">Kami telah mengirimkan kode <br>
@@ -75,18 +120,20 @@
                                     oninvalid="this.setCustomValidity('Harap Lengkapi Kode Otp!')"
                                     onchange="this.setCustomValidity('')" maxlength="6" name="otp" pattern="[0-9]*"
                                     autocomplete="off">
-                                <svg viewBox="0 0 380 1" xmlns="http://www.w3.org/2000/svg">
-                                    <line x1="0" y1="0" x2="380" y2="0" stroke="#3e3e3e" stroke-width="2"
-                                        stroke-dasharray="44,22" />
-                                </svg>
+                                <div class="svg">
+                                    <svg viewBox="0 0 380 1" xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="0" y1="0" x2="380" y2="0" stroke="#3e3e3e" stroke-width="2"
+                                            stroke-dasharray="44,22" />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
 
-            {{-- <div class="d-grid gap-2 mx-auto w-25">
-                <button class="btn btn-primary rounded-pill p-3" type="submit" style="
+            <div class="verifikasibutton">
+                <button class="btn btn-primary rounded-pill " type="submit" style="
               background: linear-gradient(
                 93.89deg,
                 #0100cc 0%,
@@ -102,7 +149,7 @@
                 <h5 class="text-center">Tidak menerima Kode OTP ?</h5>
                 <h5 class="text-center text-primary" id="kirimulangotp" style="cursor:pointer">kirim ulang kode</h5>
                 <h5 class="text-center text-primary" style="display:none" id="timer"> </h5>
-            </div> --}}
+            </div>
         </div>
     </form>
 </div>

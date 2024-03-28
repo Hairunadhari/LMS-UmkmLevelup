@@ -1,18 +1,23 @@
 <style>
     @media only screen and (max-width: 600px) {
-        .keranjangumkm{
+        .keranjangumkm {
             width: 130px;
         }
+        .bungkusimg{
+            margin-bottom: 1rem;;
+        }
+       
     }
+
 </style>
 <nav class="navbar">
     @auth
-    <div class="container-fluid justify-content-between container-sm">
+    <div class="container-fluid  container-sm">
         @endauth
         @guest
-        <div class="container-fluid justify-content-center container-sm">
+        <div class="container-fluid  container-sm">
             @endguest
-            <div>
+            <div class="bungkusimg">
                 @auth
                 <a class="navbar-brand" href="home">
                     @endauth

@@ -97,12 +97,12 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nik'                  => 'nullable|size:16',
-            'nib'                  => 'size:13',
+            // 'nib'                  => 'size:13',
            
         ],
             [
                 'nik'=>'NIK harus terdiri dari 16 karakter.',
-                'nib'=>'NIB harus terdiri dari 13 karakter.',
+                // 'nib'=>'NIB harus terdiri dari 13 karakter.',
                
             ]
         );

@@ -25,10 +25,7 @@
         aspect-ratio: 3/2;
         object-fit: contain;
       }
-      input {
-        font-size: 32px !important;
-        font-weight: bold !important;
-      }
+      
     </style>
   </head>
   <body

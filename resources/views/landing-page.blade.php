@@ -92,7 +92,7 @@
     <div class="container-fluid py-4 py-md-5">
       <div class="text-center mb-4">
         <h1 class="fw-bold mb-4" style="color: #0C438D;">Siap Untuk <span class="fw-normal text-dark">#BikinUsahamuJadiLevelUp?</span></h1>
-        <a href="#" class="btn btn-primary fw-bold">REGISTRASI</a>
+        {{-- <a href="#" class="btn btn-primary fw-bold">REGISTRASI</a> --}}
       </div>
       <div class="row row-cols-1 row-cols-md-3 justify-content-around align-items-center gap-2 gap-md-0 p-0 p-md-0">
         <div class="col order-lg-2 text-center">

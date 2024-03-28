@@ -30,12 +30,15 @@
             object-fit: contain;
         }
 
-        nav.for-dropdown li {
-            list-style: none;
-            float: left;
-            margin: 0 10px;
-            /* text-transform: none; */
+        nav.for-dropdown ul {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+        }
+        li{
             text-decoration: none;
+            list-style: none;
         }
 
         nav.for-dropdown li a {
@@ -49,7 +52,11 @@
             /* border-bottom: 1px solid #000; */
             /* font-weight: bold; */
         }
-
+        @media only screen and (max-width: 600px) {
+            nav.for-dropdown ul {
+            padding: 0;
+        }
+        }
     </style>
 </head>
 
