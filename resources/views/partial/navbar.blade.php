@@ -1,3 +1,10 @@
+<style>
+    @media only screen and (max-width: 600px) {
+        .keranjangumkm{
+            width: 130px;
+        }
+    }
+</style>
 <nav class="navbar">
     @auth
     <div class="container-fluid justify-content-between container-sm">
@@ -28,7 +35,7 @@
                             @guest
                             <a class="navbar-brand" href="#">
                                 @endguest
-                                <img src="{{asset('asset/logo.png')}}" alt="logo umkm levelup" />
+                                <img src="{{asset('asset/logo.png')}}" class="keranjangumkm" alt="logo umkm levelup" />
                             </a>
             </div>
             @auth
