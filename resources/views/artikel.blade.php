@@ -27,7 +27,7 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/artikel">Artikel</a>
           </li>
-          <a class="btn btn-primary fw-semibold fs-6" aria-current="page" href="pendaftaran">Pendaftaran</a>
+          <a class="btn btn-primary fw-semibold fs-6" aria-current="page" href="/#pendaftaran">Pendaftaran</a>
           <a class="btn btn-warning fw-semibold fs-6" aria-current="page" href="login">Login</a>
         </ul>
       </div>
@@ -42,7 +42,6 @@
         <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2 " style="height: 100% !important; border-radius: 10px">
             <div class="card" style="height: 100% !important; ">
                 <img src="{{$item->gambar}}" class="card-img-top" alt="..." style="border-radius: 0 0 10px 10px">
-                {{-- <img src="/storage/data_upload_lms/a14.jpg" class="card-img-top" alt="..." style="border-radius: 0 0 10px 10px"> --}}
                 <div class="card-body" style="height: 100% !important;">
                  <div class="row  fw-semibold">
                   <div class="col-6">

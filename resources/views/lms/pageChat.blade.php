@@ -19,6 +19,7 @@
     @media only screen and (max-width: 600px) {
         #pdf-container {
             padding: 0;
+            height: max-content;
         }
         .navigation-buttons {
             display: block;
@@ -29,9 +30,9 @@
         .selesaikan{
             margin-bottom: 1rem;
         }
-        .buttondetail{
+        /* .buttondetail{
             display: inline;
-        }
+        } */
         
     }
 
@@ -68,10 +69,10 @@
                                         class="fa fa-paper-plane"></i> Selesaikan Semua Materi</a>
                             </div>
                             <div class="detailmateri">
-                                <button type="button"  class="btn btn-dark buttondetail" data-bs-toggle="modal"
+                                {{-- <button type="button"  class="btn btn-dark buttondetail" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal{{$sub_materi->id}}">
                                     <i class="fas fa-eye"></i> Detail Materi
-                                </button>
+                                </button> --}}
                                 <span>Page : <span id="pageKe"></span> / <span id="totalHalaman"></span></span>
                             </div>
                         </div>
@@ -233,8 +234,12 @@
 
         const renderPage = (pageNumber, canvas) => {
             pdfDoc.getPage(pageNumber).then((page) => {
+                let scale = 1; // Default scale
+                if (window.innerWidth <= 600) {
+                    scale = 0.5; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+                }
                 const viewport = page.getViewport({
-                    scale: 1 // Ubah scale dari 0.5 menjadi 1 untuk resolusi yang lebih tinggi
+                    scale: scale
                 });
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
@@ -439,7 +444,7 @@
 </script>
 @endsection
 @section('modal')
-<style>
+{{-- <style>
     @media only screen and (max-width: 600px) {
         #pdf-container {
             margin-top: 2%;
@@ -450,9 +455,9 @@
         }
     }
 
-</style>
+</style> --}}
 <!-- Modal -->
-<div class="modal fade" id="exampleModal{{$sub_materi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="exampleModal{{$sub_materi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -493,10 +498,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
-<script>
+{{-- <script>
     $(document).ready(function () {
         // const fileUrl = '/storage/data_upload_lms/HVETLEWJ1PLYq9rNbFsigQdIQGZqByvd6isMSqve.pdf';
         let id_submateri = $('#id_submateri').val();
@@ -620,5 +625,5 @@
 
     });
 
-</script>
+</script> --}}
 @endsection

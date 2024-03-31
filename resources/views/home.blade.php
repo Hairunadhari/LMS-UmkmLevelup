@@ -36,7 +36,7 @@ style="
         @include('profil-pengisian')
       @else
       <div class="row">
-        <div class="col text-center">
+        <div class="col text-center mb-2">
         @if ($done == true)
           {{-- <span class="card" style="width: 100%rem;">
             <div class="card-body">
