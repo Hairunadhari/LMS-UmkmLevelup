@@ -73,7 +73,7 @@
               <h5 class="fw-semibold text-center">Pendampingan dan Fasilitasi UMKM Level Up</h5>
               <p class="text-body-secondary">Pendampingan dan pelatihan kepada 20.000 UMKM dalam rangka mendorong UMKM #LevelUp dari sisi adopsi teknologi digital.</p>
               <div class="d-flex justify-content-center">
-              <a href="/pendaftaran" class="btn btn-primary">Daftar</a>
+              <a href="/pendaftaran" class="btn btn-primary">Registrasi <i class="fa fa-arrow-right"></i></a>
 
               </div>
             </div>
@@ -86,7 +86,7 @@
               <h5 class="fw-semibold text-center">UMKM Level Up Business Incubator</h5>
               <p class="text-body-secondary">Inkubasi bisnis kepada 100 UMKM dalam rangka mendorong UMKM #LevelUp dari sisi transaksi penjualan, akses pemasaran, serta daya saing dalam pasar domestik dan global.</p>
               <div class="d-flex justify-content-center">
-                <a href="https://akselerator.umkmlevelup.id/login" class="btn btn-primary">Daftar</a>
+                <a href="https://akselerator.umkmlevelup.id/pendaftaran" class="btn btn-primary">Registrasi <i class="fa fa-arrow-right"></i></a>
   
                 </div>
             </div>
