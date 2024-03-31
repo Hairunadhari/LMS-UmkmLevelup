@@ -27,8 +27,8 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="/artikel">Artikel</a>
           </li>
-          <a class="btn btn-primary fw-semibold fs-6" aria-current="page" href="pendaftaran">Pendaftaran</a>
-          <a class="btn btn-warning fw-semibold fs-6" aria-current="page" href="login">Login</a>
+          <a class="btn btn-primary fw-semibold fs-6" aria-current="page" href="/#pendaftaran">Pendaftaran</a>
+          <a class="btn btn-warning fw-semibold fs-6" aria-current="page" href="/login">Login</a>
         </ul>
       </div>
     </div>
@@ -39,7 +39,6 @@
     <h3 style="color: #0C438D" class="mb-4">Detail Artikel</h3>
     <div class="row d-flex justify-content-center align-items-center">
         <img src="{{$data->gambar}}"  style="border-radius: 0 0 10px 10px; height: auto; width: 80%; object-fit: contain">
-        {{-- <img src="/storage/data_upload_lms/a14.jpg"  style="border-radius: 0 0 10px 10px; height: auto; width: 80%; object-fit: contain"> --}}
     </div>
     <div class="row my-5  d-flex justify-content-center align-items-center">
         <div class="title" style="width: 80%">
