@@ -84,8 +84,8 @@
           <div class="card h-100 p-4">
             <div class="card-body">
               <img src="{{url('/')}}/asset/umkm-level-up-business-incubator.png" alt="" class="img-fluid mb-2" width="700">
-              <h5 class="fw-semibold text-center">UMKM Level Up Business Incubator</h5>
-              <p class="text-body-secondary">Inkubasi bisnis kepada 100 UMKM dalam rangka mendorong UMKM #LevelUp dari sisi transaksi penjualan, akses pemasaran, serta daya saing dalam pasar domestik dan global.</p>
+              <h5 class="fw-semibold text-center">UMKM Level Up Business Akselerator</h5>
+              <p class="text-body-secondary">Pendampingan intensif kepada 100 UMKM melalui sesi One-on-One Business coaching oleh Dedicated Business Coach, serta online Mentoring untuk mendorong UMKM melakukan akselerasi bisnis.</p>
               <div class="d-flex justify-content-center">
                 <a href="https://akselerator.umkmlevelup.id/pendaftaran" class="btn btn-primary me-2">Registrasi <i class="fa fa-arrow-right"></i></a>
                 <a href="https://akselerator.umkmlevelup.id/login" class="btn btn-warning">Login <i class="fa fa-arrow-right"></i></a>

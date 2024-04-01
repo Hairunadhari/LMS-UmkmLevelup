@@ -205,6 +205,7 @@ public function register(Request $request)
             session()->flash('name', $request->name);
             session()->flash('email', $request->email);
             session()->flash('no_wa', $request->no_wa);
+            
             return redirect()->back()->with('success', [
                 'type' => 'error',
                 'message' => 'Email Sudah Dipakai',
