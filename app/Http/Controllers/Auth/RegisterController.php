@@ -235,8 +235,11 @@ public function register(Request $request)
         DB::commit();
 
     } catch (\Throwable $th) {
-        dd($th);
-        return view('ndaran');
+        // dd($th);
+        return back()->with('success', [
+            'type' => 'error',
+            'message' => $th->getMessage(),
+        ]);
         DB::rollBack();
     }
     

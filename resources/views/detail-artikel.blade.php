@@ -28,7 +28,7 @@
             <a class="nav-link" aria-current="page" href="/artikel">Artikel</a>
           </li>
           <a class="btn btn-primary fw-semibold fs-6" aria-current="page" href="/#pendaftaran">Pendaftaran</a>
-          <a class="btn btn-warning fw-semibold fs-6" aria-current="page" href="/login">Login</a>
+          <a class="btn btn-warning fw-semibold fs-6" aria-current="page" href="/#pendaftaran">Login</a>
         </ul>
       </div>
     </div>
