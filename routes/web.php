@@ -62,7 +62,7 @@ Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, '
 // Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/submit-otp', [App\Http\Controllers\Auth\RegisterController::class, 'submitOtp'])->name('submit-otp');
 Route::post('/submit-login', [App\Http\Controllers\Auth\LoginController::class, 'submitLogin'])->name('submit-login')->middleware('redirect.get.method');
-;
+
 Route::get('/logout', [App\Http\Controllers\Auth\LogoutController::class, 'index'])->name('logout');
 Route::post('/submit-profil', [App\Http\Controllers\UserController::class, 'submitProfil'])->name('submit-profil');
 Route::post('/update-profil', [App\Http\Controllers\UserController::class, 'updateProfil'])->name('update-profil');

@@ -16,9 +16,8 @@ class RedirectIfGetMethod
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->getMethod() === 'GET') {
-            // Redirect kembali dengan pesan kesalahan
-            return redirect('/');
+        if ($request->method() !== 'POST') {
+            return back();
         }
         return $next($request);
     }
