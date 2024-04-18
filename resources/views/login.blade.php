@@ -94,12 +94,16 @@
                         Login
                     </button>
                     <div class="conbutton-daftar">
-                      <div>
+                      {{-- <div>
                         <p>Lupa Password? <a href="forgot">klik disini</a></p>
                         Belum memiliki akun? 
 
                       </div>
                         <a type="button" class="daftar-button btn btn-primary" style="width: 40%"  href="pendaftaran">
+                            Daftar
+                        </a> --}}
+
+                        <a type="button" class="daftar-button btn btn-primary" style="width: 100%"  href="pendaftaran">
                             Daftar
                         </a>
                     </div>
