@@ -189,6 +189,7 @@ public function register(Request $request)
                     'name' => $request->name,
                     'no_wa' => $request->no_wa,
                     'password' => Hash::make($request->password),
+                    'email_verified_at' => date("Y-m-d H:i:s"),
                 ]);
             } else{
                 DB::table('users')->insert([
@@ -198,6 +199,7 @@ public function register(Request $request)
                     'password' => Hash::make($request->password),
                     'aktif' => 1,
                     'final_level' => 0,
+                    'email_verified_at' => date("Y-m-d H:i:s"),
                 ]);
             }
             
@@ -212,27 +214,27 @@ public function register(Request $request)
             ]);
         }
 
-        $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
-        $otp = mt_rand(100000, 999999);
-        $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
-        $now = $konvers_tanggal->format('Y-m-d H:i:s');
-        DB::table('t_otp')->insert([
-            'kode_otp' => $otp,
-            'id_user' => $getuser->id,
-            'status' => 0,
-            'created_at' => $now,
-        ]);
+        // $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
+        // $otp = mt_rand(100000, 999999);
+        // $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+        // $now = $konvers_tanggal->format('Y-m-d H:i:s');
+        // DB::table('t_otp')->insert([
+        //     'kode_otp' => $otp,
+        //     'id_user' => $getuser->id,
+        //     'status' => 0,
+        //     'created_at' => $now,
+        // ]);
     
-        $mailData = [
-            'title' => 'Mail from noreply@umkmlevelup.id',
-            'body' => 'Harap isi kode otp berikut ini.',
-            'otp' => $otp
-        ];
+        // $mailData = [
+        //     'title' => 'Mail from noreply@umkmlevelup.id',
+        //     'body' => 'Harap isi kode otp berikut ini.',
+        //     'otp' => $otp
+        // ];
         
-        Mail::to($request->email)->send(new DemoMail($mailData));
-        $request->session()->forget('alert');
-        $encryptEmail = Crypt::encrypt($request->email);
-        $encryptIduser = Crypt::encrypt($getuser->id);
+        // Mail::to($request->email)->send(new DemoMail($mailData));
+        // $request->session()->forget('alert');
+        // $encryptEmail = Crypt::encrypt($request->email);
+        // $encryptIduser = Crypt::encrypt($getuser->id);
         DB::commit();
 
     } catch (\Throwable $th) {
@@ -245,7 +247,11 @@ public function register(Request $request)
     }
     
 
-    return redirect('verifikasiOtp/'.$encryptEmail.'/'.$encryptIduser);
+    // return redirect('verifikasiOtp/'.$encryptEmail.'/'.$encryptIduser);
+    return redirect('/login')->with('success', [
+        'type' => 'success',
+        'message' => 'Registrasi Berhasil, Silahkan Login',
+    ]);
 
 }
 
