@@ -145,8 +145,8 @@ public function register(Request $request)
         [
             'name'=>'Nama Harus Diisi',
             'email'=>'Email Harus Diisi',
-            'no_wa'=>'No HP Sudah Dipakai',
-            'password'=>'Password min 8 character',
+            'no_wa'=>'No HP Harus Diisi',
+            'password'=>'Password Harus Diisi dan min 8 character',
             'konfirmasi_password'=>'Konfirmasi Password Tidak Cocok',
         ]
     );
@@ -161,7 +161,7 @@ public function register(Request $request)
         session()->flash('no_wa', $request->no_wa);
       
         // Tampilkan pesan error
-        return redirect()->back()->with('success', [
+        return redirect('/pendaftaran')->with('success', [
           'type' => 'error',
           'message' => $alertMessage,
         ]);
