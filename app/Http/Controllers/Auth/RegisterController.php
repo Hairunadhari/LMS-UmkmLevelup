@@ -175,7 +175,7 @@ public function register(Request $request)
                   session()->flash('name', $request->name);
                   session()->flash('email', $request->email);
                   session()->flash('no_wa', $request->no_wa);
-                  return redirect()->back()->with('success', [
+                  return redirect('/pendaftaran')->with('success', [
                       'type' => 'error',
                       'message' => 'No HP Sudah Dipakai',
                   ]);
