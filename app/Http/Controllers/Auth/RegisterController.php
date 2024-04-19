@@ -145,8 +145,8 @@ public function register(Request $request)
         [
             'name'=>'Nama Harus Diisi',
             'email'=>'Email Harus Diisi',
-            'no_wa'=>'No HP Sudah Dipakai',
-            'password'=>'Password min 8 character',
+            'no_wa'=>'No HP Harus Diisi',
+            'password'=>'Password Harus Diisi dan min 8 character',
             'konfirmasi_password'=>'Konfirmasi Password Tidak Cocok',
         ]
     );
@@ -161,7 +161,7 @@ public function register(Request $request)
         session()->flash('no_wa', $request->no_wa);
       
         // Tampilkan pesan error
-        return redirect()->back()->with('success', [
+        return redirect('/pendaftaran')->with('success', [
           'type' => 'error',
           'message' => $alertMessage,
         ]);
@@ -175,7 +175,7 @@ public function register(Request $request)
                   session()->flash('name', $request->name);
                   session()->flash('email', $request->email);
                   session()->flash('no_wa', $request->no_wa);
-                  return redirect()->back()->with('success', [
+                  return redirect('/pendaftaran')->with('success', [
                       'type' => 'error',
                       'message' => 'No HP Sudah Dipakai',
                   ]);
@@ -189,6 +189,7 @@ public function register(Request $request)
                     'name' => $request->name,
                     'no_wa' => $request->no_wa,
                     'password' => Hash::make($request->password),
+                    'email_verified_at' => date("Y-m-d H:i:s"),
                 ]);
             } else{
                 DB::table('users')->insert([
@@ -198,50 +199,60 @@ public function register(Request $request)
                     'password' => Hash::make($request->password),
                     'aktif' => 1,
                     'final_level' => 0,
+                    'email_verified_at' => date("Y-m-d H:i:s"),
                 ]);
+                dispatch(new SendEmailJob($request->email));
             }
             
         }else{
             session()->flash('name', $request->name);
             session()->flash('email', $request->email);
             session()->flash('no_wa', $request->no_wa);
+            
             return redirect()->back()->with('success', [
                 'type' => 'error',
                 'message' => 'Email Sudah Dipakai',
             ]);
         }
 
-        $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
-        $otp = mt_rand(100000, 999999);
-        $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
-        $now = $konvers_tanggal->format('Y-m-d H:i:s');
-        DB::table('t_otp')->insert([
-            'kode_otp' => $otp,
-            'id_user' => $getuser->id,
-            'status' => 0,
-            'created_at' => $now,
-        ]);
+        // $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
+        // $otp = mt_rand(100000, 999999);
+        // $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+        // $now = $konvers_tanggal->format('Y-m-d H:i:s');
+        // DB::table('t_otp')->insert([
+        //     'kode_otp' => $otp,
+        //     'id_user' => $getuser->id,
+        //     'status' => 0,
+        //     'created_at' => $now,
+        // ]);
     
-        $mailData = [
-            'title' => 'Mail from noreply@umkmlevelup.id',
-            'body' => 'Harap isi kode otp berikut ini.',
-            'otp' => $otp
-        ];
+        // $mailData = [
+        //     'title' => 'Mail from noreply@umkmlevelup.id',
+        //     'body' => 'Harap isi kode otp berikut ini.',
+        //     'otp' => $otp
+        // ];
         
-        Mail::to($request->email)->send(new DemoMail($mailData));
-        $request->session()->forget('alert');
-        $encryptEmail = Crypt::encrypt($request->email);
-        $encryptIduser = Crypt::encrypt($getuser->id);
+        // Mail::to($request->email)->send(new DemoMail($mailData));
+        // $request->session()->forget('alert');
+        // $encryptEmail = Crypt::encrypt($request->email);
+        // $encryptIduser = Crypt::encrypt($getuser->id);
         DB::commit();
 
     } catch (\Throwable $th) {
-        dd($th);
-        return view('ndaran');
+        // dd($th);
+        return back()->with('success', [
+            'type' => 'error',
+            'message' => $th->getMessage(),
+        ]);
         DB::rollBack();
     }
     
 
-    return redirect('verifikasiOtp/'.$encryptEmail.'/'.$encryptIduser);
+    // return redirect('verifikasiOtp/'.$encryptEmail.'/'.$encryptIduser);
+    return redirect('/login')->with('success', [
+        'type' => 'success',
+        'message' => 'Registrasi Berhasil, Silahkan Login',
+    ]);
 
 }
 
@@ -309,16 +320,31 @@ public function submitOtp(Request $request){
         return response()->json('success');
     }
 
-    public function tes(){
-        $otp = mt_rand(100000, 999999);
-       
-        $mailData = [
-            'title' => 'Mail from noreply@umkmlevelup.id',
-            'body' => 'Harap isi kode otp berikut ini.',
-            'otp' => $otp
-        ];
-        
-        Mail::to('siarun666@gmail.com')->send(new DemoMail($mailData));
+    public function tes(){ 
+        try {
+            //post api mailgun
+            // $mgClient =  Mailgun::create(env('APP_KEY_MAILGUN'));
+            // $domain = env('MAILGUN_DOMAIN');
+            // # Make the call to the client.
+            // $result = $mgClient->messages()->send($domain,[
+            //     'from'	=> env('MAIL_FROM_ADDRESS'),
+            //     'to'	=> 'siarunadhari666@gmail.com',
+            //     'subject' => 'Hello',
+            //     'text'	=> 'Testing some Mailgun awesomeness!'
+            // ]);
+            $otp = mt_rand(100000, 999999);
+            
+            $mailData = [
+                'title' => 'Mail from noreply@umkmlevelup.id',
+                'body' => 'Harap isi kode otp berikut ini.',
+                'otp' => $otp
+            ];
+            
+            Mail::to('arunzxxxxxxx@gmail.com')->send(new DemoMail($mailData));
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd($th);
+        }
         return 'success';
     }
 
