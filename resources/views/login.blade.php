@@ -36,6 +36,7 @@
   .daftar-button{
     background: linear-gradient(93.89deg, #cc6600 0%, #fe9d01 47.54%, #ffcd18 100.92%);
     border:none;
+    width: 100%;
 
   }
   .form-floating{
@@ -48,7 +49,8 @@
         
 
         .daftar-button {
-            width: auto;
+            width: 40%;
+            margin-top: 1rem;
         }
         .container-button{
           display: block;
@@ -103,7 +105,7 @@
                             Daftar
                         </a> --}}
 
-                        <a type="button" class="daftar-button btn btn-primary" style="width: 100%"  href="pendaftaran">
+                        <a type="button" class="daftar-button btn btn-primary"   href="pendaftaran">
                             Daftar
                         </a>
                     </div>
