@@ -7,6 +7,7 @@ use Mail;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Mail\DemoMail;
+use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -201,7 +202,7 @@ public function register(Request $request)
                     'final_level' => 0,
                     'email_verified_at' => date("Y-m-d H:i:s"),
                 ]);
-                dispatch(new SendEmailJob($request->email));
+              
             }
             
         }else{
@@ -216,7 +217,7 @@ public function register(Request $request)
         }
 
         // $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
-        // $otp = mt_rand(100000, 999999);
+        $otp = mt_rand(100000, 999999);
         // $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
         // $now = $konvers_tanggal->format('Y-m-d H:i:s');
         // DB::table('t_otp')->insert([
@@ -236,6 +237,15 @@ public function register(Request $request)
         // $request->session()->forget('alert');
         // $encryptEmail = Crypt::encrypt($request->email);
         // $encryptIduser = Crypt::encrypt($getuser->id);
+
+
+        $mailData = [
+            'title' => 'Mail from noreply@umkmlevelup.id',
+            'body' => 'Harap isi kode otp berikut ini.',
+            'otp' => $otp,
+            'email' => $request->email
+        ];
+        dispatch(new SendEmailJob($mailData));
         DB::commit();
 
     } catch (\Throwable $th) {
