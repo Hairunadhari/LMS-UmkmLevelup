@@ -342,7 +342,6 @@ public function submitOtp(Request $request){
                     'otp' => $otp,
                     'email' => $mail,
                 ];
-                    # code...
             
                     // Menggunakan alamat email yang berbeda untuk setiap iterasi
                     DB::table('users')->insert([
