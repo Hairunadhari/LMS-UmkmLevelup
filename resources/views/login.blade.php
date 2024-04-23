@@ -17,6 +17,7 @@
         background-size: contain;
         background-position-y: bottom;
         height: 85vh;
+        padding-top: 2rem;
   }
   .buttonlogin{
     height: max-content;
@@ -32,11 +33,11 @@
   .container-button{
     display: flex;
     justify-content: space-evenly;
+    height: auto;
   }
   .daftar-button{
     background: linear-gradient(93.89deg, #cc6600 0%, #fe9d01 47.54%, #ffcd18 100.92%);
     border:none;
-    width: 100%;
 
   }
   .form-floating{
@@ -50,7 +51,6 @@
 
         .daftar-button {
             width: 40%;
-            margin-top: 1rem;
         }
         .container-button{
           display: block;
@@ -64,11 +64,14 @@
         .form-floating{
         margin-bottom: 1rem;
       }
+      .con-login2{
+        padding-top: 1rem;
+      }
     }
 
 </style>
 <div class="con-login" style="">
-    <div class="pt-5 con-login2" style="">
+    <div class="con-login2" style="">
         <div class="container">
             <h1 class="text-uppercase text-center font-bold" style="font-size: 3rem; font-weight: bolder">
                 Login
@@ -96,18 +99,18 @@
                         Login
                     </button>
                     <div class="conbutton-daftar">
-                      {{-- <div>
+                      <div>
                         <p>Lupa Password? <a href="forgot">klik disini</a></p>
                         Belum memiliki akun? 
 
                       </div>
                         <a type="button" class="daftar-button btn btn-primary" style="width: 40%"  href="pendaftaran">
                             Daftar
-                        </a> --}}
-
-                        <a type="button" class="daftar-button btn btn-primary"   href="pendaftaran">
-                            Daftar
                         </a>
+
+                        {{-- <a type="button" class="daftar-button btn btn-primary"   href="pendaftaran">
+                            Daftar
+                        </a> --}}
                     </div>
                 </div>
             </form>

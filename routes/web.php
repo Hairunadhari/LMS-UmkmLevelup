@@ -40,7 +40,7 @@ Route::get('pendaftaran', function (Request $request) {
 //     Crypt::decrypt($encryptId_user);
 //     return view('verifikasiOtp', compact('email', 'id_user'));
 // });
-Route::get('verifikasiOtp/{email}/{id_user}', [App\Http\Controllers\Auth\RegisterController::class, 'verifikasiOtp']);
+Route::get('/verifikasiOtp/{email}/{id_user}', [App\Http\Controllers\Auth\RegisterController::class, 'verifikasiOtp']);
 // Route::get('verifikasix', function (Request $request) {
 //     return view('verifikasiOtp');
 //     // return view('underconstruct');

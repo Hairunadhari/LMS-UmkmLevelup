@@ -99,7 +99,7 @@
             </div>
           </div> --}}
 
-          <form method="POST" action="{{ route('forgot-password') }}">
+          <form method="POST" action="/forgot-password">
             @csrf
             <div class="row pt-5">
               <div class="col-lg-6 offset-lg-3">
