@@ -216,16 +216,16 @@ public function register(Request $request)
             ]);
         }
 
-        // $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
-        // $otp = mt_rand(100000, 999999);
-        // $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
-        // $now = $konvers_tanggal->format('Y-m-d H:i:s');
-        // DB::table('t_otp')->insert([
-        //     'kode_otp' => $otp,
-        //     'id_user' => $getuser->id,
-        //     'status' => 0,
-        //     'created_at' => $now,
-        // ]);
+        $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
+        $otp = mt_rand(100000, 999999);
+        $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+        $now = $konvers_tanggal->format('Y-m-d H:i:s');
+        DB::table('t_otp')->insert([
+            'kode_otp' => $otp,
+            'id_user' => $getuser->id,
+            'status' => 0,
+            'created_at' => $now,
+        ]);
     
         
         $mailData = [
