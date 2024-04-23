@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Mail;
 use DB;
-
+use App\Mail\ForgotMail;
 class SendEmailForgotJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -23,6 +23,6 @@ class SendEmailForgotJob implements ShouldQueue
     }
     public function handle()
     {
-            Mail::to($this->mailData['email'])->send(new \App\Mail\ForgotMail($this->mailData));
+            Mail::to($this->mailData['email'])->send(new ForgotMail($this->mailData));
     }
 }
