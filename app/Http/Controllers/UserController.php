@@ -220,10 +220,9 @@ class UserController extends Controller
             ]);
             return redirect('reset-password/'.$request->url);
         }
-        $request->session()->flash('success', [
+        return redirect('/login')->with('success', [
             'type' => 'info',
             'message' => 'password anda sudah direset, silahkan login kembali',
         ]);
-        return view('login');
     }
 }
