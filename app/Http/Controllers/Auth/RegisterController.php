@@ -234,7 +234,8 @@ public function register(Request $request)
             'otp' => $otp,
             'email' => $request->email
         ];
-        dispatch(new SendEmailJob($mailData));
+        // dispatch(new SendEmailJob($mailData));
+        Mail::to($this->mailData['email'])->send(new DemoMail($this->mailData));
         $request->session()->forget('alert');
         $encryptEmail = Crypt::encrypt($request->email);
         $encryptIduser = Crypt::encrypt($getuser->id);
@@ -318,7 +319,8 @@ public function submitOtp(Request $request){
                 'email' => $email_user
             ];
             
-            dispatch(new SendEmailJob($mailData));
+            // dispatch(new SendEmailJob($mailData));
+            Mail::to($this->mailData['email'])->send(new DemoMail($this->mailData));
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();

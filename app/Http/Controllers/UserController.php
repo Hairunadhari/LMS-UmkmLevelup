@@ -181,8 +181,8 @@ class UserController extends Controller
                 'link' => env('APP_URL')."/reset-password/".$encryptId,
                 'email' => $request->email,
             ];
-            dispatch(new SendEmailForgotJob($mailData));
-            // Mail::to($mailData['email'])->send(new \App\Mail\ForgotMail($mailData));
+            // dispatch(new SendEmailForgotJob($mailData));
+            Mail::to($mailData['email'])->send(new ForgotMail($mailData));
     
         
             DB::commit();
