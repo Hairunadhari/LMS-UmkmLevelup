@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DB;
-use Illuminate\Support\Facades\Auth;
-use App\Mail\ForgotMail;
 use Mail;
+use App\Mail\ForgotMail;
+use App\Jobs\SendEmailJob;
+use Illuminate\Http\Request;
+use App\Jobs\SendEmailForgotJob;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
@@ -160,32 +162,44 @@ class UserController extends Controller
     }
 
     public function forgotPassword(Request $request){
-        $checkUser = DB::table('users')->where('email', $request->email)->where('aktif', 1)->first();
-        if ($checkUser != null) {
-            $encryptId = urlencode(Crypt::encryptString($checkUser->id));
-        }else{
-            $request->session()->flash('alert', [
+        try {
+            DB::beginTransaction();
+            $checkUser = DB::table('users')->where('email', $request->email)->where('aktif', 1)->first();
+            if ($checkUser != null) {
+                $encryptId = urlencode(Crypt::encryptString($checkUser->id));
+            }else{
+                $request->session()->flash('alert', [
+                    'type' => 'error',
+                    'message' => 'akun dengan email "'.$request->email.'" tidak terdaftar di akun',
+                ]);
+                return redirect('/forgot');
+            }
+
+            $mailData = [
+                'title' => 'Mail from umkmlevelup.id',
+                'body' => 'Berikut email lupa password anda.',
+                'link' => env('APP_URL')."/reset-password/".$encryptId,
+                'email' => $request->email,
+            ];
+            dispatch(new SendEmailForgotJob($mailData));
+            // Mail::to($mailData['email'])->send(new \App\Mail\ForgotMail($mailData));
+    
+        
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            // dd($th);
+            return back()->with('success', [
                 'type' => 'error',
-                'message' => 'akun dengan email "'.$request->email.'" tidak terdaftar di akun',
+                'message' => 'Ada Kesalahan, '.$th->getMessage(),
             ]);
-            return view('forgot');
+            //throw $th;
         }
-
-        $mailData = [
-            'title' => 'Mail from umkmlevelup.id',
-            'body' => 'Berikut email lupa password anda.',
-            'link' => env('APP_URL')."/reset-password/".$encryptId
-        ];
-    
-        Mail::to($request->email)->send(new ForgotMail($mailData));
-    
-        $d['email'] = $request->email;
-
-        $request->session()->flash('success', [
+        
+        return redirect('/login')->with('success', [
             'type' => 'info',
             'message' => 'email "lupa password" sudah terkirim, silahkan periksa email anda.',
         ]);
-        return view('login');
     }
 
     public function doReset($url) {

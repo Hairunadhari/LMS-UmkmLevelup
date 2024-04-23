@@ -96,8 +96,9 @@
 <div class="container-fluid">
     <form method="POST" action="{{ route('submit-otp') }}">
         @csrf
-        <input type="hidden" class="hidden" name="id_user" id="id_user" value="{{$id_user}}">
+        {{-- <input type="hidden" class="hidden" name="id_user" id="id_user" value="{{$id_user}}"> --}}
         {{-- <input type="hidden" class="hidden" name="email" id="email_user" value="hairunadhari@gmail.com"> --}}
+        <input type="hidden" class="hidden" name="id_user" id="id_user" value="{{$id_user}}">
         <input type="hidden" class="hidden" name="email" id="email_user" value="{{$email}}">
         <div class="container">
             <div>

@@ -7,6 +7,7 @@ use Mail;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Mail\DemoMail;
+use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -189,8 +190,10 @@ public function register(Request $request)
                     'name' => $request->name,
                     'no_wa' => $request->no_wa,
                     'password' => Hash::make($request->password),
+                    // 'email_verified_at' => date("Y-m-d H:i:s"),
                 ]);
             } else{
+             
                 DB::table('users')->insert([
                     'name' => $request->name,
                     'no_wa' => $request->no_wa,
@@ -198,7 +201,9 @@ public function register(Request $request)
                     'password' => Hash::make($request->password),
                     'aktif' => 1,
                     'final_level' => 0,
+                    // 'email_verified_at' => date("Y-m-d H:i:s"),
                 ]);
+              
             }
             
         }else{
@@ -223,37 +228,38 @@ public function register(Request $request)
             'created_at' => $now,
         ]);
     
+        
         $mailData = [
             'title' => 'Mail from noreply@umkmlevelup.id',
             'body' => 'Harap isi kode otp berikut ini.',
-            'otp' => $otp
+            'otp' => $otp,
+            'email' => $request->email
         ];
-        
-        Mail::to($request->email)->send(new DemoMail($mailData));
+        dispatch(new SendEmailJob($mailData));
         $request->session()->forget('alert');
         $encryptEmail = Crypt::encrypt($request->email);
         $encryptIduser = Crypt::encrypt($getuser->id);
+
         DB::commit();
 
     } catch (\Throwable $th) {
-        // dd($th);
+        DB::rollback();
         return back()->with('success', [
             'type' => 'error',
             'message' => $th->getMessage(),
         ]);
-        DB::rollBack();
     }
     
 
-    return redirect('verifikasiOtp/'.$encryptEmail.'/'.$encryptIduser);
+    return redirect('/verifikasiOtp/'.$encryptEmail.'/'.$encryptIduser);
+   
 
 }
 
 public function submitOtp(Request $request){
-    $otp = $request->otp;
-    // dd($request->id_user);
-    // dd($checkOtp);
     try {
+        DB::beginTransaction();
+        $otp = $request->otp;
         $checkOtp = DB::table('t_otp')->where('id_user', $request->id_user)->where('status', 0)->latest()->first();
         if($checkOtp->kode_otp == $otp){
             DB::table('t_otp')->where('id_user', $request->id_user)->where('kode_otp',$otp)->where('status', 0)->latest()->update([
@@ -265,14 +271,15 @@ public function submitOtp(Request $request){
         }else{
             throw new \Exception('');
         }
+        DB::commit();
     } catch (\Exception $th) {
+        DB::rollback();
         //throw $th;
         $request->session()->flash('alert', [
             'type' => 'error',
             'message' => 'Kode OTP salah.',
         ]);
         $d['email'] = $request->email;
-        $d['id_user'] = $request->id_user;
         
         return back()->with($d);
     }
@@ -281,49 +288,102 @@ public function submitOtp(Request $request){
         'type' => 'info',
         'message' => 'Selamat anda sudah terverifikasi, silahkan login kembali menggunakan email dan password anda.',
     ]);
-    return redirect('login');
+    return redirect('/login');
 }
 
 
-    public function verifikasiOtp($encryptEmail, $encryptId_user){
+    public function verifikasiOtp($encryptEmail, $encryptIduser){
         $email = Crypt::decrypt($encryptEmail);
-        $id_user = Crypt::decrypt($encryptId_user);
-        return view('verifikasiOtp', compact('email', 'id_user'));
+        $id_user = Crypt::decrypt($encryptIduser);
+        return view('verifikasiOtp', compact('email','id_user'));
     }
 
     public function resend_otp($email_user){
-        $getuser = DB::table('users')->where('aktif', 1)->where('email',$email_user)->orderBy('id','desc')->first();           
-        $otp = mt_rand(100000, 999999);
-        $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
-        $now = $konvers_tanggal->format('Y-m-d H:i:s');
-        DB::table('t_otp')->insert([
-            'kode_otp' => $otp,
-            'id_user' => $getuser->id,
-            'status' => 0,
-            'created_at' => $now,
-        ]);
-    
-        $mailData = [
-            'title' => 'Mail from noreply@umkmlevelup.id',
-            'body' => 'Harap isi kode otp berikut ini.',
-            'otp' => $otp
-        ];
-        
-        Mail::to($email_user)->send(new DemoMail($mailData));
+        try {
+            DB::beginTransaction();
+            $getuser = DB::table('users')->where('aktif', 1)->where('email',$email_user)->orderBy('id','desc')->first();           
+            $otp = mt_rand(100000, 999999);
+            $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+            $now = $konvers_tanggal->format('Y-m-d H:i:s');
+            DB::table('t_otp')->insert([
+                'kode_otp' => $otp,
+                'id_user' => $getuser->id,
+                'status' => 0,
+                'created_at' => $now,
+            ]);
+            
+            $mailData = [
+                'title' => 'Mail from noreply@umkmlevelup.id',
+                'body' => 'Harap isi kode otp berikut ini.',
+                'otp' => $otp,
+                'email' => $email_user
+            ];
+            
+            dispatch(new SendEmailJob($mailData));
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            // dd($th)
+        }
         return response()->json('success');
     }
 
-    public function tes(){
-        $otp = mt_rand(100000, 999999);
-       
-        $mailData = [
-            'title' => 'Mail from noreply@umkmlevelup.id',
-            'body' => 'Harap isi kode otp berikut ini.',
-            'otp' => $otp
-        ];
+    public function tes(){ 
+        try {
+            DB::beginTransaction();
+            // Loop untuk mengirim email sebanyak 100 kali
+            for ($i = 2540; $i <= 2543; $i++) {
+                $otp = mt_rand(100000, 999999);
+                
+                $mail = 'arunzxxxxxxx+' . $i . '@gmail.com'; // Menambahkan nomor ke alamat email
+                $mailData = [
+                    'title' => 'Mail from noreply@umkmlevelup.id',
+                    'body' => 'Harap isi kode otp berikut ini.',
+                    'otp' => $otp,
+                    'email' => $mail,
+                ];
         
-        Mail::to('siarun666@gmail.com')->send(new DemoMail($mailData));
+                // Menggunakan alamat email yang berbeda untuk setiap iterasi
+                DB::table('users')->insert([
+                    'name' => 'testing'.$i,
+                    'no_wa' => 22,
+                    'email' => $mail,
+                    'password' => Hash::make('testing'),
+                    'aktif' => 1,
+                    'final_level' => 0,
+                ]);
+                dispatch(new SendEmailJob($mailData));
+               
+            }
+                // $otp = mt_rand(100000, 999999);
+                
+                // $mail = 'arunzxxxxx123xx@gmail.com'; // Menambahkan nomor ke alamat email
+                // $mailData = [
+                //     'title' => 'Mail from noreply@umkmlevelup.id',
+                //     'body' => 'Harap isi kode otp berikut ini.',
+                //     'otp' => $otp,
+                //     'email' => $mail,
+                // ];
+        
+                // // Menggunakan alamat email yang berbeda untuk setiap iterasi
+                // DB::table('users')->insert([
+                //     'name' => 'testing',
+                //     'no_wa' => 22,
+                //     'email' => $mail,
+                //     'password' => Hash::make('testing'),
+                //     'aktif' => 1,
+                //     'final_level' => 0,
+                // ]);
+                // dispatch(new SendEmailJob($mailData));
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            // Menangani kesalahan
+        }
+        
         return 'success';
+        
     }
 
     public function tesipin(){
