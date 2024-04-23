@@ -38,7 +38,6 @@
   .daftar-button{
     background: linear-gradient(93.89deg, #cc6600 0%, #fe9d01 47.54%, #ffcd18 100.92%);
     border:none;
-    width: 100%;
 
   }
   .form-floating{
@@ -52,10 +51,6 @@
 
         .daftar-button {
             width: 40%;
-<<<<<<< HEAD
-=======
-            margin-top: 1rem;
->>>>>>> registertanpaotp
         }
         .container-button{
           display: block;
@@ -104,16 +99,12 @@
                         Login
                     </button>
                     <div class="conbutton-daftar">
-                      {{-- <div>
+                      <div>
                         <p>Lupa Password? <a href="forgot">klik disini</a></p>
                         Belum memiliki akun? 
 
                       </div>
                         <a type="button" class="daftar-button btn btn-primary" style="width: 40%"  href="pendaftaran">
-                            Daftar
-                        </a> --}}
-
-                        <a type="button" class="daftar-button btn btn-primary"   href="pendaftaran">
                             Daftar
                         </a>
 
