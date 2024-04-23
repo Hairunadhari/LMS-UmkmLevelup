@@ -190,7 +190,6 @@ public function register(Request $request)
                     'name' => $request->name,
                     'no_wa' => $request->no_wa,
                     'password' => Hash::make($request->password),
-                    // 'email_verified_at' => date("Y-m-d H:i:s"),
                 ]);
             } else{
              
