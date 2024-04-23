@@ -331,49 +331,34 @@ public function submitOtp(Request $request){
         try {
             DB::beginTransaction();
             // Loop untuk mengirim email sebanyak 100 kali
-            for ($i = 2540; $i <= 2543; $i++) {
+            for ($i = 2600; $i <= 2603; $i++) {
                 $otp = mt_rand(100000, 999999);
                 
                 $mail = 'arunzxxxxxxx+' . $i . '@gmail.com'; // Menambahkan nomor ke alamat email
+                $a = DB::table('users')->where('email',$mail)->where('email_verified_at','!=',null)->first();
                 $mailData = [
                     'title' => 'Mail from noreply@umkmlevelup.id',
                     'body' => 'Harap isi kode otp berikut ini.',
                     'otp' => $otp,
                     'email' => $mail,
                 ];
-        
-                // Menggunakan alamat email yang berbeda untuk setiap iterasi
-                DB::table('users')->insert([
-                    'name' => 'testing'.$i,
-                    'no_wa' => 22,
-                    'email' => $mail,
-                    'password' => Hash::make('testing'),
-                    'aktif' => 1,
-                    'final_level' => 0,
-                ]);
+                    # code...
+            
+                    // Menggunakan alamat email yang berbeda untuk setiap iterasi
+                    DB::table('users')->insert([
+                        'name' => 'testing'.$i,
+                        'no_wa' => 22,
+                        'email' => $mail,
+                        'password' => Hash::make('testing'),
+                        'aktif' => 1,
+                        'final_level' => 0,
+                    ]);
+               
+                
                 dispatch(new SendEmailJob($mailData));
                
             }
-                // $otp = mt_rand(100000, 999999);
                 
-                // $mail = 'arunzxxxxx123xx@gmail.com'; // Menambahkan nomor ke alamat email
-                // $mailData = [
-                //     'title' => 'Mail from noreply@umkmlevelup.id',
-                //     'body' => 'Harap isi kode otp berikut ini.',
-                //     'otp' => $otp,
-                //     'email' => $mail,
-                // ];
-        
-                // // Menggunakan alamat email yang berbeda untuk setiap iterasi
-                // DB::table('users')->insert([
-                //     'name' => 'testing',
-                //     'no_wa' => 22,
-                //     'email' => $mail,
-                //     'password' => Hash::make('testing'),
-                //     'aktif' => 1,
-                //     'final_level' => 0,
-                // ]);
-                // dispatch(new SendEmailJob($mailData));
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();

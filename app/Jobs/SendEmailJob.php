@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Mail;
 use DB;
-
+use App\Mail\DemoMail;
 class SendEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -24,16 +24,16 @@ class SendEmailJob implements ShouldQueue
 
     public function handle()
     {
-        try {
-            DB::beginTransaction();
-            
-            Mail::to($this->mailData['email'])->send(new app\Mail\DemoMail($this->mailData));
+        Mail::to($this->mailData['email'])->send(new DemoMail($this->mailData));
             DB::table('users')->where('email',$this->mailData['email'])->update([
                 'send_email' => 1
             ]);
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollback();
-        }
+        // try {
+        //     DB::beginTransaction();
+            
+        //     DB::commit();
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        // }
     }
 }
