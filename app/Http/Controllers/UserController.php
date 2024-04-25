@@ -236,15 +236,15 @@ class UserController extends Controller
             //code...
             $cekEmail = DB::table('users')->where('email',$request->email)->first();
             $encryptEmail = Crypt::encrypt($request->email);
-            if ($cekEmail != null) {
-                return redirect('/pass-view/'.$encryptEmail);
-            }else {
+            if ($cekEmail == null) {
                 return back()->with(['error'=>'Email Tidak Ditemukan!']);
             }
+            
         } catch (\Throwable $th) {
             //throw $th;
             dd($th);
         }
+        return redirect('/pass-view/'.$encryptEmail);
     }
     public function pass_view($encryptEmail){
         $email = Crypt::decrypt($encryptEmail);
