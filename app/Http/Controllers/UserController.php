@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 
+
 class UserController extends Controller
 {
     public function submitProfil(Request $request)
@@ -224,5 +225,66 @@ class UserController extends Controller
             'type' => 'info',
             'message' => 'password anda sudah direset, silahkan login kembali',
         ]);
+    }
+
+    public function reset_view(){
+        return view('reset-pass');
+    }
+
+    public function cek_email(Request $request){
+        try {
+            //code...
+            $cekEmail = DB::table('users')->where('email',$request->email)->first();
+            $encryptEmail = Crypt::encrypt($request->email);
+            if ($cekEmail != null) {
+                return redirect('/pass-view/'.$encryptEmail);
+            }else {
+                return back()->with(['error'=>'Email Tidak Ditemukan!']);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd($th);
+        }
+    }
+    public function pass_view($encryptEmail){
+        $email = Crypt::decrypt($encryptEmail);
+        
+        return view('pass-view',compact('email'));
+
+    }
+    public function update_password(Request $request){
+        $validator = Validator::make($request->all(), [
+            'password'              => 'required|min:8',
+        ],
+    [
+        'password.min'=>'Password Minimal 8 Karakter'
+    ]);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+            $alertMessage = $messages->first();
+          
+            // Tampilkan pesan error
+            return back()->with([
+              'error' => $alertMessage,
+            ]);
+          }
+
+          try {
+            DB::beginTransaction();
+            DB::table('users')->where('email',$request->email)->update([
+                'password'=> Hash::make($request->password),
+            ]);
+            DB::commit();
+        } catch (\Throwable $th) {
+              DB::rollback();
+            return back()->with(['error'=>$th->getMessage()]);
+        }
+         return redirect('/reset-pass')->with(['success'=>'Password Berhasil Diupdate!']);
+
+    }
+
+    public function privacy_policy(){
+        return view('privacy-policy');
     }
 }

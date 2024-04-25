@@ -98,6 +98,11 @@ Route::get('/tesipin', [App\Http\Controllers\Auth\RegisterController::class, 'te
 
 Route::get('/artikel', [ArtikelController::class, 'index']);
 Route::get('/artikel/detail/{id}', [ArtikelController::class, 'detail']);
+Route::get('/reset-pass', [UserController::class, 'reset_view']);
+Route::post('/cek-email', [UserController::class, 'cek_email']);
+Route::get('/pass-view/{email}', [UserController::class, 'pass_view']);
+Route::post('/update-password', [UserController::class, 'update_password']);
+Route::get('/privacy-police', [UserController::class, 'privacy_policy']);
 
 // Route::post('/add-sub-materi/{id}/{name}',function(){
 //     echo 1;
