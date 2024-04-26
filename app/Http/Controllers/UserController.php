@@ -287,4 +287,8 @@ class UserController extends Controller
     public function privacy_policy(){
         return view('privacy-policy');
     }
+
+    public function terms_of_service(){
+        return view('terms-of-service');
+    }
 }

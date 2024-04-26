@@ -103,6 +103,7 @@ Route::post('/cek-email', [UserController::class, 'cek_email']);
 Route::get('/pass-view/{email}', [UserController::class, 'pass_view']);
 Route::post('/update-password', [UserController::class, 'update_password']);
 Route::get('/privacy-police', [UserController::class, 'privacy_policy']);
+Route::get('/terms-of-service', [UserController::class, 'terms_of_service']);
 
 // Route::post('/add-sub-materi/{id}/{name}',function(){
 //     echo 1;
