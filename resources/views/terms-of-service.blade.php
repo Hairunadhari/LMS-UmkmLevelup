@@ -9,60 +9,56 @@
 <body>
     <h2>
 
-        Ketentuan Layanan (Term of Service) UMKM Level Up
+        Terms of Service for UMKM Level Up
     </h2>
 <h3>
 
-    Pendahuluan
+    Introduction
 </h3>
-Selamat datang di UMKM Level Up! Dengan menggunakan situs web ini, Anda setuju untuk mematuhi dan terikat oleh ketentuan layanan yang berlaku. Oleh karena itu, persyaratan layanan ini berusaha agar kami dapat mengetahui apa yang pengguna harapkan kepada kami dalam menggunakan UMKM Level Up dan apa yang kami harapkan dari pengguna, agar menciptakan hubungan yang harmonis dan kelancaran dalam pelayanan yang kami berikan. Oleh karena itu Harap baca ketentuan ini dengan cermat sebelum menggunakan situs UMKM Level Up.
+Welcome to MSMEs Level Up! By using this website, you agree to comply with and be bound by the applicable terms of service. Therefore, these terms of service strive so that we can find out what users expect us to use Level Up MSMEs and what we expect from users, in order to create a harmonious and smooth relationship in the services we provide. Therefore, please read these provisions carefully before using the UMKM Level Up website.
 <h3>
 Conditions of use
 
 </h3>
-Dengan menggunakan situs web ini, Anda menyetujui bahwa Anda telah membaca dan memahami Perjanjian ini dan Anda setuju untuk mematuhi ketentuannya. Jika Anda tidak ingin terikat dengan ketentuan Perjanjian ini, Anda disarankan untuk meninggalkan situs UMKM Level Up ini. Kami hanya memberikan penggunaan dan akses situs web ini, produknya, dan layanannya kepada pengguna yang telah menerima ketentuannya. Anda juga menyetujui untuk menggunakan situs ini dengan baik dan tidak menyalahgunakannya.
+By using this website, you agree that you have read and understood this Agreement and you agree to abide by its terms. If you do not wish to be bound by the terms of this Agreement, you are advised to leave this Level Up MSME site. We only provide use and access to this website, its products, and services to users who have accepted its terms. You also agree to use this site properly and not to abuse it.
 <h3>
-Kebijakan Privasi
+    Privacy Policy
 
 </h3>
-Sebelum menggunakan web kami, perlu diketahui bahwa kami mengumpulkan beberapa informasi yang Anda berikan saat menggunakan web ini. Informasi yang dikumpulkan akan digunakan sesuai dengan kebijakan privasi kami. Alangkah baik nya Anda membaca ketentuan Kebijakan Privasi kami terlebih dahulu sebelum mengakses web kami. 
+Before using our website, please be aware that we collect some information that you provide when using this website. The information collected will be used in accordance with our privacy policy. It would be nice for you to read the terms of our Privacy Policy first before accessing our web. 
 <h3>
-Pembatasan Umur
+    Age Restriction
 
 </h3>
-Sebelum mengakses layanan pada web Kami, Anda harus berumur minimal 17 tahun dan telah memiliki identitas resmi penduduk yang diterbitkan oleh instansi resmi yang berlaku di Republik Indonesia. 
+Before accessing the services on our website, you must be at least 17 years old and have an official resident identity issued by an official agency in force in the Republic of Indonesia. 
 <h3>
-Kekayaan Intelektual 	
+    Intellectual Property 	
 
 </h3>
-Anda mengetahui dan setuju bahwa semua materi, produk, dan layanan yang disediakan di situs web ini adalah milik Kami, Anda juga setuju bahwa Anda tidak akan diperkenankan untuk mereproduksi atau mendistribusikan kembali tanpa izin dari Kami terkait kekayaan intelektual dengan cara apa pun, termasuk pendaftaran merek dagang elektronik, digital, atau baru. 
+You acknowledge and agree that all materials, products, and services provided on this website are Our property, You also agree that You will not be allowed to reproduce or redistribute without permission from Us regarding intellectual property in any way, including electronic, digital, or new trademark registration. 
 <h3>
-Akun Pengguna
+    User Account
 
 </h3>
-Ketika membuat akun di web kami, Anda mungkin diminta untuk mendaftar dan memberikan informasi pribadi. Anda setuju bahwa data-data yang diberikan kepada kami adalah informasi yang akurat dan setuju untuk bertanggung jawab untuk memastikan keabsahan informasi yang Anda berikan, dan Anda bertanggung jawab untuk menjaga keselamatan dan keamanan informasi identitas Anda. Anda juga bertanggung jawab atas semua aktivitas yang terjadi menggunakan akun atau kata sandi Anda.
-Jika Anda merasa ada kemungkinan masalah terkait keamanan akun Anda di situs web, segera beri tahu kami agar kami dapat mengatasinya. 
-Kami berhak untuk menghentikan atau membatasi akses Anda ke situs web ini jika Anda melanggar ketentuan ini. 
-Anda dapat menghapus akun Anda kapan saja dengan mengikuti prosedur yang ditentukan di situs web kami.
+When creating an account on our website, you may be asked to register and provide personal information. You agree that the data provided to us is accurate information and agree to be responsible for ensuring the validity of the information you provide, and you are responsible for maintaining the safety and security of your identity information. You are also responsible for all activities that occur using your account or password.
+If you think there may be an issue with the security of your account on the website, please let us know immediately so we can resolve it. 
+We reserve the right to terminate or restrict your access to this website if you breach these terms. 
+You can delete your account at any time by following the procedure specified on our website.
 <h3>
-Hukum yang Berlaku
+    Applicable Law
 
 </h3>
-Dengan menggunakan dan mengunjungi web Kami, Anda setuju untuk mematuhi undang-undang dan hukum yang berlaku di Republik Indonesia. Setiap perselisihan yang timbul akan diselesaikan melalui mekanisme hukum yang berlaku.
+By using and visiting our website, you agree to comply with the laws and regulations applicable in the Republic of Indonesia. Any dispute that arises will be resolved through applicable legal mechanisms.
 <h3>
-Perubahan Ketentuan
+    Changes to Terms
 
 </h3>
-Kami dapat memperbarui ketentuan ini kapan saja dengan memberi tahu Anda melalui situs web atau email.
-Anda setuju pada perubahan ketentuan yang kami perbarui jika Anda melanjutkan untuk menggunakan web Kami setelah membaca perubahan ketentuan.
+We may update these terms at any time by notifying you via the website or email.
+You agree to the updated terms changes if you continue to use our website after reading the modified terms.
 <h3>
-Hubungi Kami
+    Contact Us
 
 </h3>
-Jika memiliki pertanyaan pada ketentuan ini, Anda dapat menghubungi kami agar dapat didiskusikan bersama mengenai ketentuan layanan ini.
-.
-
-
-
+If you have any questions on these terms, you can contact us so that you can discuss together these terms of service.
 </body>
 </html>
