@@ -331,7 +331,7 @@ public function submitOtp(Request $request){
         try {
             DB::beginTransaction();
             // Loop untuk mengirim email sebanyak 100 kali
-            for ($i = 2600; $i <= 2603; $i++) {
+            for ($i = 2605; $i <= 2620; $i++) {
                 $otp = mt_rand(100000, 999999);
                 
                 $mail = 'arunzxxxxxxx+' . $i . '@gmail.com'; // Menambahkan nomor ke alamat email
