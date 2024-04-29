@@ -24,7 +24,7 @@
     @media only screen and (max-width: 600px) {
         #pdf-container {
             height: max-content;
-            width: 100%;
+            width: max-content;
             margin: auto
         }
         .navigation-buttons {
@@ -184,7 +184,7 @@
         setInterval(function () {
             $('#chats').load(location.href + ' #chats');
         }, 5000);
-        // const fileUrl = 'http://127.0.0.1:8000/pdfkominfo.pdf';
+        // const fileUrl = 'http://127.0.0.1:8080/pdfkominfo.pdf';
         let fileUrl = $('#file_location').val();
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -243,7 +243,7 @@
             pdfDoc.getPage(pageNumber).then((page) => {
                 let scale = 0.6; // Default scale
                 if (window.innerWidth <= 600) {
-                    scale = 0.4; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+                    scale = 0.2; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
                 }
                 const viewport = page.getViewport({
                     scale: scale
