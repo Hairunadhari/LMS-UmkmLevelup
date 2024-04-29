@@ -8,13 +8,6 @@
         background-color: #3b3b3b;
         border-radius: 5px;
     }
-    #pdf-viewer {
-        margin-top: 2%;
-        padding: 10px 70px;
-        height: 100vh;
-        background-color: #3b3b3b;
-        border-radius: 5px;
-    }
 
     .navigation-buttons {
         display: flex;
@@ -250,7 +243,7 @@
             pdfDoc.getPage(pageNumber).then((page) => {
                 let scale = 0.6; // Default scale
                 if (window.innerWidth <= 600) {
-                    scale = 0.3; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+                    scale = 0.4; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
                 }
                 const viewport = page.getViewport({
                     scale: scale
