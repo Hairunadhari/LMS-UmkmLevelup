@@ -247,33 +247,30 @@
         };
 
         const renderPage = (pageNumber, canvas) => {
-    pdfDoc.getPage(pageNumber).then((page) => {
-        let scale;
-        if (window.innerWidth <= window.innerHeight) {
-            scale = window.innerHeight / page.getViewport({ scale: 1 }).height;
-        } else {
-            scale = window.innerWidth / page.getViewport({ scale: 1 }).width;
-        }
-        
-        const viewport = page.getViewport({ scale });
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+            pdfDoc.getPage(pageNumber).then((page) => {
+                let scale = 0.6; // Default scale
+                if (window.innerWidth <= 600) {
+                    scale = 0.3; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+                }
+                const viewport = page.getViewport({
+                    scale: scale
+                });
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
 
-        const ctx = canvas.getContext('2d');
-        const renderContext = {
-            canvasContext: ctx,
-            viewport: viewport
-        };
+                const ctx = canvas.getContext('2d');
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
 
-        page.render(renderContext);
-        const pageKeElem = document.getElementById('pageKe');
-        const totalHalamanElem = document.getElementById('totalHalaman');
+                page.render(renderContext);
+                const pageKeElem = document.getElementById('pageKe');
+                const totalHalamanElem = document.getElementById('totalHalaman');
 
-        pageKeElem.textContent = pageNumber;
-        totalHalamanElem.textContent = pdfDoc.numPages;
-    });
-};
-
+                pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
+                totalHalamanElem.textContent = pdfDoc.numPages;
+            });
         };
 
         loadPdf();
