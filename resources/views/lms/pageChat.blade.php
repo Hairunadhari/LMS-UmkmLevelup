@@ -3,6 +3,13 @@
 <style>
     #pdf-container {
         margin-top: 2%;
+        /* padding: 10px; */
+        height: max-content;
+        background-color: #3b3b3b;
+        border-radius: 5px;
+    }
+    #pdf-viewer {
+        margin-top: 2%;
         padding: 10px 70px;
         height: 100vh;
         background-color: #3b3b3b;
@@ -16,10 +23,16 @@
     .buttondetail{
             display: none;
         }
+        .content-materi{
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            margin: 0;
+        }
     @media only screen and (max-width: 600px) {
         #pdf-container {
-            padding: 0;
             height: max-content;
+            width: max-content;
+            margin: auto
         }
         .navigation-buttons {
             display: block;
@@ -33,6 +46,10 @@
         /* .buttondetail{
             display: inline;
         } */
+        .content-materi{
+            padding: 0px;
+            margin: 0px;
+        }
         
     }
 
@@ -44,7 +61,7 @@
         <div class="row">
         </div>
     </div>
-    <div class="row px-4 px-lg-5 m-0">
+    <div class="row  content-materi">
         <div class="tp_left d-flex align-items-center gap-4 mt-3">
             <div class="tpl_img">
                 <img src="{{asset ('../img/senbud-icon.png')}} " alt="" class="">
@@ -100,11 +117,6 @@
                             </div>
 
                         </div>
-                        <input style="display: none" type="text" value="{{$sub_materi->id}}" id="id_submateri">
-                        {{-- <input style="display: none" type="text" value="/tes.pdf" id="file_location"> --}}
-
-                        {{-- <input style="display: none" type="text" value="https://www.youtube.com/embed/PH7JrJ4_MBw?si=cryHmtkj4tbGsUW4" id="video_url"> --}}
-                        {{-- <input style="display: none" type="text" value="/storage/data_upload_lms/materi.mp4" id="video_url"> --}}
 
                         <input style="display: none" type="text" value="{{$sub_materi->file_location}}"
                         id="file_location">
@@ -173,21 +185,23 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.7/pdfobject.min.js" integrity="sha512-g16L6hyoieygYYZrtuzScNFXrrbJo/lj9+1AYsw+0CYYYZ6lx5J3x9Yyzsm+D37/7jMIGh0fDqdvyYkNWbuYuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
 <script>
     $(document).ready(function () {
         setInterval(function () {
             $('#chats').load(location.href + ' #chats');
         }, 5000);
-        // const fileUrl = 'https://admin.umkmlevelup.id/storage/data_upload_lms/2xr1699348192.pdf';
+        // const fileUrl = 'http://127.0.0.1:8000/pdfkominfo.pdf';
+        let fileUrl = $('#file_location').val();
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
         console.log('csrftoken', csrfToken);
-        let fileUrl = $('#file_location').val();
         let videoUrl = $('#video_url').val();
         let id_materi = $('#id_materi').val();
         console.log("file pdf", fileUrl)
         console.log("file video", videoUrl)
+        
+
 
 
         let currentPage = 1;
@@ -234,9 +248,9 @@
 
         const renderPage = (pageNumber, canvas) => {
             pdfDoc.getPage(pageNumber).then((page) => {
-                let scale = 1; // Default scale
+                let scale = 0.6; // Default scale
                 if (window.innerWidth <= 600) {
-                    scale = 0.5; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+                    scale = 0.2; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
                 }
                 const viewport = page.getViewport({
                     scale: scale
