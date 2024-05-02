@@ -253,7 +253,7 @@
         };
         const renderPage = (pageNumber, canvas) => {
     pdfDoc.getPage(pageNumber).then((page) => {
-        // Mendapatkan skala berdasarkan lebar layar
+        // Mendapatkan skala berdasarkan lebar layarowewiew
         let scale = 1;
         const viewport = page.getViewport({ scale: scale });
         let desiredWidth = window.innerWidth;
