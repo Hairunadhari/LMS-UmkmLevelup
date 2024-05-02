@@ -58,7 +58,7 @@
 </style>
 <link rel="stylesheet" href=" {{ asset('css/pageChat.css')}}">
 
-<div class="Content ">
+<div class="Content">
     <div id="video-container" style=" padding: 10px; height:auto; background-color:#3b3b3b; border-radius:5px">
         <div class="row">
         </div>
@@ -253,6 +253,7 @@
         };
         const renderPage = (pageNumber, canvas) => {
     pdfDoc.getPage(pageNumber).then((page) => {
+        // Mendapatkan skala berdasarkan lebar layarowewiew
         // Mendapatkan skala berdasarkan lebar layarowewiew
         let scale = 1;
         const viewport = page.getViewport({ scale: scale });
