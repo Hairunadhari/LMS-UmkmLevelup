@@ -48,6 +48,10 @@
             padding: 0px;
             margin: 0px;
         }
+        #loadingpdf{
+        text-align: center;
+        padding-top: 50px;
+    }
         
     }
 
@@ -248,46 +252,49 @@
             }
         };
         const renderPage = (pageNumber, canvas) => {
-    pdfDoc.getPage(pageNumber).then((page) => {
-        let scale = 0.6; // Default scale
+            pdfDoc.getPage(pageNumber).then((page) => {
+                let scale = 0.5; // Default scale
 
-        const viewport = page.getViewport({
-            scale: scale
-        });
+                const viewport = page.getViewport({
+                    scale: scale
+                });
 
-        // Hitung lebar yang diinginkan
-        let desiredWidth = window.innerWidth; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
-        if (window.innerWidth <= 600) {
-            desiredWidth *= 0.8; // Misalnya, menggunakan 80% dari lebar layar
-        } else {
-            desiredWidth *= 0.62;
-        }
+                // Hitung lebar yang diinginkan
+                let desiredWidth = window.innerWidth; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+                if (window.innerWidth <= 600) {
+                    desiredWidth *= 0.8; // Misalnya, menggunakan 80% dari lebar layar
+                } else {
+                    desiredWidth *= 0.62;
+                }
 
-        // Hitung skala yang diperlukan untuk menyesuaikan lebar
-        const scaleNeeded = desiredWidth / viewport.width;
+                // Hitung skala yang diperlukan untuk menyesuaikan lebar
+                const scaleNeeded = desiredWidth / viewport.width;
 
-        // Terapkan viewport dengan skala yang dihitung
-        const newViewport = page.getViewport({
-            scale: scale * scaleNeeded // Mengkombinasikan skala awal dengan skala yang diperlukan untuk lebar baru
-        });
+                // Terapkan viewport dengan skala yang dihitung
+                const newViewport = page.getViewport({
+                    scale: scale * scaleNeeded // Mengkombinasikan skala awal dengan skala yang diperlukan untuk lebar baru
+                });
 
-        canvas.width = desiredWidth;
-        canvas.height = newViewport.height;
+                canvas.width = desiredWidth;
+                canvas.height = newViewport.height;
+                if (window.innerWidth <= 600) {
+                    canvas.height *= 2;
+                }
 
-        const ctx = canvas.getContext('2d');
-        const renderContext = {
-            canvasContext: ctx,
-            viewport: newViewport
+                const ctx = canvas.getContext('2d');
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: newViewport
+                };
+
+                page.render(renderContext);
+                const pageKeElem = document.getElementById('pageKe');
+                const totalHalamanElem = document.getElementById('totalHalaman');
+
+                pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
+                totalHalamanElem.textContent = pdfDoc.numPages;
+            });
         };
-
-        page.render(renderContext);
-        const pageKeElem = document.getElementById('pageKe');
-        const totalHalamanElem = document.getElementById('totalHalaman');
-
-        pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
-        totalHalamanElem.textContent = pdfDoc.numPages;
-    });
-};
 
 
 
