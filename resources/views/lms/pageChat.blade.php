@@ -258,7 +258,7 @@
         const viewport = page.getViewport({ scale: scale });
         let desiredWidth = window.innerWidth;
 
-        // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+        // Jika lebar layar kurang dari atau sama dengan 600px
         if (window.innerWidth <= 600) {
             desiredWidth *= 0.8; // Misalnya, menggunakan 80% dari lebar layar
             scale = desiredWidth / viewport.width;
