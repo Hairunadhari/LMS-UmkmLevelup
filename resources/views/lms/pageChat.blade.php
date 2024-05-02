@@ -21,6 +21,11 @@
             padding-right: 1.5rem;
             margin: 0;
         }
+
+    #loadingpdf{
+        text-align: center;
+        padding-top: 200px;
+    }
     @media only screen and (max-width: 600px) {
         #pdf-container {
             height: max-content;
@@ -84,16 +89,19 @@
                                     <i class="fas fa-eye"></i> Detail Materi
                                 </button> --}}
                                 <span>Page : <span id="pageKe"></span> / <span id="totalHalaman"></span></span>
+                               
+                            </div>
+                        </div>
+                        <div id="loadingpdf">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
                             </div>
                         </div>
                         <div style="" id="pdf-container">
                             <div id="controls" class="carousel slide" data-interval="false">
                                 <!-- Button trigger modal -->
                                 <div class="carousel-inner" data-interval="false">
-                                    <div class="spinner-border text-light" style="display: none" id="pdfLoader"
-                                        role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
+                                   
                                 </div>
                                 <button class="carousel-control-prev" id="prev-slide" style="z-index: 9999;  "
                                     type="button" data-bs-target="#controls" data-bs-slide="prev">
@@ -184,7 +192,8 @@
         setInterval(function () {
             $('#chats').load(location.href + ' #chats');
         }, 5000);
-        // const fileUrl = 'http://127.0.0.1:8080/pdfkominfo.pdf';
+        // const fileUrl = 'http://127.0.0.1:8000/pdfkominfo.pdf';
+        // const fileUrl = 'http://127.0.0.1:8000/pdf2.pdf';
         let fileUrl = $('#file_location').val();
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -203,8 +212,8 @@
         const loadPdf = async () => {
             try {
                 // Tampilkan loader saat PDF dimuat
-                const pdfLoader = document.getElementById('pdfLoader');
-                pdfLoader.style.display = 'block';
+                const loadingpdf = document.getElementById('loadingpdf');
+                loadingpdf.style.display = 'block';
 
                 pdfDoc = await pdfjsLib.getDocument(fileUrl).promise;
 
@@ -230,41 +239,57 @@
                 }
 
                 // Sembunyikan loader setelah PDF dimuat
-                pdfLoader.style.display = 'none';
+                loadingpdf.style.display = 'none';
             } catch (error) {
                 console.error('Error loading PDF:', error);
                 // Sembunyikan loader jika terjadi kesalahan saat memuat PDF
-                const pdfLoader = document.getElementById('pdfLoader');
-                pdfLoader.style.display = 'none';
+                const loadingpdf = document.getElementById('loadingpdf');
+                loadingpdf.style.display = 'none';
             }
         };
-
         const renderPage = (pageNumber, canvas) => {
-            pdfDoc.getPage(pageNumber).then((page) => {
-                let scale = 0.6; // Default scale
-                if (window.innerWidth <= 600) {
-                    scale = 0.25; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
-                }
-                const viewport = page.getViewport({
-                    scale: scale
-                });
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+    pdfDoc.getPage(pageNumber).then((page) => {
+        let scale = 0.6; // Default scale
 
-                const ctx = canvas.getContext('2d');
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
+        const viewport = page.getViewport({
+            scale: scale
+        });
 
-                page.render(renderContext);
-                const pageKeElem = document.getElementById('pageKe');
-                const totalHalamanElem = document.getElementById('totalHalaman');
+        // Hitung lebar yang diinginkan
+        let desiredWidth = window.innerWidth; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+        if (window.innerWidth <= 600) {
+            desiredWidth *= 0.8; // Misalnya, menggunakan 80% dari lebar layar
+        } else {
+            desiredWidth *= 0.62;
+        }
 
-                pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
-                totalHalamanElem.textContent = pdfDoc.numPages;
-            });
+        // Hitung skala yang diperlukan untuk menyesuaikan lebar
+        const scaleNeeded = desiredWidth / viewport.width;
+
+        // Terapkan viewport dengan skala yang dihitung
+        const newViewport = page.getViewport({
+            scale: scale * scaleNeeded // Mengkombinasikan skala awal dengan skala yang diperlukan untuk lebar baru
+        });
+
+        canvas.width = desiredWidth;
+        canvas.height = newViewport.height;
+
+        const ctx = canvas.getContext('2d');
+        const renderContext = {
+            canvasContext: ctx,
+            viewport: newViewport
         };
+
+        page.render(renderContext);
+        const pageKeElem = document.getElementById('pageKe');
+        const totalHalamanElem = document.getElementById('totalHalaman');
+
+        pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
+        totalHalamanElem.textContent = pdfDoc.numPages;
+    });
+};
+
+
 
         loadPdf();
 
