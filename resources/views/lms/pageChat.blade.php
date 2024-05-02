@@ -196,9 +196,9 @@
         setInterval(function () {
             $('#chats').load(location.href + ' #chats');
         }, 5000);
-        const fileUrl = 'http://127.0.0.1:8000/pdfkominfo.pdf';
+        // const fileUrl = 'http://127.0.0.1:8000/pdfkominfo.pdf';
         // const fileUrl = 'http://127.0.0.1:8000/pdf2.pdf';
-        // let fileUrl = $('#file_location').val();
+        let fileUrl = $('#file_location').val();
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
         console.log('csrftoken', csrfToken);
