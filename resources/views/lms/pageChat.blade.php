@@ -196,9 +196,9 @@
         setInterval(function () {
             $('#chats').load(location.href + ' #chats');
         }, 5000);
-        // const fileUrl = 'http://127.0.0.1:8000/pdfkominfo.pdf';
+        const fileUrl = 'http://127.0.0.1:8000/pdfkominfo.pdf';
         // const fileUrl = 'http://127.0.0.1:8000/pdf2.pdf';
-        let fileUrl = $('#file_location').val();
+        // let fileUrl = $('#file_location').val();
         let id_submateri = $('#id_submateri').val();
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
         console.log('csrftoken', csrfToken);
@@ -252,49 +252,47 @@
             }
         };
         const renderPage = (pageNumber, canvas) => {
-            pdfDoc.getPage(pageNumber).then((page) => {
-                let scale = 0.5; // Default scale
+    pdfDoc.getPage(pageNumber).then((page) => {
+        // Mendapatkan skala berdasarkan lebar layar
+        let scale = 1;
+        const viewport = page.getViewport({ scale: scale });
+        let desiredWidth = window.innerWidth;
 
-                const viewport = page.getViewport({
-                    scale: scale
-                });
+        // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
+        if (window.innerWidth <= 600) {
+            desiredWidth *= 0.8; // Misalnya, menggunakan 80% dari lebar layar
+            scale = desiredWidth / viewport.width;
+        } else {
+            desiredWidth *= 0.62; // Misalnya, menggunakan 62% dari lebar layar
+            scale = desiredWidth / viewport.width;
+        }
 
-                // Hitung lebar yang diinginkan
-                let desiredWidth = window.innerWidth; // Jika lebar layar kurang dari atau sama dengan 600px, gunakan skala 0.5
-                if (window.innerWidth <= 600) {
-                    desiredWidth *= 0.8; // Misalnya, menggunakan 80% dari lebar layar
-                } else {
-                    desiredWidth *= 0.62;
-                }
+        // Terapkan viewport dengan skala yang dihitung
+        const newViewport = page.getViewport({ scale: scale });
 
-                // Hitung skala yang diperlukan untuk menyesuaikan lebar
-                const scaleNeeded = desiredWidth / viewport.width;
+        canvas.width = desiredWidth;
+        canvas.height = newViewport.height;
 
-                // Terapkan viewport dengan skala yang dihitung
-                const newViewport = page.getViewport({
-                    scale: scale * scaleNeeded // Mengkombinasikan skala awal dengan skala yang diperlukan untuk lebar baru
-                });
+        const ctx = canvas.getContext('2d');
+        const renderContext = { canvasContext: ctx, viewport: newViewport };
 
-                canvas.width = desiredWidth;
-                canvas.height = newViewport.height;
-                if (window.innerWidth <= 600) {
-                    canvas.height *= 2;
-                }
+        // Periksa resolusi gambar
+        const renderTask = page.render(renderContext);
+        renderTask.promise.then(() => {
+            console.log('Halaman dirender tanpa buram');
+        }).catch((error) => {
+            console.error('Ada kesalahan saat merender halaman:', error);
+        });
 
-                const ctx = canvas.getContext('2d');
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport: newViewport
-                };
+        // Menampilkan nomor halaman
+        const pageKeElem = document.getElementById('pageKe');
+        const totalHalamanElem = document.getElementById('totalHalaman');
 
-                page.render(renderContext);
-                const pageKeElem = document.getElementById('pageKe');
-                const totalHalamanElem = document.getElementById('totalHalaman');
+        pageKeElem.textContent = pageNumber;
+        totalHalamanElem.textContent = pdfDoc.numPages;
+    });
+};
 
-                pageKeElem.textContent = pageNumber; // Ubah currentPage menjadi pageNumber
-                totalHalamanElem.textContent = pdfDoc.numPages;
-            });
-        };
 
 
 
