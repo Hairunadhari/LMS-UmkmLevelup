@@ -172,6 +172,8 @@ public function register(Request $request)
       try {
           DB::beginTransaction();
           $cekWa = DB::table('users')->where('aktif', 1)->where('no_wa',$request->no_wa)->whereNotNull('email_verified_at')->first();
+          $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+          $now = $konvers_tanggal->format('Y-m-d H:i:s');
           if ($cekWa !== null) {
                   session()->flash('name', $request->name);
                   session()->flash('email', $request->email);
@@ -190,6 +192,7 @@ public function register(Request $request)
                     'name' => $request->name,
                     'no_wa' => $request->no_wa,
                     'password' => Hash::make($request->password),
+                    'updated_at' => $now,
                 ]);
             } else{
              
@@ -200,6 +203,7 @@ public function register(Request $request)
                     'password' => Hash::make($request->password),
                     'aktif' => 1,
                     'final_level' => 0,
+                    'created_at' => $now,
                 ]);
               
             }
@@ -217,8 +221,7 @@ public function register(Request $request)
 
         $getuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->first();           
         $otp = mt_rand(100000, 999999);
-        $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
-        $now = $konvers_tanggal->format('Y-m-d H:i:s');
+      
         DB::table('t_otp')->insert([
             'kode_otp' => $otp,
             'id_user' => $getuser->id,
