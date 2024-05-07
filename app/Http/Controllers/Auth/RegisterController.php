@@ -183,7 +183,7 @@ public function register(Request $request)
                       'message' => 'No HP Sudah Dipakai',
                   ]);
           }
-        
+        //contoh
         $cekuser = DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNotNull('email_verified_at')->first();           
         if ($cekuser == null) {
             $cekuserVerifiedNull = DB::table('users')->where('aktif', 1)->where('email',$request->email)->whereNull('email_verified_at')->orderBy('id','desc')->first();           
