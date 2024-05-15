@@ -266,12 +266,14 @@ public function submitOtp(Request $request){
         DB::beginTransaction();
         $otp = $request->otp;
         $checkOtp = DB::table('t_otp')->where('id_user', $request->id_user)->where('status', 0)->latest()->first();
+        $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+        $now = $konvers_tanggal->format('Y-m-d H:i:s');
         if($checkOtp->kode_otp == $otp){
             DB::table('t_otp')->where('id_user', $request->id_user)->where('kode_otp',$otp)->where('status', 0)->latest()->update([
                 'status' => 1,
             ]);
             DB::table('users')->where('aktif', 1)->where('id', $request->id_user)->update([
-                'email_verified_at' => date("Y-m-d H:i:s"),
+                'email_verified_at' => $now,
             ]);
         }else{
             throw new \Exception('');
