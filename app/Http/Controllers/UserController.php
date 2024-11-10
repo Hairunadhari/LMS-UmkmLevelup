@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Mail;
+use Carbon\Carbon;
 use App\Mail\ForgotMail;
 use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
@@ -23,6 +24,8 @@ class UserController extends Controller
             DB::beginTransaction();
             
             $checkUser = DB::table('profil_user')->where('id_user', Auth::user()->id)->count();
+            $konvers_tanggal = Carbon::parse(now(),'UTC')->setTimezone('Asia/Jakarta');
+            $now = $konvers_tanggal->format('Y-m-d H:i:s');
             if($checkUser == 0){
                 DB::table('profil_user')->insert([
                     'id_user' => Auth::user()->id,
@@ -42,6 +45,7 @@ class UserController extends Controller
                     'jenis_kelamin' => $request->jenisKelamin,
                     'nik' => $request->nik,
                     'nib' => $request->nib,
+                    'created_at' => $now,
                 ]);
             }else{
                 DB::table('profil_user')->where('id_user', Auth::user()->id)->update([
